@@ -6,5 +6,14 @@
 
 template <typename T, typename Alloc>
 ft::vector<T, Alloc>::vector(void) {
+}
+
+template<typename T, typename Alloc>
+int* ft::vector<T, Alloc>::test(size_t n) {
+	return _Alloc.allocate(n);
+}
+
+template<typename T, typename Alloc>
+ft::vector<T, Alloc>::~vector(void) {
 
 }

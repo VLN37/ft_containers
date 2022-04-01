@@ -6,6 +6,7 @@ SRC		=	main.cpp \
 
 INC		=	vector.hpp \
 			vector.tpp \
+			vector_operators.tpp \
 
 OBJ		= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	= obj

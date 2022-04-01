@@ -15,18 +15,23 @@ class vector {
 public:
 	vector(void);
 	~vector(void);
+	vector<T, Alloc>& operator=(vector<T, Alloc> const& rhs);
 
-	typedef				Alloc								allocator_type;
+	int* test(size_t n);
+
+	typedef				std::allocator<T>					allocator_type;
 	typedef				T									value_type;
 	typedef typename	std::allocator<T>::pointer			pointer;
 	typedef typename	std::allocator<T>::const_pointer	const_pointer;
 	typedef typename	std::allocator<T>::reference		reference;
 	typedef typename	std::allocator<T>::const_reference	const_reference;
+	typedef typename	ft::vector<T, Alloc>				vector_type;
+	allocator_type _Alloc;
 
 private:
 	};
 #include "vector.tpp"
-}
+#include "vector_operators.tpp"
+} //namespace ft
 
-
-#endif
+#endif //FT_VECTOR_HPP

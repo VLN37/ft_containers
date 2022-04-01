@@ -7,8 +7,18 @@
 
 int main(void) {
 	std::cout << "this compiles!\n";
-	// std::vector<int> vec;
-	// ft_Vector<int> vec2;
+	ft::vector<int> vec1;
+	ft::vector<int> vec2;
 
+	int *ptr = vec1.test(50);
+
+	*ptr = 10;
+	ptr[1] = 20;
+	ptr[2] = 30;
+	std::cout << *ptr << '\n';
+	std::cout << *(ptr + 1) << '\n';
+	std::cout << ptr[2] << '\n';
+
+	vec1 = vec2;
 	return (0);
 }
