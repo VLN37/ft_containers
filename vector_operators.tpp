@@ -7,18 +7,14 @@
 namespace ft {
 
 template<typename T, typename Alloc>
-vector<T, Alloc>& vector<T, Alloc>::operator=(vector<T, Alloc> const& src) {
-	(void)src;
+vector<T, Alloc>& vector<T, Alloc>::operator=(vector<T, Alloc> const& rhs) {
 	std::cout << "vector assignment operator called\n";
+	_alloc.deallocate(_data, size_type());
+	_size = rhs._size;
+	_capacity = rhs._capacity;
+	_data = _alloc.allocate(_size);
+	data = _data;
+	memcpy(_data, data, _size * sizeof(value_type));
 	return *this;
 }
 } //namepace ft
-
-
-
-// template<typename T, typename Alloc>
-// ft::vector<T, Alloc>& ft::vector<T, Alloc>::operator=(ft::vector<T, Alloc> const& src) {
-// 	(void)src;
-// 	std::cout << "vector assignment operator called\n";
-// 	return *this;
-// }

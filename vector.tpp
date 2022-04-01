@@ -8,11 +8,6 @@ namespace ft {
 
 template<typename T, typename Alloc>
 int* vector<T, Alloc>::test(size_t n) {
-	return _Alloc.allocate(n);
-}
-
-template<typename T, typename Alloc>
-vector<T, Alloc>::~vector(void) {
-	std::cout << "default destructor called\n";
+	return _alloc.allocate(n);
 }
 } // namespace ft

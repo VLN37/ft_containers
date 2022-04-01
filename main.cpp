@@ -13,12 +13,13 @@ int main(void) {
 	int *ptr = vec1.test(50);
 
 	*ptr = 10;
-	// ptr[1] = 20;
-	// ptr[2] = 30;
-	// std::cout << *ptr << '\n';
-	// std::cout << *(ptr + 1) << '\n';
-	// std::cout << ptr[2] << '\n';
+	ptr[1] = 20;
+	ptr[2] = 30;
+	std::cout << *ptr << '\n';
+	std::cout << *(ptr + 1) << '\n';
+	std::cout << ptr[2] << '\n';
 
-	// vec1 = vec2;
+	vec1 = vec2;
+	delete ptr;
 	return (0);
 }

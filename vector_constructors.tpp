@@ -7,19 +7,38 @@
 namespace ft {
 
 template <typename T, typename Alloc>
-vector<T, Alloc>::vector(void) {
+vector<T, Alloc>::vector(const alloc_type& alloc)
+: _alloc(alloc) {
 	std::cout << "default constructor called\n";
+	_data = _alloc.allocate(0);
+	data = _data;
+	_size = 0;
+	_capacity = 0;
+	_max_size = _alloc.max_size();
 }
 
 template<typename T, typename Alloc>
-vector<T, Alloc>::vector(vector<T, Alloc> const& src) {
+vector<T, Alloc>::vector(vector<T, Alloc> const& src, const alloc_type& alloc)
+: _alloc(alloc) {
 	std::cout << "vector copy constructor called\n";
-	(void)src;
+	*this = src;
 }
 
 template<typename T, typename Alloc>
-vector<T, Alloc>::vector(size_t n) {
+vector<T, Alloc>::vector(size_t n, const alloc_type& alloc)
+: _alloc(alloc) {
 	std::cout << "size parametric constructor called\n";
+	_data = _alloc.allocate(n);
+	data = _data;
+	_size = n;
+	_capacity = n;
+	_max_size = _alloc.max_size();
 	(void)n;
 }
+
+template<typename T, typename Alloc>
+vector<T, Alloc>::~vector(void) {
+	std::cout << "default destructor called\n";
+	_alloc.deallocate(_data, size_type());
 }
+} // namespace ft
