@@ -8,7 +8,7 @@
 int main(void) {
 	std::cout << "this compiles!\n";
 	ft::vector<int> vec1;
-	ft::vector<int> vec2(5);
+	ft::vector<int> vec2(5, 42);
 
 	int *ptr = vec1.test(50);
 

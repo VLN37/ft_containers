@@ -31,7 +31,8 @@ public:
 	explicit vector(const alloc_type& alloc = alloc_type());
 	explicit vector(vec_constref src, const alloc_type& alloc = alloc_type());
 	//missing range constructor - depends on iterator class
-	explicit vector(size_t n, const alloc_type& alloc = alloc_type());
+	explicit vector(size_type n,
+		value_type val = value_type(), const alloc_type& alloc = alloc_type());
 	~vector(void);
 	vec_ref operator=(vec_constref rhs);
 

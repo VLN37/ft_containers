@@ -25,7 +25,7 @@ vector<T, Alloc>::vector(vector<T, Alloc> const& src, const alloc_type& alloc)
 }
 
 template<typename T, typename Alloc>
-vector<T, Alloc>::vector(size_t n, const alloc_type& alloc)
+vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
 : _alloc(alloc) {
 	std::cout << "size parametric constructor called\n";
 	_data = _alloc.allocate(n);
@@ -33,7 +33,8 @@ vector<T, Alloc>::vector(size_t n, const alloc_type& alloc)
 	_size = n;
 	_capacity = n;
 	_max_size = _alloc.max_size();
-	(void)n;
+	for (size_t i = 0; i < _size; i++)
+		_alloc.construct(_data + i, val);
 }
 
 template<typename T, typename Alloc>
