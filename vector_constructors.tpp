@@ -40,6 +40,8 @@ vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
 template<typename T, typename Alloc>
 vector<T, Alloc>::~vector(void) {
 	std::cout << "default destructor called\n";
+	for (size_t i = 0; i < _size; i++)
+		_alloc.destroy(_data + i);
 	_alloc.deallocate(_data, size_type());
 }
 } // namespace ft
