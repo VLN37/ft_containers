@@ -1,11 +1,12 @@
 CC 		= c++
-CFLAGS 	=  -g3 -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS 	=  -g3 -Wall -Wextra -Werror -std=c++98 -Wshadow -pedantic
 NAME 	= containers
 
 SRC		=	main.cpp \
 
 INC		=	vector.hpp \
 			vector.tpp \
+			vector_constructors.tpp \
 			vector_operators.tpp \
 
 OBJ		= $(SRC:%.cpp=$(OBJDIR)/%.o)

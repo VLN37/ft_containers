@@ -8,17 +8,17 @@
 int main(void) {
 	std::cout << "this compiles!\n";
 	ft::vector<int> vec1;
-	ft::vector<int> vec2;
+	ft::vector<int> vec2(5);
 
 	int *ptr = vec1.test(50);
 
 	*ptr = 10;
-	ptr[1] = 20;
-	ptr[2] = 30;
-	std::cout << *ptr << '\n';
-	std::cout << *(ptr + 1) << '\n';
-	std::cout << ptr[2] << '\n';
+	// ptr[1] = 20;
+	// ptr[2] = 30;
+	// std::cout << *ptr << '\n';
+	// std::cout << *(ptr + 1) << '\n';
+	// std::cout << ptr[2] << '\n';
 
-	vec1 = vec2;
+	// vec1 = vec2;
 	return (0);
 }

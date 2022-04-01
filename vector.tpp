@@ -4,16 +4,15 @@
 
 #include "vector.hpp"
 
-template <typename T, typename Alloc>
-ft::vector<T, Alloc>::vector(void) {
-}
+namespace ft {
 
 template<typename T, typename Alloc>
-int* ft::vector<T, Alloc>::test(size_t n) {
+int* vector<T, Alloc>::test(size_t n) {
 	return _Alloc.allocate(n);
 }
 
 template<typename T, typename Alloc>
-ft::vector<T, Alloc>::~vector(void) {
-
+vector<T, Alloc>::~vector(void) {
+	std::cout << "default destructor called\n";
 }
+} // namespace ft
