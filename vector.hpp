@@ -34,9 +34,16 @@ public:
 	explicit vector(size_type n,
 		value_type val = value_type(), const alloc_type& alloc = alloc_type());
 	~vector(void);
+
 	vec_ref operator=(vec_constref rhs);
 
 	int* test(size_t n);
+	size_t size(void) const;
+	size_t max_size(void) const;
+	size_t capacity(void) const;
+
+	void reserve(size_t n);
+	void resize(size_t n, value_type val = value_type());
 
 
 protected:

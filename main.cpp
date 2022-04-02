@@ -19,7 +19,40 @@ int main(void) {
 	std::cout << *(ptr + 1) << '\n';
 	std::cout << ptr[2] << '\n';
 
+	std::vector<int> vec3;
+	ft::vector<int> vec4;
+
 	vec1 = vec2;
+	//test resize
+	vec3.resize(15, 42);
+	vec4.resize(15, 42);
+
+	std::cout << vec3.size() << " size \n";
+	std::cout << vec4.size() << " size \n";
+	std::cout << vec3.capacity() << " capacity \n";
+	std::cout << vec4.capacity() << " capacity \n";
+	std::cout << '\n';
+
+	vec3.resize(5, 42);
+	vec4.resize(5, 42);
+
+	std::cout << vec3.size() << " size \n";
+	std::cout << vec4.size() << " size \n";
+	std::cout << vec3.capacity() << " capacity \n";
+	std::cout << vec4.capacity() << " capacity \n";
+	std::cout << '\n';
+
+	vec3.resize(15, 0);
+	vec4.resize(15, 0);
+
+	std::cout << vec3.size() << " size \n";
+	std::cout << vec4.size() << " size \n";
+	std::cout << vec3.capacity() << " capacity \n";
+	std::cout << vec4.capacity() << " capacity \n";
+	std::cout << '\n';
+	//test resize
+
+
 	delete ptr;
 	return (0);
 }

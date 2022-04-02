@@ -19,4 +19,4 @@ vector<T, Alloc>& vector<T, Alloc>::operator=(vector<T, Alloc> const& rhs) {
 	memcpy(_data, data, _size * sizeof(value_type));
 	return *this;
 }
-} //namepace ft
+} //namespace ft
