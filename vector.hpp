@@ -51,8 +51,8 @@ public:
 	//member functions
 	void			reserve(size_t n);
 	void			resize(size_t n, value_type val = value_type());
-	// vec_ref			at(size_type n);
-	// vec_constref	at(size_type n) const;
+	reference		at(size_type n);
+	const_reference	at(size_type n) const;
 	// vec_ref			front(void);
 	// vec_constref	front(void) const;
 	// vec_ref			back(void);

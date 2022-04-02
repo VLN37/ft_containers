@@ -51,9 +51,21 @@ int main(void) {
 	std::cout << ftvec.capacity() << " capacity \n";
 	std::cout << '\n';
 
-	std::cout << ftvec[2] << '\n';
+	std::cout << ftvec[2] << " ftvec pos 2\n";
 	ftvec[2] = 21;
-	std::cout << ftvec[2] << '\n';
+	std::cout << ftvec[2] << " ftvec pos 2\n";
+	ftvec[2] = 42;
+	std::cout << ftvec.at(2) << " ftvec pos 2\n";
+	ftvec[2] = 21;
+	std::cout << ftvec.at(2) << " ftvec pos 2\n";
+	ftvec[2] = 42;
+	try {
+		std::cout << ftvec.at(42) << " ftvec pos 2\n";
+	} catch (std::exception &e) {
+		std::cout << e.what();
+	}
+
+
 
 	//test resize
 
