@@ -28,6 +28,7 @@ public:
 	std::allocator<T>	_alloc;
 	pointer				data;
 
+	//constructors
 	explicit vector(const alloc_type& alloc = alloc_type());
 	explicit vector(vec_constref src, const alloc_type& alloc = alloc_type());
 	//missing range constructor - depends on iterator class
@@ -35,21 +36,27 @@ public:
 		value_type val = value_type(), const alloc_type& alloc = alloc_type());
 	~vector(void);
 
+	//operators
 	vec_ref operator=(vec_constref rhs);
 	vec_ref operator[](size_type n);
 	vec_constref operator[](size_type n) const;
 	std::ostream& operator<<(std::ostream& o);
 
-	int* test(size_t n);
-	size_t size(void) const;
-	size_t max_size(void) const;
-	size_t capacity(void) const;
+	//getters
+	int*	test(size_t n);
+	size_t	size(void) const;
+	size_t	max_size(void) const;
+	size_t	capacity(void) const;
 
-	void reserve(size_t n);
-	void resize(size_t n, value_type val = value_type());
-	//implement exceptions for out of bounds
-	vec_ref at(size_type n);
-	vec_constref at(size_type n) const;
+	//member functions
+	void			reserve(size_t n);
+	void			resize(size_t n, value_type val = value_type());
+	vec_ref			at(size_type n);
+	vec_constref	at(size_type n) const;
+	vec_ref			front(void);
+	vec_constref	front(void) const;
+	vec_ref			back(void);
+	vec_constref	back(void) const;
 
 protected:
 	pointer		_data;
