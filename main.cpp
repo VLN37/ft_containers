@@ -50,6 +50,11 @@ int main(void) {
 	std::cout << vec3.capacity() << " capacity \n";
 	std::cout << vec4.capacity() << " capacity \n";
 	std::cout << '\n';
+
+	std::cout << vec3[2] << '\n';
+	vec3[2] = 21;
+	std::cout << vec3[2] << '\n';
+
 	//test resize
 
 

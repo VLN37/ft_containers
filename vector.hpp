@@ -36,6 +36,7 @@ public:
 	~vector(void);
 
 	vec_ref operator=(vec_constref rhs);
+	vec_ref operator[](size_type n);
 
 	int* test(size_t n);
 	size_t size(void) const;
@@ -55,6 +56,10 @@ protected:
 private:
 	};
 } //namespace ft
+
+template<typename T, typename Alloc = std::allocator<T> >
+std::ostream& operator<<(std::ostream& o, const ft::vector<T, Alloc>& rhs);
+
 #include "vector.tpp"
 #include "vector_operators.tpp"
 #include "vector_constructors.tpp"
