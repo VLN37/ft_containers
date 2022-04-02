@@ -69,6 +69,13 @@ void vector<T, Alloc>::reserve(size_t n) {
 }
 
 template<typename T, typename Alloc>
+void vector<T, Alloc>::clear(void) {
+	for (size_t i = 0; i < _size; i++)
+		_alloc.destroy(_data + i);
+	_size = 0;
+}
+
+template<typename T, typename Alloc>
 typename vector<T, Alloc>::reference
 	vector<T, Alloc>::at(size_type n) {
 	if (n >= _size)

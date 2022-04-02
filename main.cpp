@@ -51,7 +51,11 @@ int main(void) {
 	std::cout << ftvec.size() << " size \n";
 	std::cout << stdvec.capacity() << " capacity \n";
 	std::cout << ftvec.capacity() << " capacity \n";
+	std::cout << '\n';
 
+	std::cout << "push_back()\n\n";
+	stdvec[14] = 42;
+	ftvec[14] = 42;
 	stdvec.push_back(66);
 	ftvec.push_back(66);
 	std::cout << stdvec.back() << " stdvec back\n";
@@ -61,9 +65,23 @@ int main(void) {
 	std::cout << ftvec.size() << " size \n";
 	std::cout << stdvec.capacity() << " capacity \n";
 	std::cout << ftvec.capacity() << " capacity \n";
-
 	std::cout << '\n';
 
+	std::cout << "pop_back()\n\n";
+	stdvec.pop_back();
+	ftvec.pop_back();
+	std::cout << stdvec.back() << " stdvec back\n";
+	std::cout << ftvec.back() << " ftvec back\n";
+
+	std::cout << stdvec.size() << " size \n";
+	std::cout << ftvec.size() << " size \n";
+	std::cout << stdvec.capacity() << " capacity \n";
+	std::cout << ftvec.capacity() << " capacity \n";
+	std::cout << '\n';
+
+
+
+	std::cout << "[] operator\n\n";
 	std::cout << ftvec[2] << " ftvec pos 2\n";
 	ftvec[2] = 21;
 	std::cout << ftvec[2] << " ftvec pos 2\n";
@@ -77,11 +95,18 @@ int main(void) {
 	} catch (std::exception &e) {
 		std::cout << e.what();
 	}
+	std::cout << '\n';
+
+
+	std::cout << "back() / front()\n\n";
 	std::cout << stdvec.back() << " stdvec back\n";
 	std::cout << ftvec.back() << " ftvec back\n";
 	std::cout << stdvec.front() << " stdvec front\n";
 	std::cout << ftvec.front() << " ftvec front\n";
+	std::cout << '\n';
 	//test element access
+	stdvec.clear();
+	ftvec.clear();
 
 	delete ptr;
 	return (0);

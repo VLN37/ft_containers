@@ -36,7 +36,14 @@ void vector<T, Alloc>::push_back(value_type const& val) {
 	if (_size == _capacity)
 		reserve(_size * 2);
 	_alloc.construct(_data + _size, val);
-	_size += 1;
+	_size++;
+}
+
+template<typename T, typename Alloc>
+void vector<T, Alloc>::pop_back(void) {
+	if (_size > 0)
+		_alloc.destroy(data + _size);
+	_size--;
 }
 
 // template<typename T, typename Alloc>
