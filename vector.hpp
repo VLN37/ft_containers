@@ -37,13 +37,13 @@ public:
 	~vector(void);
 
 	//operators
-	vec_ref operator=(vec_constref rhs);
-	reference operator[](size_type n);
-	const_reference operator[](size_type n) const;
+	vec_ref			operator=(vec_constref rhs);
+	reference		operator[](size_type n);
+	const_reference	operator[](size_type n) const;
 	// std::ostream& operator<<(std::ostream& o);
 
 	//getters
-	int*	test(size_t n);
+	pointer	test(size_t n);
 	size_t	size(void) const;
 	size_t	max_size(void) const;
 	size_t	capacity(void) const;
@@ -69,8 +69,8 @@ private:
 } //namespace ft
 
 // C 11 variant
-template<typename T, typename Alloc = std::allocator<T> >
-std::ostream& operator<<(std::ostream& o, ft::vector<T, Alloc>& rhs);
+// template<typename T, typename Alloc = std::allocator<T> >
+// std::ostream& operator<<(std::ostream& o, ft::vector<T, Alloc>& rhs);
 
 #include "vector.tpp"
 #include "vector_operators.tpp"

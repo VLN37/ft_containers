@@ -7,7 +7,7 @@
 namespace ft {
 
 template<typename T, typename Alloc>
-int* vector<T, Alloc>::test(size_t n) {
+typename vector<T, Alloc>::pointer vector<T, Alloc>::test(size_t n) {
 	return _alloc.allocate(n);
 }
 
@@ -81,7 +81,7 @@ typename vector<T, Alloc>::const_reference
 	vector<T, Alloc>::at(size_type n) const {
 	if (n >= _size)
 		throw(std::out_of_range("at: index out of range\n"));
-	return _data[0];
+	return _data[n];
 }
 
 template<typename T, typename Alloc>
@@ -97,14 +97,12 @@ typename vector<T, Alloc>::const_reference
 }
 
 template<typename T, typename Alloc>
-typename vector<T, Alloc>::reference
-	vector<T, Alloc>::back(void) {
+typename vector<T, Alloc>::reference vector<T, Alloc>::back(void) {
 	return _data[_size - 1];
 }
 
 template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_reference
-	vector<T, Alloc>::back(void) const {
+typename vector<T, Alloc>::const_reference vector<T, Alloc>::back(void) const {
 	return _data[_size - 1];
 }
 
