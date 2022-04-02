@@ -38,9 +38,9 @@ public:
 
 	//operators
 	vec_ref operator=(vec_constref rhs);
-	vec_ref operator[](size_type n);
-	vec_constref operator[](size_type n) const;
-	std::ostream& operator<<(std::ostream& o);
+	reference operator[](size_type n);
+	const_reference operator[](size_type n) const;
+	// std::ostream& operator<<(std::ostream& o);
 
 	//getters
 	int*	test(size_t n);
@@ -51,12 +51,12 @@ public:
 	//member functions
 	void			reserve(size_t n);
 	void			resize(size_t n, value_type val = value_type());
-	vec_ref			at(size_type n);
-	vec_constref	at(size_type n) const;
-	vec_ref			front(void);
-	vec_constref	front(void) const;
-	vec_ref			back(void);
-	vec_constref	back(void) const;
+	// vec_ref			at(size_type n);
+	// vec_constref	at(size_type n) const;
+	// vec_ref			front(void);
+	// vec_constref	front(void) const;
+	// vec_ref			back(void);
+	// vec_constref	back(void) const;
 
 protected:
 	pointer		_data;
@@ -69,8 +69,8 @@ private:
 } //namespace ft
 
 // C 11 variant
-// template<typename T, typename Alloc = std::allocator<T> >
-// std::ostream& operator<<(std::ostream& o, const ft::vector<T, Alloc>& rhs);
+template<typename T, typename Alloc = std::allocator<T> >
+std::ostream& operator<<(std::ostream& o, ft::vector<T, Alloc>& rhs);
 
 #include "vector.tpp"
 #include "vector_operators.tpp"

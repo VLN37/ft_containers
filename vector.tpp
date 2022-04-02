@@ -68,38 +68,38 @@ void vector<T, Alloc>::reserve(size_t n) {
 	_data = tmp;
 }
 
-template<typename T, typename Alloc>
-vector<T, Alloc>& vector<T, Alloc>::at(size_type n) {
-	if (n > _size)
-		throw(std::out_of_range());
-	return _alloc.address(n);
-}
+// template<typename T, typename Alloc>
+// vector<T, Alloc>& vector<T, Alloc>::at(size_type n) {
+// 	if (n > _size)
+// 		throw(std::out_of_range());
+// 	return _alloc.address(n);
+// }
 
-template<typename T, typename Alloc>
-vector<T, Alloc> const& vector<T, Alloc>::at(size_type n) const {
-	if (n > _size)
-		throw(std::out_of_range());
-	return _alloc.address(n);
-}
+// template<typename T, typename Alloc>
+// vector<T, Alloc> const& vector<T, Alloc>::at(size_type n) const {
+// 	if (n > _size)
+// 		throw(std::out_of_range());
+// 	return _alloc.address(n);
+// }
 
-template<typename T, typename Alloc>
-vector<T, Alloc>& vector<T, Alloc>::front(void) {
-	return _alloc.address(0);
-}
+// template<typename T, typename Alloc>
+// vector<T, Alloc>& vector<T, Alloc>::front(void) {
+// 	return _alloc.address(1);
+// }
 
-template<typename T, typename Alloc>
-vector<T, Alloc> const& vector<T, Alloc>::front(void) const {
-	return _alloc.address(0);
-}
+// template<typename T, typename Alloc>
+// vector<T, Alloc> const& vector<T, Alloc>::front(void) const {
+// 	return _alloc.address(1);
+// }
 
-template<typename T, typename Alloc>
-vector<T, Alloc>& vector<T, Alloc>::back(void) {
-	return _alloc.address(_size);
-}
+// template<typename T, typename Alloc>
+// vector<T, Alloc>& vector<T, Alloc>::back(void) {
+// 	return _alloc.address(_size);
+// }
 
-template<typename T, typename Alloc>
-vector<T, Alloc> const& vector<T, Alloc>::back(void) const {
-	return _alloc.address(_size);
-}
+// template<typename T, typename Alloc>
+// vector<T, Alloc> const& vector<T, Alloc>::back(void) const {
+// 	return _alloc.address(_size);
+// }
 
 } // namespace ft

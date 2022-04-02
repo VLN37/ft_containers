@@ -19,43 +19,48 @@ int main(void) {
 	std::cout << *(ptr + 1) << '\n';
 	std::cout << ptr[2] << '\n';
 
-	std::vector<int> vec3;
-	ft::vector<int> vec4;
+	std::vector<int> stdvec;
+	ft::vector<int> ftvec;
 
 	vec1 = vec2;
 	//test resize
-	vec3.resize(15, 42);
-	vec4.resize(15, 42);
+	stdvec.resize(15, 42);
+	ftvec.resize(15, 42);
 
-	std::cout << vec3.size() << " size \n";
-	std::cout << vec4.size() << " size \n";
-	std::cout << vec3.capacity() << " capacity \n";
-	std::cout << vec4.capacity() << " capacity \n";
+	std::cout << stdvec.size() << " size \n";
+	std::cout << ftvec.size() << " size \n";
+	std::cout << stdvec.capacity() << " capacity \n";
+	std::cout << ftvec.capacity() << " capacity \n";
 	std::cout << '\n';
 
-	vec3.resize(5, 42);
-	vec4.resize(5, 42);
+	stdvec.resize(5, 42);
+	ftvec.resize(5, 42);
 
-	std::cout << vec3.size() << " size \n";
-	std::cout << vec4.size() << " size \n";
-	std::cout << vec3.capacity() << " capacity \n";
-	std::cout << vec4.capacity() << " capacity \n";
+	std::cout << stdvec.size() << " size \n";
+	std::cout << ftvec.size() << " size \n";
+	std::cout << stdvec.capacity() << " capacity \n";
+	std::cout << ftvec.capacity() << " capacity \n";
 	std::cout << '\n';
 
-	vec3.resize(15, 0);
-	vec4.resize(15, 0);
+	stdvec.resize(15, 0);
+	ftvec.resize(15, 0);
 
-	std::cout << vec3.size() << " size \n";
-	std::cout << vec4.size() << " size \n";
-	std::cout << vec3.capacity() << " capacity \n";
-	std::cout << vec4.capacity() << " capacity \n";
+	std::cout << stdvec.size() << " size \n";
+	std::cout << ftvec.size() << " size \n";
+	std::cout << stdvec.capacity() << " capacity \n";
+	std::cout << ftvec.capacity() << " capacity \n";
 	std::cout << '\n';
 
-	std::cout << vec3[2] << '\n';
-	vec3[2] = 21;
-	std::cout << vec3[2] << '\n';
+	std::cout << ftvec[2] << '\n';
+	ftvec[2] = 21;
+	std::cout << ftvec[2] << '\n';
 
 	//test resize
+
+	std::cout << stdvec.back() << " back\n";
+	// std::cout << ftvec.back() << " back\n";
+	std::cout << stdvec.front() << " front\n";
+	// std::cout << ftvec.front() << " front\n";
 
 
 	delete ptr;

@@ -21,26 +21,28 @@ vector<T, Alloc>& vector<T, Alloc>::operator=(vec_constref rhs) {
 }
 
 template<typename T, typename Alloc>
-vector<T, Alloc>& vector<T, Alloc>::operator[](size_type n) {
-	return _alloc.address(n);
+typename vector<T, Alloc>::reference
+	vector<T, Alloc>::operator[](size_type n) {
+	return _data[n];
 }
 
 template<typename T, typename Alloc>
-vector<T, Alloc> const& vector<T, Alloc>::operator[](size_type n) const {
-	return _alloc.address(n);
+typename vector<T, Alloc>::const_reference
+	vector<T, Alloc>::operator[](size_type n) const {
+	return _data[n];
 }
 
-template<typename T, typename Alloc>
-std::ostream& vector<T, Alloc>::operator<<(std::ostream& o) {
-	o << *_data;
-	return o;
-}
-
-//C11 variant vector.hpp line 61
 // template<typename T, typename Alloc>
-// std::ostream& operator<<(std::ostream& o, vector<T, Alloc> const& rhs) {
-// 	o << *_data;
+// std::ostream& vector<T, Alloc>::operator<<(std::ostream& o) {
+// 	std::cout << *_data;
 // 	return o;
 // }
+
+// C11 variant vector.hpp line 61
+template<typename T, typename Alloc>
+std::ostream& operator<<(std::ostream& o, vector<T, Alloc>& rhs) {
+	o << *rhs._data;
+	return o;
+}
 
 } //namespace ft
