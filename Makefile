@@ -1,5 +1,5 @@
 CC 		= c++
-CFLAGS 	=  -g3 -Wall -Wextra -Werror -Wshadow -pedantic
+CFLAGS 	=  -g3 -Wall -Wextra -Werror -std=c++98 -Wshadow -pedantic
 NAME 	= containers
 
 SRC		=	main.cpp \

@@ -26,9 +26,16 @@ vector<T, Alloc>& vector<T, Alloc>::operator[](size_type n) {
 }
 
 template<typename T, typename Alloc>
-std::ostream& operator<<(std::ostream& o, vector<T, Alloc> const& rhs) {
-	o << *rhs._data;
+std::ostream& vector<T, Alloc>::operator<<(std::ostream& o) {
+	o << *_data;
 	return o;
 }
+
+//C11 variant vector.hpp line 61
+// template<typename T, typename Alloc>
+// std::ostream& operator<<(std::ostream& o, vector<T, Alloc> const& rhs) {
+// 	o << *_data;
+// 	return o;
+// }
 
 } //namespace ft
