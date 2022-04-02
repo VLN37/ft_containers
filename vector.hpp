@@ -57,6 +57,8 @@ public:
 	const_reference	front(void) const;
 	reference		back(void);
 	const_reference	back(void) const;
+	void			push_back(value_type const& val);
+
 
 protected:
 	pointer		_data;

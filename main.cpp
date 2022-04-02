@@ -51,6 +51,17 @@ int main(void) {
 	std::cout << ftvec.size() << " size \n";
 	std::cout << stdvec.capacity() << " capacity \n";
 	std::cout << ftvec.capacity() << " capacity \n";
+
+	stdvec.push_back(66);
+	ftvec.push_back(66);
+	std::cout << stdvec.back() << " stdvec back\n";
+	std::cout << ftvec.back() << " ftvec back\n";
+
+	std::cout << stdvec.size() << " size \n";
+	std::cout << ftvec.size() << " size \n";
+	std::cout << stdvec.capacity() << " capacity \n";
+	std::cout << ftvec.capacity() << " capacity \n";
+
 	std::cout << '\n';
 
 	std::cout << ftvec[2] << " ftvec pos 2\n";
