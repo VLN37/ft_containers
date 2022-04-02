@@ -84,24 +84,28 @@ typename vector<T, Alloc>::const_reference
 	return _data[0];
 }
 
-// template<typename T, typename Alloc>
-// vector<T, Alloc>& vector<T, Alloc>::front(void) {
-// 	return _alloc.address(1);
-// }
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::reference
+	vector<T, Alloc>::front(void) {
+	return _data[0];
+}
 
-// template<typename T, typename Alloc>
-// vector<T, Alloc> const& vector<T, Alloc>::front(void) const {
-// 	return _alloc.address(1);
-// }
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::const_reference
+	vector<T, Alloc>::front(void) const {
+	return _data[0];
+}
 
-// template<typename T, typename Alloc>
-// vector<T, Alloc>& vector<T, Alloc>::back(void) {
-// 	return _alloc.address(_size);
-// }
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::reference
+	vector<T, Alloc>::back(void) {
+	return _data[_size - 1];
+}
 
-// template<typename T, typename Alloc>
-// vector<T, Alloc> const& vector<T, Alloc>::back(void) const {
-// 	return _alloc.address(_size);
-// }
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::const_reference
+	vector<T, Alloc>::back(void) const {
+	return _data[_size - 1];
+}
 
 } // namespace ft

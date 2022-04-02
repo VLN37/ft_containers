@@ -53,10 +53,10 @@ public:
 	void			resize(size_t n, value_type val = value_type());
 	reference		at(size_type n);
 	const_reference	at(size_type n) const;
-	// vec_ref			front(void);
-	// vec_constref	front(void) const;
-	// vec_ref			back(void);
-	// vec_constref	back(void) const;
+	reference		front(void);
+	const_reference	front(void) const;
+	reference		back(void);
+	const_reference	back(void) const;
 
 protected:
 	pointer		_data;

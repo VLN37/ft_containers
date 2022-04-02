@@ -44,7 +44,9 @@ int main(void) {
 
 	stdvec.resize(15, 0);
 	ftvec.resize(15, 0);
+	//test resize
 
+	//test element access
 	std::cout << stdvec.size() << " size \n";
 	std::cout << ftvec.size() << " size \n";
 	std::cout << stdvec.capacity() << " capacity \n";
@@ -64,16 +66,11 @@ int main(void) {
 	} catch (std::exception &e) {
 		std::cout << e.what();
 	}
-
-
-
-	//test resize
-
-	std::cout << stdvec.back() << " back\n";
-	// std::cout << ftvec.back() << " back\n";
-	std::cout << stdvec.front() << " front\n";
-	// std::cout << ftvec.front() << " front\n";
-
+	std::cout << stdvec.back() << " stdvec back\n";
+	std::cout << ftvec.back() << " ftvec back\n";
+	std::cout << stdvec.front() << " stdvec front\n";
+	std::cout << ftvec.front() << " ftvec front\n";
+	//test element access
 
 	delete ptr;
 	return (0);
