@@ -68,5 +68,19 @@ void vector<T, Alloc>::reserve(size_t n) {
 	_data = tmp;
 }
 
+template<typename T, typename Alloc>
+vector<T, Alloc>& vector<T, Alloc>::at(size_type n) {
+	if (n > _size)
+		throw(std::out_of_range());
+	return _alloc.address(n);
+}
+
+template<typename T, typename Alloc>
+vector<T, Alloc> const& vector<T, Alloc>::at(size_type n) const {
+	if (n > _size)
+		throw(std::out_of_range());
+	return _alloc.address(n);
+}
+
 
 } // namespace ft

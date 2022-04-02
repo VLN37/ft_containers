@@ -37,6 +37,7 @@ public:
 
 	vec_ref operator=(vec_constref rhs);
 	vec_ref operator[](size_type n);
+	vec_constref operator[](size_type n) const;
 	std::ostream& operator<<(std::ostream& o);
 
 	int* test(size_t n);
@@ -46,7 +47,9 @@ public:
 
 	void reserve(size_t n);
 	void resize(size_t n, value_type val = value_type());
-
+	//implement exceptions for out of bounds
+	vec_ref at(size_type n);
+	vec_constref at(size_type n) const;
 
 protected:
 	pointer		_data;

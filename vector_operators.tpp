@@ -26,6 +26,11 @@ vector<T, Alloc>& vector<T, Alloc>::operator[](size_type n) {
 }
 
 template<typename T, typename Alloc>
+vector<T, Alloc> const& vector<T, Alloc>::operator[](size_type n) const {
+	return _alloc.address(n);
+}
+
+template<typename T, typename Alloc>
 std::ostream& vector<T, Alloc>::operator<<(std::ostream& o) {
 	o << *_data;
 	return o;
