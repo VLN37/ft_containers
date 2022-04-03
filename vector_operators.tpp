@@ -34,16 +34,17 @@ typename vector<T, Alloc>::const_reference
 template<typename T, typename Alloc>
 void vector<T, Alloc>::push_back(value_type const& val) {
 	if (_size == _capacity)
-		reserve(_size * 2);
+		reserve(_size ? _size * 2 : 1);
 	_alloc.construct(_data + _size, val);
 	_size++;
 }
 
 template<typename T, typename Alloc>
 void vector<T, Alloc>::pop_back(void) {
-	if (_size > 0)
+	if (_size > 0) {
 		_alloc.destroy(data + _size);
-	_size--;
+		_size--;
+	}
 }
 
 // template<typename T, typename Alloc>

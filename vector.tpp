@@ -33,17 +33,8 @@ void vector<T, Alloc>::resize(size_t n, value_type val) {
 			_alloc.destroy(_data + i);
 		_size = n;
 	}
-	if (n > _capacity) {
-		T *tmp;
-		tmp = _alloc.allocate(n);
-		for (size_t i = 0; i < _size; i++)
-			_alloc.construct(tmp + i, *(_data + i));
-		for (size_t i = 0; i < _capacity; i++)
-			_alloc.destroy(_data + i);
-		_alloc.deallocate(_data, _capacity);
-		_capacity = n;
-		_data = tmp;
-	}
+	if (n > _capacity)
+		reserve(n);
 	if (n > _size) {
 		for (size_t i = _size; i < n; i++)
 			_alloc.construct(_data + i, val);
@@ -51,6 +42,7 @@ void vector<T, Alloc>::resize(size_t n, value_type val) {
 	}
 }
 
+//treat capacity = 0 case
 template<typename T, typename Alloc>
 void vector<T, Alloc>::reserve(size_t n) {
 	if (n < _capacity)
@@ -62,8 +54,6 @@ void vector<T, Alloc>::reserve(size_t n) {
 	for (size_t i = 0; i < _capacity; i++)
 		_alloc.destroy(_data + i);
 	_alloc.deallocate(_data, _capacity);
-	// for (size_t i = _size; i < n; i++)
-		// _alloc.construct(_data + i, value_type());
 	_capacity = n;
 	_data = tmp;
 }
