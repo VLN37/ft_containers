@@ -3,7 +3,9 @@
 // Last modified: 31/03/2022
 
 #include <vector>
+#include <typeinfo>
 #include "vector.hpp"
+#include "iterator.hpp"
 
 int main(void) {
 	std::cout << "this compiles!\n";
@@ -107,7 +109,15 @@ int main(void) {
 	//test element access
 	stdvec.clear();
 	ftvec.clear();
+{
+	ft::iterator<std::input_iterator_tag, int> it1;
+	ft::iterator<std::output_iterator_tag, int*> it2;
+	ft::iterator<std::output_iterator_tag, float> it3;
 
+	std::cout << typeid(it1).name() << '\n';
+	std::cout << typeid(it2).name() << '\n';
+	std::cout << typeid(it3).name() << "\n\n";
+}
 	delete ptr;
 	return (0);
 }

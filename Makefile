@@ -8,6 +8,7 @@ INC		=	vector.hpp \
 			vector.tpp \
 			vector_constructors.tpp \
 			vector_operators.tpp \
+			iterator.hpp \
 
 OBJ		= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	= obj
