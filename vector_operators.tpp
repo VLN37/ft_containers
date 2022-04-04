@@ -16,7 +16,9 @@ vector<T, Alloc>& vector<T, Alloc>::operator=(vec_constref rhs) {
 	_capacity = rhs._capacity;
 	_data = _alloc.allocate(_size);
 	data = _data;
-	memcpy(_data, data, _size * sizeof(value_type));
+	for (size_t i = 0; i < _size; i++)
+		_alloc.construct(_data + i, *(rhs._data + i));
+	// memcpy(_data, data, _size * sizeof(value_type));
 	return *this;
 }
 
