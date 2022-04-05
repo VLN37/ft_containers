@@ -112,11 +112,14 @@ int main(void) {
 {
 	ft::iterator<std::input_iterator_tag, int> it1;
 	ft::iterator<std::output_iterator_tag, int*> it2;
-	ft::iterator<std::output_iterator_tag, float> it3;
+	ft::iterator<std::random_access_iterator_tag, float> it3;
+	ft::iterator<std::random_access_iterator_tag, ft::vector<int> > it4;
 
+	(void)it4;
 	std::cout << typeid(it1).name() << '\n';
 	std::cout << typeid(it2).name() << '\n';
-	std::cout << typeid(it3).name() << "\n\n";
+	std::cout << typeid(it3).name() << "\n";
+	std::cout << typeid(it4).name() << "\n\n";
 }
 	delete ptr;
 	return (0);

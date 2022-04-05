@@ -6,6 +6,7 @@
 # define FT_ITERATOR_HPP
 
 #include <iostream>
+#include <cstddef>
 
 namespace ft {
 template<typename Category,
@@ -14,7 +15,7 @@ template<typename Category,
 		 typename Pointer = T*,
 		 typename Reference = T&>
 struct iterator {
-	typedef T			value_type;
+	typedef	T			value_type;
 	typedef Distance	difference_type;
 	typedef Pointer		pointer;
 	typedef Reference	reference;
@@ -48,12 +49,17 @@ struct iterator_traits<const T*> {
 	typedef std::random_access_iterator_tag	iterator_category;
 };
 
-// template <typename IterType>
-// class random_access_iterator
-// : public iterator<std::random_access_iterator_tag, IterType> {
-
-// }
-// };
+template <typename IterT>
+class random_access_iterator
+: public iterator<std::random_access_iterator_tag, IterT> {
+public:
+	typedef IterT												iterator_type;
+	typedef typename iterator_traits<IterT>::iterator_category	iterator_category;
+	typedef typename iterator_traits<IterT>::value_type			value_type;
+	typedef typename iterator_traits<IterT>::difference_type	difference_type;
+	typedef typename iterator_traits<IterT>::pointer			pointer;
+	typedef typename iterator_traits<IterT>::reference			reference;
+};
 
 } // namespace ft
 
