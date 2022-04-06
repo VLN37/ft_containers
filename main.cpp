@@ -6,6 +6,7 @@
 #include <typeinfo>
 #include "vector.hpp"
 #include "iterator.hpp"
+#include "type_traits.hpp"
 
 int main(void) {
 	std::cout << "this compiles!\n";
@@ -115,7 +116,23 @@ int main(void) {
 	ft::iterator<std::random_access_iterator_tag, float> it3;
 	ft::iterator<std::random_access_iterator_tag, ft::vector<int> > it4;
 
-	(void)it4;
+	ft::vector<int>::iterator ftit1;
+	std::vector<int>::iterator stdit1;
+
+
+	std::cout << ft::vector<int>::iterator::difference_type() << "here\n";
+	// std::cout << ft::vector<int>::iterator::iterator_category() << "here\n";
+	// std::cout << ft::vector<int>::iterator::pointer() << "here\n";
+	// std::cout << ft::vector<int>::iterator::reference() << "here\n";
+
+
+	//functions not part of cpp98 - not possible to test the std version
+	std::cout << ft::is_integral<int>::value << " is integral<int>\n";
+	std::cout << ft::integral_constant<int, 10>::value
+			  << " integral_constant<int>\n\n";
+
+	(void)ftit1;
+	(void)stdit1;
 	std::cout << typeid(it1).name() << '\n';
 	std::cout << typeid(it2).name() << '\n';
 	std::cout << typeid(it3).name() << "\n";

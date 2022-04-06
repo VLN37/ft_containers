@@ -10,6 +10,8 @@
 #include <iostream>
 #include <cstring>
 
+#include "iterator.hpp"
+
 namespace ft {
 
 template<typename T, typename Alloc = std::allocator<T> >
@@ -24,6 +26,7 @@ public:
 	typedef typename	std::allocator<T>::const_reference	const_reference;
 	typedef				vector<T, Alloc>&					vec_ref;
 	typedef				vector<T, Alloc> const&				vec_constref;
+	typedef				random_access_iterator<pointer>		iterator;
 
 	std::allocator<T>	_alloc;
 	pointer				data;
@@ -60,6 +63,7 @@ public:
 	void			push_back(value_type const& val);
 	void			pop_back(void);
 	void			clear(void);
+
 
 
 protected:

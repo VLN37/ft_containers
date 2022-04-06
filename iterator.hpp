@@ -59,6 +59,7 @@ public:
 	typedef typename iterator_traits<IterT>::difference_type	difference_type;
 	typedef typename iterator_traits<IterT>::pointer			pointer;
 	typedef typename iterator_traits<IterT>::reference			reference;
+
 };
 
 } // namespace ft
