@@ -138,12 +138,19 @@ int main(void) {
 	std::cout << typeid(it4).name() << "\n\n";
 }
 
-	ft::random_access_iterator<int> ftit2;
-	ft::random_access_iterator<int> ftit3(ftit2);
+	ft::vector<int>::iterator ftit1;
+	ft::vector<int>::iterator ftit2(ftit1);
+
+	ftit2 = ftit1;
+	std::cout << ftvec[0] << '\n';
+	ftit2 = ftvec.begin();
+	*ftit2 = 21;
+	std::cout << ftvec[0] << '\n';
+
 	//why do this doesn't call the copy constructor ???
-	ft::random_access_iterator
-	< ft::iterator<std::random_access_iterator_tag, int> > ftit4(ftit2);
-	ftit4 = ftit2;
+	// ft::random_access_iterator
+	// < ft::iterator<std::random_access_iterator_tag, int> > ftit4(ftit2);
+	// ftit4 = ftit2;
 
 	delete ptr;
 	return (0);

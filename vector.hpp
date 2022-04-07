@@ -63,6 +63,7 @@ public:
 	void			push_back(value_type const& val);
 	void			pop_back(void);
 	void			clear(void);
+	iterator		begin(void) const;
 
 
 

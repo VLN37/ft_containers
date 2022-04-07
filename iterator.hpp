@@ -22,26 +22,30 @@ protected:
 	IterT current;
 
 public:
-	typedef IterT									iterator_type;
-	typedef typename iter_traits::iterator_category	iterator_category;
-	typedef typename iter_traits::value_type		value_type;
-	typedef typename iter_traits::difference_type	difference_type;
-	typedef typename iter_traits::pointer			pointer;
-	typedef typename iter_traits::reference			reference;
-
+	typedef IterT												iterator_type;
+	typedef typename iterator_traits<IterT>::iterator_category	iterator_category;
+	typedef typename iterator_traits<IterT>::value_type			value_type;
+	typedef typename iterator_traits<IterT>::difference_type	difference_type;
+	typedef typename iterator_traits<IterT>::pointer			pointer;
+	typedef typename iterator_traits<IterT>::reference			reference;
 
 	random_access_iterator(void) { };
-	random_access_iterator(iterator_type const& src) {
+	explicit random_access_iterator(pointer src) {
 		std::cout << "rai copy constructor called\n";
 		this->current = src;
 	};
 	~random_access_iterator(void) { };
 
-	iterator_type& operator=(iterator_type const& rhs){
-		std::cout << "rai assignemnt operator called\n";
-		return this->current = rhs;
+	random_access_iterator& operator=(random_access_iterator<IterT> const& rhs){
+		std::cout << "rai assignment operator called\n";
+		this->current = rhs.current;
+		return *this;
 	};
 
+	reference operator*(void) {
+		std::cout << "rai dereference operator called\n";
+		return *current;
+	}
 
 };
 

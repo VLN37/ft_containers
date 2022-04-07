@@ -103,4 +103,9 @@ typename vector<T, Alloc>::const_reference vector<T, Alloc>::back(void) const {
 	return _data[_size - 1];
 }
 
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator vector<T, Alloc>::begin(void) const {
+	return iterator(_data);
+}
+
 } // namespace ft
