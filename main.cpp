@@ -146,6 +146,27 @@ int main(void) {
 	ftit2 = ftvec.begin();
 	*ftit2 = 21;
 	std::cout << ftvec[0] << '\n';
+	ftit2++;
+	std::cout << *ftit2 << '\n';
+	++ftit2;
+	std::cout << *ftit2 << '\n';
+	std::cout << (ftit2 == ftit1 ? "true\n" : "false\n");
+	ftit2 = ftit1;
+	std::cout << (ftit2 == ftit1 ? "true\n" : "false\n");
+	std::cout << (ftit2 >= ftit1 ? "true\n" : "false\n");
+	std::cout << (ftit2 <= ftit1 ? "true\n" : "false\n");
+	std::cout << (ftit2 < ftit1 ? "true\n" : "false\n");
+	std::cout << (ftit2 > ftit1 ? "true\n" : "false\n");
+	ftit1 = ftvec.begin();
+	ftit1 += 2;
+	ftvec[0] = 42;
+	ftvec[4] = 21;
+	std::cout << (*ftit1) << '\n';
+	std::cout << (*(ftit1 + 2)) << '\n';
+	std::cout << (*(ftit1 - 2)) << '\n';
+	std::cout << (*(ftit1[2])) << '\n';
+	// ftit2 = 2 + ftit1 + 2;
+
 
 	//why do this doesn't call the copy constructor ???
 	// ft::random_access_iterator
