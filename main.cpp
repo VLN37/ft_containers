@@ -127,9 +127,8 @@ int main(void) {
 
 
 	//functions not part of cpp98 - not possible to test the std version
-	std::cout << ft::is_integral<int>::value << " is integral<int>\n";
-	std::cout << ft::integral_constant<int, 10>::value
-			  << " integral_constant<int>\n\n";
+	std::cout << ft::is_integral<int>::value << " is integral <int>\n";
+	std::cout << ft::integral_constant<int, 10>::value << '\n';
 
 	(void)ftit1;
 	(void)stdit1;

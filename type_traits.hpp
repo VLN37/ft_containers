@@ -62,9 +62,9 @@ template<>
 struct is_integral<long int>
 : public integral_constant<bool, true> { };
 
-// template<>
-// struct is_integral<long long int>
-// : public integral_constant<bool, true> { };
+template<>
+struct is_integral<long long int>
+: public integral_constant<bool, true> { };
 
 template<>
 struct is_integral<unsigned short int>
@@ -78,9 +78,9 @@ template<>
 struct is_integral<unsigned long int>
 : public integral_constant<bool, true> { };
 
-// template<>
-// struct is_integral<unsigned long long int>
-// : public integral_constant<bool, true> { };
+template<>
+struct is_integral<unsigned long long int>
+: public integral_constant<bool, true> { };
 
 } // namespace ft
 
