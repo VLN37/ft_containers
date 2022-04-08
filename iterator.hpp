@@ -60,21 +60,19 @@ public:
   rai     operator[](difference_type n) const { return rai(current + n); }
 };
 
-  template<typename IterT>
-    random_access_iterator<IterT> operator+(
-    typename random_access_iterator<IterT>::difference_type n,
-  random_access_iterator<IterT> const& rhs)
-  {
-    return random_access_iterator<IterT>(rhs.base() + n);
-  }
+template<typename IterT>
+random_access_iterator<IterT> operator+(
+  typename random_access_iterator<IterT>::difference_type n,
+  random_access_iterator<IterT> const& rhs) {
+  return random_access_iterator<IterT>(rhs.base() + n);
+}
 
-  template<typename IterT>
-    random_access_iterator<IterT> operator-(
-    typename random_access_iterator<IterT>::difference_type n,
-  random_access_iterator<IterT> const& rhs)
-  {
-    return random_access_iterator<IterT>(rhs.base() - n);
-  }
+template<typename IterT>
+random_access_iterator<IterT> operator-(
+  typename random_access_iterator<IterT>::difference_type n,
+  random_access_iterator<IterT> const& rhs) {
+  return random_access_iterator<IterT>(rhs.base() - n);
+}
 
 } // namespace ft
 
