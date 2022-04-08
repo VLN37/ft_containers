@@ -36,11 +36,12 @@ public:
   random_access_iterator(rai_constref src): current(src.current) { };
   ~random_access_iterator(void) { };
 
-  rai_ref operator=(rai_constref rhs) {
-    this->current = rhs.current;
+  template<typename Iter>
+  random_access_iterator& operator=(random_access_iterator<Iter> const& rhs) {
+    this->current = rhs.base();
     return *this;
-  };
-  iterator_type base(void) const { return current; }
+  }
+  iterator_type base(void) const  { return current; }
   reference operator*(void) { return *current; }
   rai_ref operator++(void)  { current++; return *this; };
   rai_ref operator++(int)   { rai tmp(*this); ++current; return *this; }
@@ -66,6 +67,12 @@ public:
     return rai(rhs.current - n);
   }
 };
+
+template<typename IteratorL, typename IteratorR>
+bool operator==(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ std::cout << "testing const qualified\n";
+  return rhs.base() == lhs.base(); }
 
 // template<typename IterT>
 // random_access_iterator<IterT> operator+(

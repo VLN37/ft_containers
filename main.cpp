@@ -137,7 +137,8 @@ int main(void) {
 	std::cout << typeid(it3).name() << "\n";
 	std::cout << typeid(it4).name() << "\n\n";
 }
-
+//testing vector member overloads
+{
 	ft::vector<int>::iterator ftit1;
 	ft::vector<int>::iterator ftit2(ftit1);
 
@@ -165,20 +166,35 @@ int main(void) {
 	std::cout << (*(ftit1 + 2)) << '\n';
 	std::cout << (*(ftit1 - 2)) << '\n';
 	std::cout << (*(ftit1[2])) << '\n';
-
-	std::vector<int>::iterator vecit1 = stdvec.begin();
-	std::vector<int>::iterator vecit2 = stdvec.begin();
-
-	vecit1 = 2 + vecit2;
-
 	ftit2 = 2 + ftit1 + 2;
+}
+//testing vector member overloads
 
+//testing vector non member overloads
+{
+	ft::vector<int> ftvec2;
+	for (int i = 0; i < 50; i++) {
+		ftvec2.push_back(i);
+	}
+	std::vector<int> stdvec2;
+	for (int i = 0; i < 50; i++) {
+		stdvec2.push_back(i);
+	}
+	ft::vector<int>::iterator ftit3(ftvec2.begin());
+	// ft::vector<int>::const_iterator ftit4(ftvec2.begin());
+	ft::vector<int>::const_iterator ftit4;
 
-	//why do this doesn't call the copy constructor ???
-	// ft::random_access_iterator
-	// < ft::iterator<std::random_access_iterator_tag, int> > ftit4(ftit2);
-	// ftit4 = ftit2;
+	std::vector<int>::iterator stdit3(stdvec2.begin());
+	std::vector<int>::const_iterator stdit4(stdvec2.begin());
 
+	stdit3 = stdvec2.begin();
+	stdit4 = stdvec2.begin();
+
+	ftit3 = ftvec2.begin();
+	ftit4 = ftvec2.begin();
+
+	ftit3 == ftit4 ? std::cout << "true" : std::cout << "false";
+}
 	delete ptr;
 	return (0);
 }

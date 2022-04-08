@@ -104,8 +104,13 @@ typename vector<T, Alloc>::const_reference vector<T, Alloc>::back(void) const {
 }
 
 template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator vector<T, Alloc>::begin(void) const {
+typename vector<T, Alloc>::iterator vector<T, Alloc>::begin(void) {
 	return iterator(_data);
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::const_iterator vector<T, Alloc>::begin(void) const {
+	return const_iterator(_data);
 }
 
 template<typename T, typename Alloc>
