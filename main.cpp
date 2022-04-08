@@ -165,7 +165,13 @@ int main(void) {
 	std::cout << (*(ftit1 + 2)) << '\n';
 	std::cout << (*(ftit1 - 2)) << '\n';
 	std::cout << (*(ftit1[2])) << '\n';
-	// ftit2 = 2 + ftit1 + 2;
+
+	std::vector<int>::iterator vecit1 = stdvec.begin();
+	std::vector<int>::iterator vecit2 = stdvec.begin();
+
+	vecit1 = 2 + vecit2;
+
+	ftit2 = 2 + ftit1 + 2;
 
 
 	//why do this doesn't call the copy constructor ???

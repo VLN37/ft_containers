@@ -31,11 +31,12 @@ public:
   typedef typename iterator_traits<IterT>::reference          reference;
 
 
-  random_access_iterator(void) { };
+  random_access_iterator(void): current(NULL) { };
   explicit random_access_iterator(pointer src) : current(src) { };
   random_access_iterator(rai_constref src): current(src.current) { };
   ~random_access_iterator(void) { };
 
+  iterator_type base(void) const { return current; }
   rai_ref operator=(rai_constref rhs) {
     this->current = rhs.current;
     return *this;
@@ -46,12 +47,12 @@ public:
   rai_ref operator--(void)  { current--; return *this; };
   rai_ref operator--(int)   { rai tmp(*this); --current; return *this; }
   pointer operator->(void) const { return &(operator*()); }
+  bool    operator!=(rai_constref rhs) const  { return current != rhs.current; }
   bool    operator==(rai_constref rhs) const  { return current == rhs.current; }
-  bool    operator!=(rai_constref rhs) const  { return current != rhs.current;}
-  bool    operator>(rai_constref rhs) const   { return current > rhs.current; }
-  bool    operator<(rai_constref rhs) const   { return current < rhs.current; }
   bool    operator<=(rai_constref rhs) const  { return current <= rhs.current; }
   bool    operator>=(rai_constref rhs) const  { return current >= rhs.current; }
+  bool    operator>(rai_constref rhs) const   { return current > rhs.current; }
+  bool    operator<(rai_constref rhs) const   { return current < rhs.current; }
   rai_ref	operator+=(difference_type n)       { current += n; return *this; }
   rai_ref	operator-=(difference_type n)       { current -= n; return *this; }
   rai     operator+(difference_type n) const  { return rai(current + n); }
@@ -59,14 +60,21 @@ public:
   rai     operator[](difference_type n) const { return rai(current + n); }
 };
 
-//           SFINAE ????????
+  template<typename IterT>
+    random_access_iterator<IterT> operator+(
+    typename random_access_iterator<IterT>::difference_type n,
+  random_access_iterator<IterT> const& rhs)
+  {
+    return random_access_iterator<IterT>(rhs.base() + n);
+  }
 
-    // template<typename IterT>
-    // random_access_iterator<IterT> operator+(
-    // typename random_access_iterator<IterT>::difference_type n,
-    // typename random_access_iterator<IterT>::rai_constref rhs) {
-    // 	return rai(rhs.current + n);
-    // }
+  template<typename IterT>
+    random_access_iterator<IterT> operator-(
+    typename random_access_iterator<IterT>::difference_type n,
+  random_access_iterator<IterT> const& rhs)
+  {
+    return random_access_iterator<IterT>(rhs.base() - n);
+  }
 
 } // namespace ft
 
