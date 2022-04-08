@@ -181,11 +181,14 @@ int main(void) {
 		stdvec2.push_back(i);
 	}
 	ft::vector<int>::iterator ftit3(ftvec2.begin());
-	// ft::vector<int>::const_iterator ftit4(ftvec2.begin());
-	ft::vector<int>::const_iterator ftit4;
+	ft::vector<int>::const_iterator ftit4(ftvec2.begin());
+	ft::vector<int>::const_iterator ftit5(ftit3);
+	//teste maroto
+	// ft::vector<int>::iterator ftit5(ftit4);
 
 	std::vector<int>::iterator stdit3(stdvec2.begin());
 	std::vector<int>::const_iterator stdit4(stdvec2.begin());
+
 
 	stdit3 = stdvec2.begin();
 	stdit4 = stdvec2.begin();

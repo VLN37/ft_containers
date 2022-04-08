@@ -32,15 +32,20 @@ public:
 
 
   random_access_iterator(void): current(NULL) { };
-  explicit random_access_iterator(pointer src) : current(src) { };
-  random_access_iterator(rai_constref src): current(src.current) { };
+  explicit random_access_iterator(iterator_type src) : current(src) { }
+  random_access_iterator(rai_constref src): current(src.current) { }
   ~random_access_iterator(void) { };
+
+  template<typename Iter>
+  random_access_iterator(random_access_iterator<Iter> src)
+    : current(src.base()) { }
 
   template<typename Iter>
   random_access_iterator& operator=(random_access_iterator<Iter> const& rhs) {
     this->current = rhs.base();
     return *this;
   }
+
   iterator_type base(void) const  { return current; }
   reference operator*(void) { return *current; }
   rai_ref operator++(void)  { current++; return *this; }
