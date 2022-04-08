@@ -194,6 +194,11 @@ int main(void) {
 	ftit4 = ftvec2.begin();
 
 	ftit3 == ftit4 ? std::cout << "true" : std::cout << "false";
+	ftit3 != ftit4 ? std::cout << "true" : std::cout << "false";
+	ftit3 >= ftit4 ? std::cout << "true" : std::cout << "false";
+	ftit3 <= ftit4 ? std::cout << "true" : std::cout << "false";
+	ftit3 > ftit4 ? std::cout << "true" : std::cout << "false";
+	ftit3 < ftit4 ? std::cout << "true" : std::cout << "false";
 }
 	delete ptr;
 	return (0);

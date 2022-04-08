@@ -43,7 +43,7 @@ public:
   }
   iterator_type base(void) const  { return current; }
   reference operator*(void) { return *current; }
-  rai_ref operator++(void)  { current++; return *this; };
+  rai_ref operator++(void)  { current++; return *this; }
   rai_ref operator++(int)   { rai tmp(*this); ++current; return *this; }
   rai_ref operator--(void)  { current--; return *this; };
   rai_ref operator--(int)   { rai tmp(*this); --current; return *this; }
@@ -71,8 +71,32 @@ public:
 template<typename IteratorL, typename IteratorR>
 bool operator==(random_access_iterator<IteratorL> const& rhs,
                 random_access_iterator<IteratorR> const& lhs)
-{ std::cout << "testing const qualified\n";
-  return rhs.base() == lhs.base(); }
+{ return rhs.base() == lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator!=(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() != lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator<=(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() <= lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator>=(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() >= lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator<(random_access_iterator<IteratorL> const& rhs,
+               random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() < lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator>(random_access_iterator<IteratorL> const& rhs,
+               random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() > lhs.base(); }
 
 // template<typename IterT>
 // random_access_iterator<IterT> operator+(
