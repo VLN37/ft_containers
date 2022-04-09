@@ -49,9 +49,9 @@ public:
   iterator_type base(void) const  { return current; }
   reference operator*(void) { return *current; }
   rai_ref operator++(void)  { current++; return *this; }
-  rai_ref operator++(int)   { rai tmp(*this); ++current; return *this; }
+  rai     operator++(int)   { rai tmp(*this); ++current; return tmp; }
   rai_ref operator--(void)  { current--; return *this; };
-  rai_ref operator--(int)   { rai tmp(*this); --current; return *this; }
+  rai     operator--(int)   { rai tmp(*this); --current; return tmp; }
   pointer operator->(void) const { return &(operator*()); }
   bool    operator!=(rai_constref rhs) const  { return current != rhs.current; }
   bool    operator==(rai_constref rhs) const  { return current == rhs.current; }
@@ -107,9 +107,9 @@ template <typename IterT>
 class reverse_iterator
 : public iterator<std::random_access_iterator_tag, IterT> {
 private:
-  typedef reverse_iterator const& revit_constref;
-  typedef reverse_iterator&       revit_ref;
-  typedef reverse_iterator        revit;
+  typedef reverse_iterator const& rev_constref;
+  typedef reverse_iterator&       rev_ref;
+  typedef reverse_iterator        rev;
 
 protected:
   IterT current;
@@ -124,19 +124,36 @@ public:
 
   reverse_iterator(void): current(NULL) { }
   explicit reverse_iterator(iterator_type src) : current(src) { }
-  reverse_iterator(revit_constref src) : current(src.current) { }
+  reverse_iterator(rev_constref src) : current(src.current) { }
   ~reverse_iterator(void) { }
 
   template<typename Iter>
   reverse_iterator(reverse_iterator<Iter> const& src) : current(src.base()) { }
 
   template<typename Iter>
-  revit_ref operator=(reverse_iterator<Iter> const& rhs) {
+  rev_ref operator=(reverse_iterator<Iter> const& rhs) {
     this->current = rhs.base();
     return *this;
   }
 
   iterator_type base(void) const { return current; }
+  reference operator*(void)      { return *current; }
+  rev_ref operator++(void)       { --current; return *this; }
+  rev     operator++(int)        { rev tmp(*this); --current; return tmp; }
+  rev_ref operator--(void)       { --current; return *this; }
+  rev     operator--(int)        { rev tmp(*this); --current; return tmp; }
+  pointer operator->(void) const             { return &(operator*()); }
+  bool    operator==(rev_constref rhs) const { return current == rhs.current; }
+  bool    operator!=(rev_constref rhs) const { return current != rhs.current; }
+  bool    operator<=(rev_constref rhs) const { return current <= rhs.current; }
+  bool    operator>=(rev_constref rhs) const { return current >= rhs.current; }
+  bool    operator>(rev_constref rhs) const  { return current > rhs.current; }
+  bool    operator<(rev_constref rhs) const  { return current < rhs.current; }
+  rev_ref operator+=(difference_type n)      { current -= n; return *this; }
+  rev_ref operator-=(difference_type n)      { current += n; return *this; }
+  rev     operator+(difference_type n) const { return rev(current - n); }
+  rev     operator-(difference_type n) const { return rev(current + n); }
+  rev     operator[](difference_type n) const { return rev(current + n); }
 };
 
 
