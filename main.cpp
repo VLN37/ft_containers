@@ -165,7 +165,7 @@ int main(void) {
 	std::cout << (*ftit1) << '\n';
 	std::cout << (*(ftit1 + 2)) << '\n';
 	std::cout << (*(ftit1 - 2)) << '\n';
-	std::cout << (*(ftit1[2])) << '\n';
+	std::cout << (ftit1[2]) << '\n';
 	ftit2 = 2 + ftit1 + 2;
 }
 //testing vector member overloads

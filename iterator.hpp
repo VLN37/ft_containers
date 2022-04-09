@@ -63,7 +63,7 @@ public:
   rai_ref	operator-=(difference_type n)       { current -= n; return *this; }
   rai     operator+(difference_type n) const  { return rai(current + n); }
   rai     operator-(difference_type n) const  { return rai(current - n); }
-  rai     operator[](difference_type n) const { return rai(current + n); }
+  reference operator[](difference_type n) const { return current[n]; }
 
   friend rai operator+(difference_type n, rai_constref rhs) {
     return rai(rhs.current + n);
@@ -142,18 +142,18 @@ public:
   rev     operator++(int)        { rev tmp(*this); --current; return tmp; }
   rev_ref operator--(void)       { --current; return *this; }
   rev     operator--(int)        { rev tmp(*this); --current; return tmp; }
-  pointer operator->(void) const             { return &(operator*()); }
-  bool    operator==(rev_constref rhs) const { return current == rhs.current; }
-  bool    operator!=(rev_constref rhs) const { return current != rhs.current; }
-  bool    operator<=(rev_constref rhs) const { return current <= rhs.current; }
-  bool    operator>=(rev_constref rhs) const { return current >= rhs.current; }
-  bool    operator>(rev_constref rhs) const  { return current > rhs.current; }
-  bool    operator<(rev_constref rhs) const  { return current < rhs.current; }
-  rev_ref operator+=(difference_type n)      { current -= n; return *this; }
-  rev_ref operator-=(difference_type n)      { current += n; return *this; }
-  rev     operator+(difference_type n) const { return rev(current - n); }
-  rev     operator-(difference_type n) const { return rev(current + n); }
-  rev     operator[](difference_type n) const { return rev(current + n); }
+  pointer operator->(void) const              { return &(operator*()); }
+  bool    operator==(rev_constref rhs) const  { return current == rhs.current; }
+  bool    operator!=(rev_constref rhs) const  { return current != rhs.current; }
+  bool    operator<=(rev_constref rhs) const  { return current <= rhs.current; }
+  bool    operator>=(rev_constref rhs) const  { return current >= rhs.current; }
+  bool    operator>(rev_constref rhs) const   { return current > rhs.current; }
+  bool    operator<(rev_constref rhs) const   { return current < rhs.current; }
+  rev_ref operator+=(difference_type n)       { current -= n; return *this; }
+  rev_ref operator-=(difference_type n)       { current += n; return *this; }
+  rev     operator+(difference_type n) const  { return rev(current - n); }
+  rev     operator-(difference_type n) const  { return rev(current + n); }
+  reference operator[](difference_type n) const { return *(*this + n); }
 };
 
 
