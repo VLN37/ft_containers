@@ -208,7 +208,8 @@ int main(void) {
 	ft::vector<int>ftvec3;
 	for (int i = 0; i < 50; i++)
 		ftvec3.push_back(i);
-	ft::vector<int>::reverse_iterator revit;
+	ft::vector<int>::reverse_iterator revit1;
+	ft::vector<int>::reverse_iterator revit2(revit1);
 }
 
 	delete ptr;

@@ -126,6 +126,11 @@ public:
   explicit reverse_iterator(iterator_type src) : current(src) { }
   reverse_iterator(revit_constref src) : current(src.current) { }
   ~reverse_iterator(void) { }
+
+  template<typename Iter>
+  reverse_iterator(reverse_iterator<Iter> const& src) : current(src.base()) { }
+
+  iterator_type base(void) const { return current; }
 };
 
 
