@@ -73,36 +73,6 @@ public:
   }
 };
 
-template<typename IteratorL, typename IteratorR>
-bool operator==(random_access_iterator<IteratorL> const& rhs,
-                random_access_iterator<IteratorR> const& lhs)
-{ return rhs.base() == lhs.base(); }
-
-template<typename IteratorL, typename IteratorR>
-bool operator!=(random_access_iterator<IteratorL> const& rhs,
-                random_access_iterator<IteratorR> const& lhs)
-{ return rhs.base() != lhs.base(); }
-
-template<typename IteratorL, typename IteratorR>
-bool operator<=(random_access_iterator<IteratorL> const& rhs,
-                random_access_iterator<IteratorR> const& lhs)
-{ return rhs.base() <= lhs.base(); }
-
-template<typename IteratorL, typename IteratorR>
-bool operator>=(random_access_iterator<IteratorL> const& rhs,
-                random_access_iterator<IteratorR> const& lhs)
-{ return rhs.base() >= lhs.base(); }
-
-template<typename IteratorL, typename IteratorR>
-bool operator<(random_access_iterator<IteratorL> const& rhs,
-               random_access_iterator<IteratorR> const& lhs)
-{ return rhs.base() < lhs.base(); }
-
-template<typename IteratorL, typename IteratorR>
-bool operator>(random_access_iterator<IteratorL> const& rhs,
-               random_access_iterator<IteratorR> const& lhs)
-{ return rhs.base() > lhs.base(); }
-
 template <typename IterT>
 class reverse_iterator
 : public iterator<std::random_access_iterator_tag, IterT> {
@@ -155,6 +125,36 @@ public:
   rev     operator-(difference_type n) const  { return rev(current + n); }
   reference operator[](difference_type n) const { return *(*this + n); }
 };
+
+template<typename IteratorL, typename IteratorR>
+bool operator==(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() == lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator!=(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() != lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator<=(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() <= lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator>=(random_access_iterator<IteratorL> const& rhs,
+                random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() >= lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator<(random_access_iterator<IteratorL> const& rhs,
+               random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() < lhs.base(); }
+
+template<typename IteratorL, typename IteratorR>
+bool operator>(random_access_iterator<IteratorL> const& rhs,
+               random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() > lhs.base(); }
 
 
 // template<typename IterT>
