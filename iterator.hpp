@@ -124,6 +124,13 @@ public:
   rev     operator+(difference_type n) const  { return rev(current - n); }
   rev     operator-(difference_type n) const  { return rev(current + n); }
   reference operator[](difference_type n) const { return *(*this + n); }
+
+  friend rev operator+(difference_type n, rev_constref rhs) {
+    return rai(rhs.current - n);
+  }
+  friend rev operator-(difference_type n, rev_constref rhs) {
+    return rai(rhs.current + n);
+  }
 };
 
 template<typename IteratorL, typename IteratorR>
