@@ -137,7 +137,8 @@ int main(void) {
 	std::cout << typeid(it3).name() << "\n";
 	std::cout << typeid(it4).name() << "\n\n";
 }
-//testing vector member overloads
+
+//testing iterator member overloads
 {
 	ft::vector<int>::iterator ftit1;
 	ft::vector<int>::iterator ftit2(ftit1);
@@ -168,9 +169,9 @@ int main(void) {
 	std::cout << (ftit1[2]) << '\n';
 	ftit2 = 2 + ftit1 + 2;
 }
-//testing vector member overloads
+//testing iterator member overloads
 
-//testing vector non member overloads
+//testing iterator non member overloads
 {
 	ft::vector<int> ftvec2;
 	for (int i = 0; i < 50; i++) {
@@ -196,14 +197,16 @@ int main(void) {
 	ftit3 = ftvec2.begin();
 	ftit4 = ftvec2.begin();
 
-	ftit3 == ftit4 ? std::cout << "true" : std::cout << "false";
-	ftit3 != ftit4 ? std::cout << "true" : std::cout << "false";
-	ftit3 >= ftit4 ? std::cout << "true" : std::cout << "false";
-	ftit3 <= ftit4 ? std::cout << "true" : std::cout << "false";
-	ftit3 > ftit4 ? std::cout << "true" : std::cout << "false";
-	ftit3 < ftit4 ? std::cout << "true" : std::cout << "false";
+	ftit3 == ftit4 ? std::cout << "true\n" : std::cout << "false\n";
+	ftit3 != ftit4 ? std::cout << "true\n" : std::cout << "false\n";
+	ftit3 >= ftit4 ? std::cout << "true\n" : std::cout << "false\n";
+	ftit3 <= ftit4 ? std::cout << "true\n" : std::cout << "false\n";
+	ftit3 > ftit4 ? std::cout << "true\n" : std::cout << "false\n";
+	ftit3 < ftit4 ? std::cout << "true\n" : std::cout << "false\n";
 }
+//testing iterator non member overloads
 
+//testing reverse iterator member overloads
 {
 	ft::vector<int>ftvec3;
 	for (int i = 0; i < 50; i++)
@@ -211,7 +214,16 @@ int main(void) {
 	ft::vector<int>::reverse_iterator revit1;
 	ft::vector<int>::reverse_iterator revit2(revit1);
 	revit1 = revit2;
+	revit1 = ftvec3.rbegin();
+	revit2 = ftvec3.rend();
+	revit1 == revit2 ? std::cout << "true\n" : std::cout << "false\n";
+	revit1 != revit2 ? std::cout << "true\n" : std::cout << "false\n";
+	revit1 >= revit2 ? std::cout << "true\n" : std::cout << "false\n";
+	revit1 <= revit2 ? std::cout << "true\n" : std::cout << "false\n";
+	revit1 > revit2 ? std::cout << "true\n" : std::cout << "false\n";
+	revit1 < revit2 ? std::cout << "true\n" : std::cout << "false\n";
 }
+//testing reverse iterator member overloads
 
 	delete ptr;
 	return (0);

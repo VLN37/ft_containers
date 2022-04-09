@@ -55,19 +55,27 @@ public:
 	size_t	capacity(void) const;
 
 	//member functions
-	void			reserve(size_t n);
-	void			resize(size_t n, value_type val = value_type());
-	reference		at(size_type n);
-	const_reference	at(size_type n) const;
-	reference		front(void);
-	const_reference	front(void) const;
-	reference		back(void);
-	const_reference	back(void) const;
-	void			push_back(value_type const& val);
-	void			pop_back(void);
-	void			clear(void);
-	iterator		begin(void);
-	const_iterator	begin(void) const;
+	void					reserve(size_t n);
+	void					resize(size_t n, value_type val = value_type());
+	reference				at(size_type n);
+	const_reference			at(size_type n) const;
+	reference				front(void);
+	const_reference			front(void) const;
+	reference				back(void);
+	const_reference			back(void) const;
+	void					push_back(value_type const& val);
+	void					pop_back(void);
+	void					clear(void);
+
+	//iterator support
+	iterator				begin(void);
+	const_iterator			begin(void) const;
+	reverse_iterator		rbegin(void);
+	const_reverse_iterator	rbegin(void) const;
+	iterator				end(void);
+	const_iterator			end(void) const;
+	reverse_iterator		rend(void);
+	const_reverse_iterator	rend(void) const;
 
 
 

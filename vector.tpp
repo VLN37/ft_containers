@@ -114,6 +114,38 @@ typename vector<T, Alloc>::const_iterator vector<T, Alloc>::begin(void) const {
 }
 
 template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator vector<T, Alloc>::end(void) {
+	return iterator(_data + _size);
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::const_iterator vector<T, Alloc>::end(void) const {
+	return const_iterator(_data + _size);
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rbegin(void) {
+	return reverse_iterator(end());
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::const_reverse_iterator
+		 vector<T, Alloc>::rbegin(void) const {
+	return reverse_iterator(end());
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rend(void) {
+	return reverse_iterator(begin());
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::const_reverse_iterator
+		 vector<T, Alloc>::rend(void) const {
+	return reverse_iterator(begin());
+}
+
+template<typename T, typename Alloc>
 void vector<T, Alloc>::push_back(value_type const& val) {
 	if (_size == _capacity)
 		reserve(_size ? _size * 2 : 1);
