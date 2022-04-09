@@ -130,6 +130,12 @@ public:
   template<typename Iter>
   reverse_iterator(reverse_iterator<Iter> const& src) : current(src.base()) { }
 
+  template<typename Iter>
+  revit_ref operator=(reverse_iterator<Iter> const& rhs) {
+    this->current = rhs.base();
+    return *this;
+  }
+
   iterator_type base(void) const { return current; }
 };
 

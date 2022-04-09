@@ -210,6 +210,7 @@ int main(void) {
 		ftvec3.push_back(i);
 	ft::vector<int>::reverse_iterator revit1;
 	ft::vector<int>::reverse_iterator revit2(revit1);
+	revit1 = revit2;
 }
 
 	delete ptr;
