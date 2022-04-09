@@ -203,6 +203,14 @@ int main(void) {
 	ftit3 > ftit4 ? std::cout << "true" : std::cout << "false";
 	ftit3 < ftit4 ? std::cout << "true" : std::cout << "false";
 }
+
+{
+	ft::vector<int>ftvec3;
+	for (int i = 0; i < 50; i++)
+		ftvec3.push_back(i);
+	ft::vector<int>::reverse_iterator revit;
+}
+
 	delete ptr;
 	return (0);
 }

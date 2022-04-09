@@ -34,14 +34,14 @@ public:
   random_access_iterator(void): current(NULL) { };
   explicit random_access_iterator(iterator_type src) : current(src) { }
   random_access_iterator(rai_constref src): current(src.current) { }
-  ~random_access_iterator(void) { };
+  ~random_access_iterator(void) { }
 
   template<typename Iter>
   random_access_iterator(random_access_iterator<Iter> src)
     : current(src.base()) { }
 
   template<typename Iter>
-  random_access_iterator& operator=(random_access_iterator<Iter> const& rhs) {
+  rai_ref operator=(random_access_iterator<Iter> const& rhs) {
     this->current = rhs.base();
     return *this;
   }
@@ -102,6 +102,32 @@ template<typename IteratorL, typename IteratorR>
 bool operator>(random_access_iterator<IteratorL> const& rhs,
                random_access_iterator<IteratorR> const& lhs)
 { return rhs.base() > lhs.base(); }
+
+template <typename IterT>
+class reverse_iterator
+: public iterator<std::random_access_iterator_tag, IterT> {
+private:
+  typedef reverse_iterator const& revit_constref;
+  typedef reverse_iterator&       revit_ref;
+  typedef reverse_iterator        revit;
+
+protected:
+  IterT current;
+
+public:
+  typedef IterT                                               iterator_type;
+  typedef typename iterator_traits<IterT>::iterator_category  iterator_category;
+  typedef typename iterator_traits<IterT>::value_type         value_type;
+  typedef typename iterator_traits<IterT>::difference_type    difference_type;
+  typedef typename iterator_traits<IterT>::pointer            pointer;
+  typedef typename iterator_traits<IterT>::reference          reference;
+
+  reverse_iterator(void): current(NULL) { }
+  explicit reverse_iterator(iterator_type src) : current(src) { }
+  reverse_iterator(revit_constref src) : current(src.current) { }
+  ~reverse_iterator(void) { }
+};
+
 
 // template<typename IterT>
 // random_access_iterator<IterT> operator+(

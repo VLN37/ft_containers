@@ -17,19 +17,19 @@ namespace ft {
 template<typename T, typename Alloc = std::allocator<T> >
 class vector {
 public:
-	typedef Alloc											alloc_type;
-	typedef T												value_type;
-	typedef typename std::allocator<T>::pointer				pointer;
-	typedef typename std::allocator<T>::size_type			size_type;
-	typedef typename std::allocator<T>::const_pointer		const_pointer;
-	typedef typename std::allocator<T>::reference			reference;
-	typedef typename std::allocator<T>::const_reference		const_reference;
-	typedef vector<T, Alloc>&								vec_ref;
-	typedef vector<T, Alloc> const&							vec_constref;
-	typedef random_access_iterator<pointer>					iterator;
-	typedef random_access_iterator<const_pointer>			const_iterator;
-	// typedef reverse_iterator<iterator>						reverse_iterator;
-	// typedef reverse_iterator<const_iterator>				const_reverse_iterator;
+	typedef Alloc										alloc_type;
+	typedef T											value_type;
+	typedef typename std::allocator<T>::pointer			pointer;
+	typedef typename std::allocator<T>::size_type		size_type;
+	typedef typename std::allocator<T>::const_pointer	const_pointer;
+	typedef typename std::allocator<T>::reference		reference;
+	typedef typename std::allocator<T>::const_reference	const_reference;
+	typedef vector<T, Alloc>&							vec_ref;
+	typedef vector<T, Alloc> const&						vec_constref;
+	typedef random_access_iterator<pointer>				iterator;
+	typedef random_access_iterator<const_pointer>		const_iterator;
+	typedef ft::reverse_iterator<iterator>				reverse_iterator;
+	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 	std::allocator<T>	_alloc;
 	pointer				data;
