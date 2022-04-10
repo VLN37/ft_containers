@@ -243,8 +243,13 @@ int main(void) {
 
 {
 	ft::vector<int>ftvec3;
-	for (int i = 0; i < 26; i++)
+	for (int i = 0; i < 11; i++)
 		ftvec3.push_back(i);
+	std::cout << ftvec3;
+	ft::vector<int>::iterator ftit2 = ftvec3.begin();
+	ftvec3.erase(ftit2 + 5);
+	std::cout << ftvec3;
+	ftvec3.erase(ftit2 + 9);
 	std::cout << ftvec3;
 }
 

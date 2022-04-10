@@ -46,7 +46,6 @@ public:
 	vec_ref			operator=(vec_constref rhs);
 	reference		operator[](size_type n);
 	const_reference	operator[](size_type n) const;
-	// std::ostream& operator<<(std::ostream& o);
 
 	//getters
 	pointer	test(size_t n);
@@ -96,10 +95,10 @@ public:
 
 	//debug
 	friend std::ostream& operator<<(std::ostream& o, vec_ref rhs) {
-		std::cout << "Vector debug\n\n";
+		std::cout << "Vector debug\n";
 		for (iterator it = rhs.begin(); it != rhs.end(); it++)
 			o << *it << " ";
-		o << "\n";
+		o << "\n\n";
 		return o;
 	}
 

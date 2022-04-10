@@ -173,12 +173,13 @@ typename vector<T, Alloc>::iterator
 	_alloc.destroy(pos.base());
 	iterator it = pos;
 	iterator next = pos + 1;
-	while (next != end()) {
+	while (it != end()) {
 		_alloc.construct(it.base(), *next);
 		_alloc.destroy(next.base());
 		it++;
 		next++;
 	}
+	--_size;
 	return pos;
 }
 
