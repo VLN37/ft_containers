@@ -49,9 +49,9 @@ void vector<T, Alloc>::reserve(size_t n) {
 		return;
 	T *tmp;
 	tmp = _alloc.allocate(n);
-	for (size_t i = 0; i < _size; i++)
+	for (size_type i = 0; i < _size; i++)
 		_alloc.construct(tmp + i, *(_data + i));
-	for (size_t i = 0; i < _capacity; i++)
+	for (size_type i = 0; i < _capacity; i++)
 		_alloc.destroy(_data + i);
 	_alloc.deallocate(_data, _capacity);
 	_capacity = n;
@@ -62,6 +62,8 @@ template<typename T, typename Alloc>
 void vector<T, Alloc>::clear(void) {
 	for (size_t i = 0; i < _size; i++)
 		_alloc.destroy(_data + i);
+	// for (iterator it = begin(); it != end(); it++)
+	// 	erase(it);
 	_size = 0;
 }
 
@@ -161,5 +163,30 @@ void vector<T, Alloc>::pop_back(void) {
 	}
 }
 
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator
+	vector<T,Alloc>::erase(vector<T, Alloc>::iterator pos) {
+	if (pos == end() - 1) {
+		pop_back();
+		return end();
+	}
+	_alloc.destroy(pos.base());
+	iterator it = pos;
+	iterator next = pos + 1;
+	while (next != end()) {
+		_alloc.construct(it.base(), *next);
+		_alloc.destroy(next.base());
+		it++;
+		next++;
+	}
+	return pos;
+}
+
+
+// template<typename T>
+// std::ostream& operator<<(std::ostream& o,
+// 	typename ft::vector<T, std::allocator<T> >& rhs) {
+// 	std::cout << "here\n";
+// 	return o;
 
 } // namespace ft

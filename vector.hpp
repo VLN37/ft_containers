@@ -54,18 +54,35 @@ public:
 	size_t	max_size(void) const;
 	size_t	capacity(void) const;
 
+	//element access
+	reference		at(size_type n);
+	const_reference	at(size_type n) const;
+	reference		front(void);
+	const_reference	front(void) const;
+	reference		back(void);
+	const_reference	back(void) const;
+
 	//member functions
-	void					reserve(size_t n);
-	void					resize(size_t n, value_type val = value_type());
-	reference				at(size_type n);
-	const_reference			at(size_type n) const;
-	reference				front(void);
-	const_reference			front(void) const;
-	reference				back(void);
-	const_reference			back(void) const;
-	void					push_back(value_type const& val);
-	void					pop_back(void);
-	void					clear(void);
+	void			reserve(size_t n);
+	void			resize(size_t n, value_type val = value_type());
+	void			push_back(value_type const& val);
+	void			pop_back(void);
+	void			clear(void);
+
+	// template <class InputIterator>
+	// void assign (InputIterator first, InputIterator last);     // range
+	// void assign (size_type n, const value_type& val);          // fill
+
+	//iterator insert (iterator position, const value_type& val); // single elem
+	// void insert (iterator position, size_type n, const value_type& val); fill
+	// template <class InputIterator>                             // range
+	// void insert (iterator position, InputIterator first, InputIterator last);
+
+	iterator erase(iterator position);
+	// iterator erase(iterator first, iterator last);
+
+	// void swap (vector& x);
+
 
 	//iterator support
 	iterator				begin(void);

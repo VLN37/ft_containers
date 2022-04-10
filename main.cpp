@@ -225,6 +225,29 @@ int main(void) {
 }
 //testing reverse iterator member overloads
 
+//test member functions
+{
+	ft::vector<int>ftvec3;
+	for (int i = 0; i < 50; i++)
+		ftvec3.push_back(i);
+	ft::vector<int>::iterator ftit3 = ftvec3.begin();
+	std::cout << *ftit3 << "\n";
+	ftit3 += 5;
+	std::cout << *ftit3 << "\n";
+	ftit3 = ftvec3.end() - 1;
+	std::cout << *ftit3 << "\n";
+	ftvec3.erase(ftit3);
+	if (ftit3 == ftvec3.end())
+		std::cout << "correct erase\n";
+}
+
+{
+	ft::vector<int>ftvec3;
+	for (int i = 0; i < 26; i++)
+		ftvec3.push_back(i);
+	std::cout << ftvec3;
+}
+
 	delete ptr;
 	return (0);
 }

@@ -106,12 +106,12 @@ public:
     return *this;
   }
 
-  iterator_type base(void) const { return current; }
-  reference operator*(void)      { return *current; }
-  rev_ref operator++(void)       { --current; return *this; }
-  rev     operator++(int)        { rev tmp(*this); --current; return tmp; }
-  rev_ref operator--(void)       { --current; return *this; }
-  rev     operator--(int)        { rev tmp(*this); --current; return tmp; }
+  iterator_type base(void) const  { return current; }
+  reference operator*(void)       { return *current; }
+  rev_ref operator++(void)        { --current; return *this; }
+  rev     operator++(int)         { rev tmp(*this); --current; return tmp; }
+  rev_ref operator--(void)        { --current; return *this; }
+  rev     operator--(int)         { rev tmp(*this); --current; return tmp; }
   pointer operator->(void) const              { return &(operator*()); }
   bool    operator==(rev_constref rhs) const  { return current == rhs.current; }
   bool    operator!=(rev_constref rhs) const  { return current != rhs.current; }
