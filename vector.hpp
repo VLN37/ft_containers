@@ -77,7 +77,14 @@ public:
 	reverse_iterator		rend(void);
 	const_reverse_iterator	rend(void) const;
 
-
+	//debug
+	friend std::ostream& operator<<(std::ostream& o, vec_ref rhs) {
+		std::cout << "Vector debug\n\n";
+		for (iterator it = rhs.begin(); it != rhs.end(); it++)
+			o << *it << " ";
+		o << "\n";
+		return o;
+	}
 
 protected:
 	pointer		_data;
@@ -90,8 +97,9 @@ private:
 } //namespace ft
 
 // C 11 variant
-// template<typename T, typename Alloc = std::allocator<T> >
-// std::ostream& operator<<(std::ostream& o, ft::vector<T, Alloc>& rhs);
+// template<typename T>
+// std::ostream& operator<<(std::ostream& o,
+//ft::vector<T, std::allocator<T> >& rhs);
 
 #include "vector.tpp"
 #include "vector_operators.tpp"
