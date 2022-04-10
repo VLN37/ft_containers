@@ -183,6 +183,13 @@ typename vector<T, Alloc>::iterator
 	return pos;
 }
 
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator
+	vector<T,Alloc>::erase(iterator first, iterator last) {
+	for (; last > first; last--)
+		erase(last);
+	return first;
+}
 
 // template<typename T>
 // std::ostream& operator<<(std::ostream& o,

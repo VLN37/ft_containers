@@ -8,6 +8,7 @@
 #include "iterator.hpp"
 #include "type_traits.hpp"
 
+
 int main(void) {
 	std::cout << "this compiles!\n";
 	ft::vector<int> vec1;
@@ -250,6 +251,8 @@ int main(void) {
 	ftvec3.erase(ftit2 + 5);
 	std::cout << ftvec3;
 	ftvec3.erase(ftit2 + 9);
+	std::cout << ftvec3;
+	ftvec3.erase(ftvec3.begin() + 3, ftvec3.end());
 	std::cout << ftvec3;
 }
 
