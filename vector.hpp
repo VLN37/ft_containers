@@ -69,18 +69,18 @@ public:
 	void			pop_back(void);
 	void			clear(void);
 
+	// void assign (size_type n, const value_type& val);          // fill
 	// template <class InputIterator>
 	// void assign (InputIterator first, InputIterator last);     // range
-	// void assign (size_type n, const value_type& val);          // fill
 
-	iterator insert(iterator pos, value_type const& val);
-	// void insert (iterator position, size_type n, const value_type& val); fill
+	iterator	insert(iterator pos, value_type const& val);
+	iterator	insert(iterator pos, size_type n, const value_type& val);
 	// template <class InputIterator>                             // range
 	// void insert (iterator position, InputIterator first, InputIterator last);
 
 	iterator erase(iterator position);
 	iterator erase(iterator first, iterator last);
-	void swap(vector& src);
+	void		swap(vector& src);
 
 
 	//iterator support

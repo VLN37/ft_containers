@@ -163,6 +163,11 @@ bool operator>(random_access_iterator<IteratorL> const& rhs,
                random_access_iterator<IteratorR> const& lhs)
 { return rhs.base() > lhs.base(); }
 
+template<typename IteratorL, typename IteratorR>
+typename random_access_iterator<IteratorL>::difference_type
+  operator-(random_access_iterator<IteratorL> const& rhs,
+            random_access_iterator<IteratorR> const& lhs)
+{ return rhs.base() - lhs.base(); }
 
 // template<typename IterT>
 // random_access_iterator<IterT> operator+(

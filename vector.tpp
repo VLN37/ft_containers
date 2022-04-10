@@ -219,7 +219,7 @@ typename vector<T, Alloc>::iterator
 		push_back(val);
 		return pos;
 	}
-	_alloc.construct(_data + _size, 42);
+	_alloc.construct(_data + _size, value_type());
 	iterator it = end() - 1;
 	iterator to = end();
 	for (; it > pos; --it, --to)
@@ -227,6 +227,38 @@ typename vector<T, Alloc>::iterator
 	*to = *it;
 	*it = val;
 	++_size;
+	return pos;
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator
+	vector<T, Alloc>::insert(iterator pos, size_type n, value_type const& val) {
+	size_t diff = pos - begin();
+	std::cout << pos - begin() << "\n";
+	if (_size + n >= _max_size)
+		throw(std::length_error("max_size exceeded\n"));
+	if (_size + n > _capacity) {
+		std::cout << "reserver\n";
+		reserve(_size ? (_size + n) * 2 : n);
+		pos = begin() + diff;
+	}
+	if (pos == end()) {
+		while (n--)
+			push_back(val);
+		return pos;
+	}
+	std::cout << _capacity << "\n";
+	for (size_type i = 0; i < n; i++)
+		_alloc.construct(_data + _size + i, 42);
+	_size += n;
+	iterator it = end() - n;
+	iterator to = end();
+	for (; it > pos; --it, --to) {
+		*to = *it;
+	}
+	*to = *it;
+	for(; n; n--)
+		*it++ = val;
 	return pos;
 }
 
