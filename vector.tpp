@@ -61,7 +61,8 @@ void vector<T, Alloc>::reserve(size_t n) {
 template<typename T, typename Alloc>
 typename vector<T, Alloc>::iterator
 	vector<T,Alloc>::erase(vector<T, Alloc>::iterator pos) {
-	if (pos == end() - 1) {
+	if (end() != begin() && pos == end() - 1) {
+		std::cout << "here\n";
 		pop_back();
 		return end();
 	}
@@ -191,6 +192,20 @@ void vector<T, Alloc>::pop_back(void) {
 		_alloc.destroy(data + _size);
 		_size--;
 	}
+}
+
+template<typename T, typename Alloc>
+void vector<T, Alloc>::swap(vector& src) {
+	size_type	tmp_size = _size;
+	size_type	tmp_cap = _capacity;
+	pointer		tmp_data = _data;
+
+	_data = src._data;
+	_size = src._size;
+	_capacity = src._capacity;
+	src._data = tmp_data;
+	src._size = tmp_size;
+	src._capacity = tmp_cap;
 }
 
 // template<typename T>

@@ -246,6 +246,7 @@ int main(void) {
 	ft::vector<int>ftvec3;
 	for (int i = 0; i < 11; i++)
 		ftvec3.push_back(i);
+	ft::vector<int>ftvec4(ftvec3);
 	std::cout << ftvec3;
 	ft::vector<int>::iterator ftit2 = ftvec3.begin();
 	ftvec3.erase(ftit2 + 5);
@@ -258,6 +259,9 @@ int main(void) {
 	std::cout << ftvec3;
 	ftvec3.clear();
 	std::cout << ftvec3;
+	ftvec3.swap(ftvec4);
+	std::cout << ftvec3;
+
 }
 
 	delete ptr;
