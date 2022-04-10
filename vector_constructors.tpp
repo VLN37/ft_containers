@@ -19,7 +19,7 @@ vector<T, Alloc>::vector(const alloc_type& alloc)
 
 template<typename T, typename Alloc>
 vector<T, Alloc>::vector(vector<T, Alloc> const& src, const alloc_type& alloc)
-: _alloc(alloc) {
+: _alloc(alloc), _size(0) {
 	std::cout << "vector copy constructor called\n";
 	*this = src;
 }
