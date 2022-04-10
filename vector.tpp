@@ -59,11 +59,41 @@ void vector<T, Alloc>::reserve(size_t n) {
 }
 
 template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator
+	vector<T,Alloc>::erase(vector<T, Alloc>::iterator pos) {
+	if (pos == end() - 1) {
+		pop_back();
+		return end();
+	}
+	_alloc.destroy(pos.base());
+	iterator it = pos;
+	iterator next = pos + 1;
+	while (it != end()) {
+		_alloc.construct(it.base(), *next);
+		_alloc.destroy(next.base());
+		it++;
+		next++;
+	}
+	--_size;
+	return pos;
+}
+
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator
+	vector<T,Alloc>::erase(iterator first, iterator last) {
+	for (; last > first; last--)
+		erase(last);
+	return first;
+}
+
+
+template<typename T, typename Alloc>
 void vector<T, Alloc>::clear(void) {
-	for (size_t i = 0; i < _size; i++)
-		_alloc.destroy(_data + i);
-	// for (iterator it = begin(); it != end(); it++)
-	// 	erase(it);
+	iterator it = end();
+	for (; it != begin(); it--)
+		erase(it);
+	if (it != end())
+		erase(it);
 	_size = 0;
 }
 
@@ -161,34 +191,6 @@ void vector<T, Alloc>::pop_back(void) {
 		_alloc.destroy(data + _size);
 		_size--;
 	}
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator
-	vector<T,Alloc>::erase(vector<T, Alloc>::iterator pos) {
-	if (pos == end() - 1) {
-		pop_back();
-		return end();
-	}
-	_alloc.destroy(pos.base());
-	iterator it = pos;
-	iterator next = pos + 1;
-	while (it != end()) {
-		_alloc.construct(it.base(), *next);
-		_alloc.destroy(next.base());
-		it++;
-		next++;
-	}
-	--_size;
-	return pos;
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator
-	vector<T,Alloc>::erase(iterator first, iterator last) {
-	for (; last > first; last--)
-		erase(last);
-	return first;
 }
 
 // template<typename T>

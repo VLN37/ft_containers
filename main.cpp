@@ -254,6 +254,10 @@ int main(void) {
 	std::cout << ftvec3;
 	ftvec3.erase(ftvec3.begin() + 3, ftvec3.end());
 	std::cout << ftvec3;
+	ftvec3.clear();
+	std::cout << ftvec3;
+	ftvec3.clear();
+	std::cout << ftvec3;
 }
 
 	delete ptr;
