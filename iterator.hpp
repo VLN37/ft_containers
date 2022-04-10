@@ -44,7 +44,7 @@ public:
   rai_ref operator=(random_access_iterator<Iter> const& rhs) {
     this->current = rhs.base();
     return *this;
-  }
+}
 
   iterator_type base(void) const  { return current; }
   reference operator*(void) { return *current; }

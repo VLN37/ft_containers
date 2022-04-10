@@ -208,6 +208,28 @@ void vector<T, Alloc>::swap(vector& src) {
 	src._capacity = tmp_cap;
 }
 
+template<typename T, typename Alloc>
+typename vector<T, Alloc>::iterator
+	vector<T, Alloc>::insert(iterator pos, value_type const& val) {
+	if (_size == _max_size)
+		throw(std::length_error("max_size exceeded\n"));
+	if (_size == _capacity)
+		reserve(_size ? _size * 2 : 1);
+	if (pos == end()) {
+		push_back(val);
+		return pos;
+	}
+	_alloc.construct(_data + _size, 42);
+	iterator it = end() - 1;
+	iterator to = end();
+	for (; it > pos; --it, --to)
+		*to = *it;
+	*to = *it;
+	*it = val;
+	++_size;
+	return pos;
+}
+
 // template<typename T>
 // std::ostream& operator<<(std::ostream& o,
 // 	typename ft::vector<T, std::allocator<T> >& rhs) {

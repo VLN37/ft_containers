@@ -261,6 +261,8 @@ int main(void) {
 	std::cout << ftvec3;
 	ftvec3.swap(ftvec4);
 	std::cout << ftvec3;
+	ftvec3.insert(ftvec3.begin() + 5, 42);
+	std::cout << ftvec3;
 }
 
 	delete ptr;

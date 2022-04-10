@@ -11,11 +11,10 @@ vector<T, Alloc>& vector<T, Alloc>::operator=(vec_constref rhs) {
 	std::cout << "vector assignment operator called\n";
 	for (size_t i = 0; i < _size; i++)
 		_alloc.destroy(_data + i);
-	if (_size)
-		_alloc.deallocate(_data, size_type());
+	_alloc.deallocate(_data, size_type());
 	_size = rhs._size;
 	_capacity = rhs._capacity;
-	_data = _alloc.allocate(_size);
+	_data = _alloc.allocate(_capacity);
 	data = _data;
 	for (size_t i = 0; i < _size; i++)
 		_alloc.construct(_data + i, *(rhs._data + i));
