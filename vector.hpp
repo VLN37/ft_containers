@@ -8,7 +8,6 @@
 #include <memory>
 #include <vector>
 #include <iostream>
-#include <cstring>
 
 #include "iterator.hpp"
 
@@ -69,7 +68,7 @@ public:
 	void			pop_back(void);
 	void			clear(void);
 
-	// void assign (size_type n, const value_type& val);          // fill
+	void assign(size_type n, value_type const& val);
 	// template <class InputIterator>
 	// void assign (InputIterator first, InputIterator last);     // range
 

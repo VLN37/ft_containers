@@ -260,6 +260,20 @@ typename vector<T, Alloc>::iterator
 	return pos;
 }
 
+template<typename T, typename Alloc>
+void vector<T, Alloc>::assign(size_type n, value_type const& val) {
+	if (n >= _max_size)
+		throw(std::length_error("max_size exceeded\n"));
+	if (n > _capacity)
+		reserve(n);
+	for (int i = _size - 1; i >= 0; i--)
+		_alloc.destroy(_data + i);
+	_size = 0;
+	while (n--)
+		push_back(val);
+
+}
+
 // template<typename T>
 // std::ostream& operator<<(std::ostream& o,
 // 	typename ft::vector<T, std::allocator<T> >& rhs) {
