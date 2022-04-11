@@ -80,7 +80,7 @@ public:
 
 	iterator erase(iterator position);
 	iterator erase(iterator first, iterator last);
-	void		swap(vector& src);
+	void	swap(vector& src);
 
 
 	//iterator support
@@ -111,11 +111,6 @@ protected:
 private:
 	};
 } //namespace ft
-
-// C 11 variant
-// template<typename T>
-// std::ostream& operator<<(std::ostream& o,
-//ft::vector<T, std::allocator<T> >& rhs);
 
 #include "vector.tpp"
 #include "vector_operators.tpp"
