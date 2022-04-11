@@ -189,7 +189,7 @@ void vector<T, Alloc>::push_back(value_type const& val) {
 template<typename T, typename Alloc>
 void vector<T, Alloc>::pop_back(void) {
 	if (_size > 0) {
-		_alloc.destroy(data + _size);
+		_alloc.destroy(_data + _size);
 		_size--;
 	}
 }

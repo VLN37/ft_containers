@@ -31,7 +31,6 @@ public:
 	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 	std::allocator<T>	_alloc;
-	pointer				data;
 
 	//constructors
 	explicit vector(const alloc_type& alloc = alloc_type());

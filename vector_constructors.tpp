@@ -11,7 +11,6 @@ vector<T, Alloc>::vector(const alloc_type& alloc)
 : _alloc(alloc) {
 	std::cout << "default constructor called\n";
 	_data = _alloc.allocate(0);
-	data = _data;
 	_size = 0;
 	_capacity = 0;
 	_max_size = _alloc.max_size();
@@ -30,7 +29,6 @@ vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
 : _alloc(alloc) {
 	std::cout << "size parametric constructor called\n";
 	_data = _alloc.allocate(n);
-	data = _data;
 	_size = n;
 	_capacity = n;
 	_max_size = _alloc.max_size();
