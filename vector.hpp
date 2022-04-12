@@ -193,10 +193,16 @@ private:
 
 	template<typename IterT>
 	void assign_dispatcher(IterT first, IterT last, false_type) {
-		(void)first;
-		(void)last;
+		if (first > last)
+			throw(std::length_error("range error\n"));
+		if (static_cast<size_type>(last - first) > _capacity)
+			reserve(last - first);
+		for (int i = _size - 1; i >= 0; i--)
+			_alloc.destroy(_data + i);
+		_size = 0;
+		for (; first != last; first++)
+			push_back(*first);
 	}
-
 	};
 } //namespace ft
 

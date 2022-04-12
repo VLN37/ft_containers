@@ -276,6 +276,17 @@ int main(void) {
 	std::cout << ftvec5;
 	ft::vector<int>ftvec6(10, 42);
 	std::cout << ftvec6;
+	ftvec5.clear();
+	std::cout << ftvec5;
+	ftvec5.assign(ftvec6.begin(), ftvec6.end());
+	std::cout << ftvec5;
+	ftvec5.clear();
+	std::cout << ftvec5;
+	ftvec5.assign(10, 21);
+	std::cout << ftvec5;
+	ftvec5.clear();
+	std::cout << ftvec5;
+
 }
 
 	delete ptr;
