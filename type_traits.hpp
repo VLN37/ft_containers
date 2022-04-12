@@ -9,21 +9,21 @@ namespace ft {
 
 // template metaprogramming to create a type only if the following is true
 template<bool b, typename T = void>
-	struct enable_if { };
+  struct enable_if { };
 
 template<typename T>
-	struct enable_if<true, T> { typedef T type; };
+  struct enable_if<true, T> { typedef T type; };
 
 //std compliant helper class for is_integral check
 //source: https://en.cppreference.com/w/cpp/types/integral_constant
 template <typename T, T v>
 struct integral_constant {
-	typedef T					value_type;
-	typedef integral_constant	type;
+  typedef T					value_type;
+  typedef integral_constant	type;
 
-	static const T value = v;
-	operator value_type() const { return value; }
-	// constexpr value_type operator()() const noexcept { return value; }
+  static const T value = v;
+  operator value_type() const { return value; }
+  // constexpr value_type operator()() const noexcept { return value; }
 };
 
 //enters here if none of the specializations fit
