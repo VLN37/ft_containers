@@ -284,9 +284,9 @@ int main(void) {
 	std::cout << ftvec5;
 	ftvec5.assign(10, 21);
 	std::cout << ftvec5;
-	ftvec5.clear();
+	std::cout << ftvec6;
+	ftvec5.insert(ftvec5.begin() + 5, ftvec6.begin(), ftvec6.end());
 	std::cout << ftvec5;
-
 }
 
 	delete ptr;
