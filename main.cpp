@@ -274,6 +274,8 @@ int main(void) {
 	ft::vector<int>ftvec5(ftvec3.begin(), ftvec3.end());
 	std::cout << ftvec3;
 	std::cout << ftvec5;
+	ft::vector<int>ftvec6(10, 42);
+	std::cout << ftvec6;
 }
 
 	delete ptr;

@@ -41,7 +41,7 @@ public:
 	explicit vector(size_type n,
 					value_type val = value_type(),
 					const alloc_type& alloc = alloc_type());
-	//range / fill disambiguator
+	//range / fill constructor disambiguator
 	template<typename IterT>
 	vector(IterT first, IterT last, alloc_type const& alloc = alloc_type());
 	~vector(void);
@@ -78,9 +78,13 @@ public:
 	// void assign (IterT first, IterT last);     // range
 
 	iterator	insert(iterator pos, value_type const& val);
-	iterator	insert(iterator pos, size_type n, const value_type& val);
-	// template <class IterT>                             // range
-	// void insert (iterator position, IterT first, IterT last);
+	iterator	insert(iterator pos, size_type n, const value_type& val)
+	{ insert_dispatch(pos, n, val, true_type()); return pos; }
+	template <class IterT>                             // range
+	void insert(iterator position, IterT first, IterT last) {
+		typedef typename is_integral<IterT>::type _integral;
+		insert_dispatch(position, first, last, _integral());
+	}
 
 	iterator erase(iterator position);
 	iterator erase(iterator first, iterator last);
@@ -133,6 +137,45 @@ private:
 		for (; first != last; ++first)
 			push_back(*first);
 	}
+
+	template<typename IterT>
+	void insert_dispatch(iterator pos, IterT first, IterT last, false_type) {
+		(void)pos;
+		(void)first;
+		(void)last;
+	}
+
+	template<typename Integer>
+	void insert_dispatch(iterator pos, Integer n,
+	Integer const& val, true_type) {
+		if (_size + n >= _max_size)
+			throw(std::length_error("max_size exceeded\n"));
+		if (_size + n > _capacity) {
+			size_t diff = pos - begin();
+			std::cout << "reserver\n";
+			reserve(_size ? (_size + n) * 2 : n);
+			pos = begin() + diff;
+		}
+		if (pos == end()) {
+			while (n--)
+				push_back(val);
+			return;
+		}
+		for (int i = 0; i < n; i++)
+			_alloc.construct(_data + _size + i, 42);
+		_size += n;
+		iterator it = end() - n;
+		iterator to = end();
+		for (; it > pos; --it, --to) {
+			*to = *it;
+		}
+		*to = *it;
+		for(; n; n--)
+			*it++ = val;
+		// return pos;
+	}
+
+
 	};
 } //namespace ft
 
