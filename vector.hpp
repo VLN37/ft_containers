@@ -38,22 +38,12 @@ public:
 	//constructors
 	explicit vector(const alloc_type& alloc = alloc_type());
 	explicit vector(vec_constref src, const alloc_type& alloc = alloc_type());
-	//missing range constructor - depends on iterator class
 	explicit vector(size_type n,
 					value_type val = value_type(),
 					const alloc_type& alloc = alloc_type());
-	template<typename InputIterator>
-	vector(InputIterator first,
-		   InputIterator last,
-		   alloc_type const& alloc = alloc_type()) {
-	(void)first;
-	(void)last;
-	(void)alloc;
-	typedef typename is_integral<InputIterator>::type _integral;
-	_integral() ? std::cout << "true\n" : std::cout << "false\n";
-	constructor_dispatch(first, last, _integral());
-
-}
+	//range / fill disambiguator
+	template<typename IterT>
+	vector(IterT first, IterT last, alloc_type const& alloc = alloc_type());
 	~vector(void);
 
 	//operators
@@ -84,13 +74,13 @@ public:
 	void			clear(void);
 
 	void assign(size_type n, value_type const& val);
-	// template <class InputIterator>
-	// void assign (InputIterator first, InputIterator last);     // range
+	// template <class IterT>
+	// void assign (IterT first, IterT last);     // range
 
 	iterator	insert(iterator pos, value_type const& val);
 	iterator	insert(iterator pos, size_type n, const value_type& val);
-	// template <class InputIterator>                             // range
-	// void insert (iterator position, InputIterator first, InputIterator last);
+	// template <class IterT>                             // range
+	// void insert (iterator position, IterT first, IterT last);
 
 	iterator erase(iterator position);
 	iterator erase(iterator first, iterator last);
@@ -134,15 +124,15 @@ private:
 			_alloc.construct(_data + i, value);
 	}
 
-	template<typename InputIterator>
-	void constructor_dispatch(InputIterator first,
-							  InputIterator last,
-							  false_type) {
-		(void)first;
-		(void)last;
-		// vector(iterator first, iterator last);
+	template<typename IterT>
+	void constructor_dispatch(IterT first, IterT last, false_type) {
+		_data = _alloc.allocate(last - first);
+		_size = 0;
+		_capacity = last - first;
+		_max_size = _alloc.max_size();
+		for (; first != last; ++first)
+			push_back(*first);
 	}
-
 	};
 } //namespace ft
 
