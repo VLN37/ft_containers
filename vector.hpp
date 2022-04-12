@@ -10,8 +10,11 @@
 #include <iostream>
 
 #include "iterator.hpp"
+#include "type_traits.hpp"
 
 namespace ft {
+	typedef integral_constant<bool, false>				false_type;
+	typedef integral_constant<bool, true>				true_type;
 
 template<typename T, typename Alloc = std::allocator<T> >
 class vector {
@@ -39,6 +42,18 @@ public:
 	explicit vector(size_type n,
 					value_type val = value_type(),
 					const alloc_type& alloc = alloc_type());
+	template<typename InputIterator>
+	vector(InputIterator first,
+		   InputIterator last,
+		   alloc_type const& alloc = alloc_type()) {
+	(void)first;
+	(void)last;
+	(void)alloc;
+	typedef typename is_integral<InputIterator>::type _integral;
+	_integral() ? std::cout << "true\n" : std::cout << "false\n";
+	constructor_dispatch(first, last, _integral());
+
+}
 	~vector(void);
 
 	//operators
@@ -47,10 +62,11 @@ public:
 	const_reference	operator[](size_type n) const;
 
 	//getters
-	pointer	test(size_t n);
-	size_t	size(void) const;
-	size_t	max_size(void) const;
-	size_t	capacity(void) const;
+	pointer		test(size_t n);
+	size_t		size(void) const;
+	size_t		max_size(void) const;
+	size_t		capacity(void) const;
+	alloc_type	get_allocator(void) const { return this->_alloc; }
 
 	//element access
 	reference		at(size_type n);
@@ -107,6 +123,26 @@ protected:
 	size_type	_capacity;
 
 private:
+	template<typename Integer>
+	void constructor_dispatch(Integer n, Integer value, true_type) {
+		std::cout << "size parametric constructor called\n";
+		_data = _alloc.allocate(n);
+		_size = n;
+		_capacity = n;
+		_max_size = _alloc.max_size();
+		for (size_t i = 0; i < _size; i++)
+			_alloc.construct(_data + i, value);
+	}
+
+	template<typename InputIterator>
+	void constructor_dispatch(InputIterator first,
+							  InputIterator last,
+							  false_type) {
+		(void)first;
+		(void)last;
+		// vector(iterator first, iterator last);
+	}
+
 	};
 } //namespace ft
 

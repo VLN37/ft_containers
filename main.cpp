@@ -271,7 +271,7 @@ int main(void) {
 	std::cout << ftvec3;
 	ftvec3.assign(3, 42);
 	std::cout << ftvec3;
-
+	// ft::vector<int>ftvec5(ftvec3.begin(), ftvec3.end());
 }
 
 	delete ptr;

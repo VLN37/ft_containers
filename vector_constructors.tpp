@@ -16,6 +16,18 @@ vector<T, Alloc>::vector(const alloc_type& alloc)
 	_max_size = _alloc.max_size();
 }
 
+// template<typename T, typename Alloc>
+// template<typename InputIterator>
+// vector<T, Alloc>::vector(InputIterator first,
+// typename enable_if<is_integral<InputIterator>::value, InputIterator>::type =0,
+// const alloc_type& alloc) : _alloc(alloc) {
+// 	iter a;
+// 	(void)a;
+// 	_size = last - first;
+// }
+
+// typename enable_if<is_integral<InputIterator>::value, InputIterator>::type last,
+
 template<typename T, typename Alloc>
 vector<T, Alloc>::vector(vector<T, Alloc> const& src, const alloc_type& alloc)
 : _alloc(alloc), _size(0) {
