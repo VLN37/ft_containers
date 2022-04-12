@@ -74,8 +74,11 @@ public:
 	void			clear(void);
 
 	void assign(size_type n, value_type const& val);
-	// template <class IterT>
-	// void assign (IterT first, IterT last);     // range
+	template <class IterT>
+	void assign(IterT first, IterT last) {
+		typedef typename is_integral<IterT>::type _integral;
+		assign_dispatcher(first, last, _integral());
+	}
 
 	iterator	insert(iterator pos, value_type const& val);
 	iterator	insert(iterator pos, size_type n, const value_type& val)
@@ -175,6 +178,24 @@ private:
 		// return pos;
 	}
 
+	template<typename Integer>
+	void assign_dispatcher(size_type n, Integer const& val, true_type) {
+		if (n >= _max_size)
+			throw(std::length_error("max_size exceeded\n"));
+		if (n > _capacity)
+			reserve(n);
+		for (int i = _size - 1; i >= 0; i--)
+			_alloc.destroy(_data + i);
+		_size = 0;
+		while (n--)
+			push_back(val);
+	}
+
+	template<typename IterT>
+	void assign_dispatcher(IterT first, IterT last, false_type) {
+		(void)first;
+		(void)last;
+	}
 
 	};
 } //namespace ft
