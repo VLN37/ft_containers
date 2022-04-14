@@ -3,3 +3,6 @@
 obj
 containers
 .vscode
+gtest
+vecft
+vecstd
