@@ -26,8 +26,8 @@ vector<T, Alloc>::vector(IterT first, IterT last, alloc_type const& alloc)
 }
 
 template<typename T, typename Alloc>
-vector<T, Alloc>::vector(vector<T, Alloc> const& src, const alloc_type& alloc)
-: _alloc(alloc), _size(0) {
+vector<T, Alloc>::vector(vector<T, Alloc> const& src)
+: _alloc(src.get_allocator()), _size(0) {
   std::cout << "vector copy constructor called\n";
   _data = _alloc.allocate(0);
   *this = src;

@@ -164,7 +164,7 @@ typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rbegin(void) {
 template<typename T, typename Alloc>
 typename vector<T, Alloc>::const_reverse_iterator
      vector<T, Alloc>::rbegin(void) const {
-  return reverse_iterator(_data + _size - 1);
+  return reverse_iterator(end());
 }
 
 template<typename T, typename Alloc>

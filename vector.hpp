@@ -37,7 +37,7 @@ public:
 
   //constructors
   explicit vector(const alloc_type& alloc = alloc_type());
-  explicit vector(vec_constref src, const alloc_type& alloc = alloc_type());
+  explicit vector(vec_constref src);
   explicit vector(size_type n,
                   value_type val = value_type(),
                   const alloc_type& alloc = alloc_type());
@@ -198,7 +198,7 @@ private:
       *to = *it;
     }
     *to = *it;
-    for(; n; --n, ++it)
+    for (; n; --n, ++it)
       *it = val;
     // return pos;
   }
