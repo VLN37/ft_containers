@@ -21,7 +21,6 @@ template<typename IterT>
 vector<T, Alloc>::vector(IterT first, IterT last, alloc_type const& alloc)
 : _alloc(alloc) {
   typedef typename is_integral<IterT>::type _integral;
-  _integral() ? std::cout << "true\n" : std::cout << "false\n";
   constructor_dispatch(first, last, _integral());
 }
 
