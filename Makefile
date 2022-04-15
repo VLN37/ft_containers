@@ -2,7 +2,7 @@ CC		= c++
 CFLAGS= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
 STD		= -DSTD=1
 NAME	= containers
-GTEST	= test
+GTEST	= perfft
 
 SRC		=	main.cpp \
 
@@ -22,9 +22,9 @@ OBJDIR	= obj
 $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(GTEST):	$(OBJDIR) $(OBJ)
-		$(CC) $(CFLAGS) $(SRCT) -o vecstd $(STD) -I./
-		$(CC) $(CFLAGS) $(SRCT) -o vecft -I./
+$(GTEST):	$(OBJDIR) $(OBJ) tests/unit.cpp
+		$(CC) $(CFLAGS) $(SRCT) -o perfstd $(STD) -I./
+		$(CC) $(CFLAGS) $(SRCT) -o perfft -I./
 
 $(OBJDIR)/%.o:	%.cpp $(INC)
 		$(CC) $(CFLAGS) -c $< -o $@

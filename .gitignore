@@ -6,3 +6,5 @@ containers
 gtest
 vecft
 vecstd
+perfft
+perfstd
