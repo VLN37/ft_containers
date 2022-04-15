@@ -32,7 +32,7 @@ public:
 
 
   random_access_iterator(void): current(NULL) { };
-  explicit random_access_iterator(iterator_type src) : current(src) { }
+  explicit random_access_iterator(iterator_type const& src) : current(src) { }
   random_access_iterator(rai_constref src): current(src.current) { }
   ~random_access_iterator(void) { }
 
@@ -47,7 +47,7 @@ public:
 }
 
   iterator_type base(void) const  { return current; }
-  reference operator*(void) { return *current; }
+  reference operator*(void) const { return *current; }
   rai_ref operator++(void)  { current++; return *this; }
   rai     operator++(int)   { rai tmp(*this); ++current; return tmp; }
   rai_ref operator--(void)  { current--; return *this; };
@@ -143,7 +143,7 @@ public:
   }
 
   iterator_type base(void) const  { return current; }
-  reference operator*(void)       { IterT tmp = current; return *--tmp; }
+  reference operator*(void) const { IterT tmp = current; return *--tmp; }
   rev_ref operator++(void)        { --current; return *this; }
   rev     operator++(int)         { rev tmp(*this); --current; return tmp; }
   rev_ref operator--(void)        { ++current; return *this; }
@@ -204,6 +204,12 @@ typename reverse_iterator<Iter>::difference_type
   operator-(reverse_iterator<Iter> const& rhs,
             reverse_iterator<Iter> const& lhs)
 { return lhs.base() - rhs.base(); }
+
+template<typename Iter>
+typename reverse_iterator<Iter>::difference_type
+  operator+(reverse_iterator<Iter> const& rhs,
+            reverse_iterator<Iter> const& lhs)
+{ return lhs.base() + rhs.base(); }
 
 
 
