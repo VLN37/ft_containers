@@ -143,7 +143,7 @@ public:
   }
 
   iterator_type base(void) const  { return current; }
-  reference operator*(void)       { return *current; }
+  reference operator*(void)       { IterT tmp = current; return *--tmp; }
   rev_ref operator++(void)        { --current; return *this; }
   rev     operator++(int)         { rev tmp(*this); --current; return tmp; }
   rev_ref operator--(void)        { ++current; return *this; }
