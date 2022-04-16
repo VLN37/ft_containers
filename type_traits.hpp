@@ -84,4 +84,4 @@ struct is_integral<unsigned long long int>
 
 } // namespace ft
 
-#endif
+#endif // TYPE_TRAITS_HPP
