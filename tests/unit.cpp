@@ -205,6 +205,10 @@ int main(void) {
   print(vec3);
   ft::vector<int> vec4(5, 50);
   print(vec4);
+  while (vec4.size()) {
+    vec4.pop_back();
+    print(vec4);
+  }
 }
 
 // {

@@ -5,11 +5,10 @@
 # define FT_VECTOR_HPP
 
 #include <memory>
-#include <vector>
 #include <iostream>
-
 #include "iterator.hpp"
 #include "type_traits.hpp"
+
 namespace ft {
   typedef integral_constant<bool, false>              false_type;
   typedef integral_constant<bool, true>               true_type;
@@ -67,8 +66,10 @@ public:
   alloc_type      get_allocator(void) const { return this->_alloc; }
 
   //element access
-  reference       at(size_type n)         { return _data[n]; }
-  const_reference at(size_type n) const   { return _data[n]; }
+  reference       at(size_type n)
+  { if (n >= _size) throw(std::range_error("range error\n")); return _data[n]; }
+  const_reference at(size_type n) const
+  { if (n >= _size) throw(std::range_error("range error\n")); return _data[n]; }
   reference       front(void)             { return _data[0]; }
   const_reference front(void) const       { return _data[0]; }
   reference       back(void)              { return _data[_size - 1]; }
