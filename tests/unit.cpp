@@ -8,10 +8,12 @@
 #ifdef STD
 namespace ft = std;
 # include <vector>
+# include <stack>
 #else
 # include "iterator.hpp"
 # include "type_traits.hpp"
 # include "vector.hpp"
+# include "stack.hpp"
 #endif
 
 void out(int var) {
@@ -210,6 +212,13 @@ int main(void) {
     print(vec4);
   }
 }
+
+{
+  std::cout << "STACK\n";
+
+  ft::stack<int> stk;
+}
+
 
 // {
 //   ft::vector<int> vec1;

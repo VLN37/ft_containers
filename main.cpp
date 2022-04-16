@@ -6,6 +6,7 @@
 #include "vector.hpp"
 #include "iterator.hpp"
 #include "type_traits.hpp"
+#include "stack.hpp"
 
 
 int main(void) {
@@ -278,6 +279,11 @@ int main(void) {
   std::cout << ftvec6;
   ftvec5.insert(ftvec5.begin() + 5, ftvec6.begin(), ftvec6.end());
   std::cout << ftvec5;
+}
+
+{
+  ft::stack<int> stk;
+  (void)stk;
 }
 
   return (0);

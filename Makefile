@@ -1,6 +1,6 @@
 CC			= c++
 CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
-INCPATH = -I./ -I./vector -I./iterator -I./utils
+INCPATH = -I./ -I./vector -I./iterator -I./utils -I./stack
 STD			= -DSTD=1
 NAME		= containers
 GTEST		= perfft
@@ -16,11 +16,12 @@ INC			=	vector.hpp \
 					type_traits.hpp \
 					iterator.hpp \
 					iterator_base.hpp \
+					stack.hpp \
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	= obj
 
-VPATH		= vector utils iterator
+VPATH		= vector stack utils iterator
 
 $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
