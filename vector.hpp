@@ -31,8 +31,14 @@ public:
   typedef ft::reverse_iterator<iterator>              reverse_iterator;
   typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
 
-  std::allocator<T>	_alloc;
+protected:
+  std::allocator<T> _alloc;
+  pointer           _data;
+  size_type         _size;
+  size_type         _max_size;
+  size_type         _capacity;
 
+public:
   //constructors
   explicit vector(const alloc_type& alloc = alloc_type());
   explicit vector(vec_constref src);
@@ -112,12 +118,6 @@ public:
     return o;
   }
 
-protected:
-  pointer     _data;
-  size_type   _size;
-  size_type   _max_size;
-  size_type   _capacity;
-
 private:
   template<typename Integer>
   void constructor_fill(size_type n, Integer value);
@@ -161,7 +161,6 @@ private:
   void assign_dispatch(IterT first, IterT last, false_type) {
     assign_range(first, last);
   }
-
   };
 } //namespace ft
 
