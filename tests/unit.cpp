@@ -201,7 +201,25 @@ int main(void) {
   vec1.insert(vec1.begin() + 5, vec2.begin(), vec2.end());
   print(vec1);
   print(vec2);
+  ft::vector<int> vec3(vec1.begin(), vec1.end());
+  print(vec3);
+  ft::vector<int> vec4(5, 50);
+  print(vec4);
 }
+
+// {
+//   ft::vector<int> vec1;
+//   for (int i = 0; i < 100000; i++)
+//     vec1.push_back(i);
+//   ft::vector<int> vec2;
+//   vec2.assign(vec1.begin() + 200, vec1.begin() + 5200);
+//   ft::vector<int>::iterator it1 = vec1.begin();
+//   for (int i = 0; i < 10000000; i++) {
+//     for (; it1 != vec1.end(); it1++)
+//       *it1 += 50;
+//   }
+//   vec1.erase(vec1.begin(), vec1.begin() + 100);
+// }
 
   return 0;
 }

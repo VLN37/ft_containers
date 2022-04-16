@@ -84,8 +84,8 @@ public:
     assign_dispatch(first, last, _integral());
   }
 
-  iterator	insert(iterator pos, value_type const& val);
-  iterator	insert(iterator pos, size_type n, const value_type& val)
+  iterator  insert(iterator pos, value_type const& val);
+  iterator  insert(iterator pos, size_type n, const value_type& val)
   { insert_dispatch(pos, n, val, true_type()); return pos; }
 
   template <class IterT>                             // range
@@ -137,7 +137,7 @@ private:
   void insert_fill(iterator pos, size_type n, Integer const& val);
   template<typename Integer>
   void insert_dispatch(iterator pos, size_type n,
-    Integer const& val, true_type) {
+Integer const& val, true_type) {
     insert_fill(pos, n, val);
   }
 
