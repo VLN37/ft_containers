@@ -17,10 +17,18 @@ public:
   typedef          Container                  container_type;
 
 protected:
-  Container _data;
+  Container _c;
 
-private:
-
+public:
+  explicit stack(Container const& c = Container()) : _c(c) {
+    std::cout << "stack constructor called\n";
+  }
+  bool            empty(void) const           { return _c.empty(); }
+  size_type       size(void) const            { return _c.size(); }
+  reference       top(void)                   { return _c.back(); }
+  const_reference top(void) const             { return _c.back(); }
+  void            pop(void)                   { _c.pop_back(); }
+  void            push(const_reference value) { _c.push_back(value); }
 };
 } // namespace ft
 

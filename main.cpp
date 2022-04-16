@@ -283,7 +283,16 @@ int main(void) {
 
 {
   ft::stack<int> stk;
-  (void)stk;
+  std::cout << stk.empty() << '\n';
+  for (int i = 0; i < 43; i++) {
+    stk.push(i);
+    std::cout << stk.top() << " ";
+  }
+  std::cout << '\n';
+  std::cout << stk.size() << '\n';
+  while (stk.size())
+    stk.pop();
+  std::cout << stk.empty() << '\n';
 }
 
   return (0);

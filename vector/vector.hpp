@@ -74,6 +74,7 @@ public:
   const_reference front(void) const       { return _data[0]; }
   reference       back(void)              { return _data[_size - 1]; }
   const_reference back(void) const        { return _data[_size - 1]; }
+  bool             empty(void) const      { return !_size; }
 
   //member functions
   void            reserve(size_t n);
