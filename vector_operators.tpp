@@ -14,6 +14,7 @@ vector<T, Alloc>& vector<T, Alloc>::operator=(vec_constref rhs) {
   _size = rhs._size;
   _capacity = rhs._capacity;
   _data = _alloc.allocate(_capacity);
+  _max_size = rhs._max_size;
   for (size_t i = 0; i < _size; i++)
     _alloc.construct(_data + i, *(rhs._data + i));
   return *this;

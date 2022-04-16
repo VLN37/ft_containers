@@ -152,7 +152,7 @@ int main(void) {
   printvar(it2 > it1);
   std::cout << *(it1) << '\n';
   std::cout << *(it2) << '\n';
-  printvar(*(it2 + 5));
+  printvar(*(it2 - 5));
   printvar(it1[3]);
   printvar(*(2 + it1 + 2));
 }
@@ -195,6 +195,9 @@ int main(void) {
   vec2.assign(10, 42);
   print(vec2);
   vec1.assign(10, 21);
+  print(vec2);
+  vec1.assign(vec1.begin(), vec1.end());
+  print(vec2);
   vec1.insert(vec1.begin() + 5, vec2.begin(), vec2.end());
   print(vec1);
   print(vec2);
