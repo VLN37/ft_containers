@@ -44,6 +44,29 @@ vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
 }
 
 template<typename T, typename Alloc>
+template<typename IterT>
+void vector<T, Alloc>::constructor_range(IterT first, IterT last) {
+  _data = _alloc.allocate(last - first);
+  _size = 0;
+  _capacity = last - first;
+  _max_size = _alloc.max_size();
+  for (; first != last; ++first)
+    push_back(*first);
+}
+
+template<typename T, typename Alloc>
+template<typename Integer>
+void vector<T, Alloc>::constructor_fill(size_type n, Integer value) {
+  std::cout << "size parametric constructor called\n";
+  _data = _alloc.allocate(n);
+  _size = n;
+  _capacity = n;
+  _max_size = _alloc.max_size();
+  for (size_t i = 0; i < _size; i++)
+    _alloc.construct(_data + i, value);
+}
+
+template<typename T, typename Alloc>
 vector<T, Alloc>::~vector(void) {
   std::cout << "default destructor called\n";
   for (size_t i = 0; i < _size; i++)

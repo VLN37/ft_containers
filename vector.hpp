@@ -75,7 +75,7 @@ public:
   template <class IterT>
   void assign(IterT first, IterT last) {
     typedef typename is_integral<IterT>::type _integral;
-    assign_dispatcher(first, last, _integral());
+    assign_dispatch(first, last, _integral());
   }
 
   iterator	insert(iterator pos, value_type const& val);
@@ -121,23 +121,45 @@ protected:
 private:
   template<typename Integer>
   void constructor_dispatch(Integer n, Integer value, true_type) {
-    std::cout << "size parametric constructor called\n";
-    _data = _alloc.allocate(n);
-    _size = n;
-    _capacity = n;
-    _max_size = _alloc.max_size();
-    for (size_t i = 0; i < _size; i++)
-      _alloc.construct(_data + i, value);
+    constructor_fill(static_cast<size_t>(n), value);
   }
+  template<typename Integer>
+  void constructor_fill(size_type n, Integer value);
 
   template<typename IterT>
   void constructor_dispatch(IterT first, IterT last, false_type) {
-    _data = _alloc.allocate(last - first);
-    _size = 0;
-    _capacity = last - first;
-    _max_size = _alloc.max_size();
-    for (; first != last; ++first)
-      push_back(*first);
+    constructor_range(first, last);
+  }
+  template<typename IterT>
+  void constructor_range(IterT first, IterT last);
+
+  template<typename Integer>
+  void insert_dispatch(iterator pos, size_type n,
+  Integer const& val, true_type) {
+    if (_size + n >= _max_size)
+      throw(std::length_error("max_size exceeded\n"));
+    if (_size + n > _capacity) {
+      size_t diff = pos - begin();
+      reserve(_size ? (_size + n) * 2 : n);
+      pos = begin() + diff;
+    }
+    if (pos == end()) {
+      while (n--)
+        push_back(val);
+      return;
+    }
+    for (size_type i = 0; i < n; i++)
+      _alloc.construct(_data + _size + i, val);
+    _size += n;
+    iterator it = end() - n;
+    iterator to = end();
+    for (; it > pos; --it, --to) {
+      *to = *it;
+    }
+    *to = *it;
+    for (; n; --n, ++it)
+      *it = val;
+    // return pos;
   }
 
   template<typename IterT>
@@ -173,36 +195,7 @@ private:
   }
 
   template<typename Integer>
-  void insert_dispatch(iterator pos, size_type n,
-  Integer const& val, true_type) {
-    if (_size + n >= _max_size)
-      throw(std::length_error("max_size exceeded\n"));
-    if (_size + n > _capacity) {
-      size_t diff = pos - begin();
-      reserve(_size ? (_size + n) * 2 : n);
-      pos = begin() + diff;
-    }
-    if (pos == end()) {
-      while (n--)
-        push_back(val);
-      return;
-    }
-    for (size_type i = 0; i < n; i++)
-      _alloc.construct(_data + _size + i, val);
-    _size += n;
-    iterator it = end() - n;
-    iterator to = end();
-    for (; it > pos; --it, --to) {
-      *to = *it;
-    }
-    *to = *it;
-    for (; n; --n, ++it)
-      *it = val;
-    // return pos;
-  }
-
-  template<typename Integer>
-  void assign_dispatcher(size_type n, Integer const& val, true_type) {
+  void assign_dispatch(size_type n, Integer const& val, true_type) {
     if (n >= _max_size)
       throw(std::length_error("max_size exceeded\n"));
     if (n > _capacity)
@@ -215,7 +208,7 @@ private:
   }
 
   template<typename IterT>
-  void assign_dispatcher(IterT first, IterT last, false_type) {
+  void assign_dispatch(IterT first, IterT last, false_type) {
     if (first > last)
       throw(std::length_error("range error\n"));
     if (static_cast<size_type>(last - first) > _capacity)
