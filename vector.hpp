@@ -1,6 +1,5 @@
-// Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
-// Creation date: 31/03/2022
-// Last modified: 31/03/2022
+//Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
+//Creation date: 07/04/2022
 
 #ifndef FT_VECTOR_HPP
 # define FT_VECTOR_HPP
