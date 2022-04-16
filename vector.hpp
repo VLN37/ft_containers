@@ -120,78 +120,32 @@ protected:
 
 private:
   template<typename Integer>
+  void constructor_fill(size_type n, Integer value);
+  template<typename Integer>
   void constructor_dispatch(Integer n, Integer value, true_type) {
     constructor_fill(static_cast<size_t>(n), value);
   }
-  template<typename Integer>
-  void constructor_fill(size_type n, Integer value);
 
+  template<typename IterT>
+  void constructor_range(IterT first, IterT last);
   template<typename IterT>
   void constructor_dispatch(IterT first, IterT last, false_type) {
     constructor_range(first, last);
   }
-  template<typename IterT>
-  void constructor_range(IterT first, IterT last);
 
   template<typename Integer>
+  void insert_fill(iterator pos, size_type n, Integer const& val);
+  template<typename Integer>
   void insert_dispatch(iterator pos, size_type n,
-  Integer const& val, true_type) {
-    if (_size + n >= _max_size)
-      throw(std::length_error("max_size exceeded\n"));
-    if (_size + n > _capacity) {
-      size_t diff = pos - begin();
-      reserve(_size ? (_size + n) * 2 : n);
-      pos = begin() + diff;
-    }
-    if (pos == end()) {
-      while (n--)
-        push_back(val);
-      return;
-    }
-    for (size_type i = 0; i < n; i++)
-      _alloc.construct(_data + _size + i, val);
-    _size += n;
-    iterator it = end() - n;
-    iterator to = end();
-    for (; it > pos; --it, --to) {
-      *to = *it;
-    }
-    *to = *it;
-    for (; n; --n, ++it)
-      *it = val;
-    // return pos;
+    Integer const& val, true_type) {
+    insert_fill(pos, n, val);
   }
 
   template<typename IterT>
+  void insert_range(iterator pos, IterT first, IterT last);
+  template<typename IterT>
   void insert_dispatch(iterator pos, IterT first, IterT last, false_type) {
-    size_t distance = last - first;
-    if (first > last)
-      throw(std::length_error("range error\n"));
-    if (_size + distance >= _max_size)
-      throw(std::length_error("max_size exceeded\n"));
-    if (_size + distance > _capacity) {
-      std::cout << "reserver\n";
-      size_t diff = pos - begin();
-      reserve(_size ? (_size + distance) * 2 : distance);
-      pos = begin() + diff;
-      std::cout << *this;
-    }
-    if (pos == end()) {
-      for (; first != last; ++first)
-        push_back(*first);
-      return;
-    }
-    for (size_type i = 0; i < distance; i++)
-      _alloc.construct(_data + _size + i, 0);
-    _size += distance;
-    iterator it = end() - distance;
-    iterator to = end();
-    for (; it > pos; --it, --to) {
-      *to = *it;
-    }
-    *to = *it;
-    for (; first != last; first++, it++)
-      *it = *first;
+    insert_range(pos, first, last);
   }
 
   template<typename Integer>

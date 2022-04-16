@@ -229,50 +229,66 @@ typename vector<T, Alloc>::iterator
   return pos;
 }
 
-// template<typename T, typename Alloc>
-// typename vector<T, Alloc>::iterator
-// 	vector<T, Alloc>::insert(iterator pos, size_type n, value_type const& val) {
-// 	if (_size + n >= _max_size)
-// 		throw(std::length_error("max_size exceeded\n"));
-// 	if (_size + n > _capacity) {
-// 		size_t diff = pos - begin();
-// 		std::cout << "reserver\n";
-// 		reserve(_size ? (_size + n) * 2 : n);
-// 		pos = begin() + diff;
-// 	}
-// 	if (pos == end()) {
-// 		while (n--)
-// 			push_back(val);
-// 		return pos;
-// 	}
-// 	for (size_type i = 0; i < n; i++)
-// 		_alloc.construct(_data + _size + i, 42);
-// 	_size += n;
-// 	iterator it = end() - n;
-// 	iterator to = end();
-// 	for (; it > pos; --it, --to) {
-// 		*to = *it;
-// 	}
-// 	*to = *it;
-// 	for(; n; n--)
-// 		*it++ = val;
-// 	return pos;
-// }
+template<typename T, typename Alloc>
+template<typename Integer>
+void
+  vector<T, Alloc>::insert_fill(iterator pos, size_type n, Integer const& val) {
+  if (_size + n >= _max_size)
+    throw(std::length_error("max_size exceeded\n"));
+  if (_size + n > _capacity) {
+    size_t diff = pos - begin();
+    reserve(_size ? (_size + n) * 2 : n);
+    pos = begin() + diff;
+  }
+  if (pos == end()) {
+    while (n--)
+      push_back(val);
+    return;
+  }
+  for (size_type i = 0; i < n; i++)
+    _alloc.construct(_data + _size + i, val);
+  _size += n;
+  iterator it = end() - n;
+  iterator to = end();
+  for (; it > pos; --it, --to) {
+    *to = *it;
+  }
+  *to = *it;
+  for (; n; --n, ++it)
+    *it = val;
+}
 
-// template<typename T, typename Alloc>
-// void vector<T, Alloc>::assign(size_type n, value_type const& val) {
-// 	if (n >= _max_size)
-// 		throw(std::length_error("max_size exceeded\n"));
-// 	if (n > _capacity)
-// 		reserve(n);
-// 	for (int i = _size - 1; i >= 0; i--)
-// 		_alloc.destroy(_data + i);
-// 	_size = 0;
-// 	while (n--)
-// 		push_back(val);
-
-// }
-
-
+template<typename T, typename Alloc>
+template<typename IterT>
+void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
+  size_t distance = last - first;
+  if (first > last)
+    throw(std::length_error("range error\n"));
+  if (_size + distance >= _max_size)
+    throw(std::length_error("max_size exceeded\n"));
+  if (_size + distance > _capacity) {
+    std::cout << "reserver\n";
+    size_t diff = pos - begin();
+    reserve(_size ? (_size + distance) * 2 : distance);
+    pos = begin() + diff;
+    std::cout << *this;
+  }
+  if (pos == end()) {
+    for (; first != last; ++first)
+      push_back(*first);
+    return;
+  }
+  for (size_type i = 0; i < distance; i++)
+    _alloc.construct(_data + _size + i, 0);
+  _size += distance;
+  iterator it = end() - distance;
+  iterator to = end();
+  for (; it > pos; --it, --to) {
+    *to = *it;
+  }
+  *to = *it;
+  for (; first != last; first++, it++)
+    *it = *first;
+}
 
 } // namespace ft
