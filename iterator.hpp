@@ -10,7 +10,6 @@
 #include "iterator_base.hpp"
 
 namespace ft {
-
 template <typename IterT>
 class random_access_iterator
 : public iterator<std::random_access_iterator_tag, IterT> {

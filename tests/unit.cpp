@@ -15,14 +15,13 @@ namespace ft = std;
 # include "vector.hpp"
 #endif
 
-template<typename T>
 void out(int var) {
   std::cout << var << ' ';
 }
 
 template<typename T>
 void print(T& vec) {
-  std::for_each(vec.begin(), vec.end(), out<T>);
+  std::for_each(vec.begin(), vec.end(), out);
   std::cout << '\n';
 }
 
@@ -33,7 +32,7 @@ void printvar(Var var) {
 
 template<typename T>
 void reverse_print(T& vec) {
-	std::for_each(vec.rbegin(), vec.rend(), out<T>);
+	std::for_each(vec.rbegin(), vec.rend(), out);
 	std::cout << '\n';
 }
 

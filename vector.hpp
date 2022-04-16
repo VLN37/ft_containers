@@ -11,10 +11,9 @@
 
 #include "iterator.hpp"
 #include "type_traits.hpp"
-
 namespace ft {
-  typedef integral_constant<bool, false>				false_type;
-  typedef integral_constant<bool, true>				true_type;
+  typedef integral_constant<bool, false>              false_type;
+  typedef integral_constant<bool, true>               true_type;
 
 template<typename T, typename Alloc = std::allocator<T> >
 class vector {
