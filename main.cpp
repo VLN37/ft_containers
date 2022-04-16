@@ -242,6 +242,7 @@ int main(void) {
 }
 
 {
+  std::vector<int> teste;
   ft::vector<int>ftvec3;
   for (int i = 0; i < 11; i++)
     ftvec3.push_back(i);

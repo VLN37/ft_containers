@@ -149,30 +149,19 @@ private:
   }
 
   template<typename Integer>
+  void assign_fill(size_type n, Integer const& val);
+  template<typename Integer>
   void assign_dispatch(size_type n, Integer const& val, true_type) {
-    if (n >= _max_size)
-      throw(std::length_error("max_size exceeded\n"));
-    if (n > _capacity)
-      reserve(n);
-    for (int i = _size - 1; i >= 0; i--)
-      _alloc.destroy(_data + i);
-    _size = 0;
-    while (n--)
-      push_back(val);
+    assign_fill(n, val);
   }
 
   template<typename IterT>
+  void assign_range(IterT first, IterT last);
+  template<typename IterT>
   void assign_dispatch(IterT first, IterT last, false_type) {
-    if (first > last)
-      throw(std::length_error("range error\n"));
-    if (static_cast<size_type>(last - first) > _capacity)
-      reserve(last - first);
-    for (int i = _size - 1; i >= 0; i--)
-      _alloc.destroy(_data + i);
-    _size = 0;
-    for (; first != last; first++)
-      push_back(*first);
+    assign_range(first, last);
   }
+
   };
 } //namespace ft
 

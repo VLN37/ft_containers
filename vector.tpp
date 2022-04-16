@@ -291,4 +291,32 @@ void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
     *it = *first;
 }
 
+template<typename T, typename Alloc>
+template<typename Integer>
+void vector<T, Alloc>::assign_fill(size_type n, Integer const& val) {
+  if (n >= _max_size)
+    throw(std::length_error("max_size exceeded\n"));
+  if (n > _capacity)
+    reserve(n);
+  for (int i = _size - 1; i >= 0; i--)
+    _alloc.destroy(_data + i);
+  _size = 0;
+  while (n--)
+    push_back(val);
+}
+
+template<typename T, typename Alloc>
+template<typename IterT>
+void vector<T, Alloc>::assign_range(IterT first, IterT last) {
+  if (first > last)
+    throw(std::length_error("range error\n"));
+  if (static_cast<size_type>(last - first) > _capacity)
+    reserve(last - first);
+  for (int i = _size - 1; i >= 0; i--)
+    _alloc.destroy(_data + i);
+  _size = 0;
+  for (; first != last; first++)
+    push_back(*first);
+}
+
 } // namespace ft
