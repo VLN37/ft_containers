@@ -1,6 +1,5 @@
-// Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
-// Creation date: 31/03/2022
-// Last modified: 31/03/2022
+//Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
+//Creation date: 31/03/2022
 
 #include "vector.hpp"
 
@@ -31,18 +30,5 @@ typename vector<T, Alloc>::const_reference
   vector<T, Alloc>::operator[](size_type n) const {
   return _data[n];
 }
-
-// template<typename T, typename Alloc>
-// std::ostream& vector<T, Alloc>::operator<<(std::ostream& o) {
-// 	std::cout << *_data;
-// 	return o;
-// }
-
-// C11 variant vector.hpp line 61
-// template<typename T, typename Alloc>
-// std::ostream& operator<<(std::ostream& o, vector<T, Alloc>& rhs) {
-  // o << *rhs._data;
-  // return o;
-// }
 
 } //namespace ft

@@ -1,6 +1,5 @@
-// Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
-// Creation date: 07/04/2022
-// Last modified: 07/04/2022
+//Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
+//Creation date: 7/04/2022
 
 #ifndef ITERATOR_BASE_HPP
 # define ITERATOR_BASE_HPP

@@ -1,6 +1,5 @@
-// Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
-// Creation date: 06/04/2022
-// Last modified: 06/04/2022
+//Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
+//Creation date: 7/04/2022
 
 #ifndef TYPE_TRAITS_HPP
 # define TYPE_TRAITS_HPP

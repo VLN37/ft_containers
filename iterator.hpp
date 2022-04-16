@@ -1,6 +1,5 @@
-// Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
-// Creation date: 04/04/2022
-// Last modified: 04/04/2022
+//Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
+//Creation date: 8/04/2022
 
 #ifndef FT_ITERATOR_HPP
 # define FT_ITERATOR_HPP

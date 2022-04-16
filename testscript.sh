@@ -4,6 +4,6 @@ make perfft
 
 time ./perfft > ft
 time ./perfstd > std
-diff -s --color std ft
+diff -s -y --color std ft
 
 rm ft std perfft perfstd

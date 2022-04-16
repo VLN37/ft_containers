@@ -1,6 +1,5 @@
-// Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
-// Creation date: 14/04/2022
-// Last modified: 14/04/2022
+//Copyright (c) 2022 João Rodriguez A.K.A. VLN37. All rights reserved.
+//Creation date: 15/04/2022
 
 #include <iostream>
 #include <algorithm>
@@ -152,8 +151,8 @@ int main(void) {
   printvar(it2 < it1);
   printvar(it2 > it1);
   std::cout << *(it1) << '\n';
-  // std::cout << *(it2) << '\n';
-  // printvar(*(it2 + 5));
+  std::cout << *(it2) << '\n';
+  printvar(*(it2 + 5));
   printvar(it1[3]);
   printvar(*(2 + it1 + 2));
 }
