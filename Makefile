@@ -9,14 +9,14 @@ SRC		=	main.cpp \
 SRCT	=	tests/unit.cpp \
 
 INC		=	vector.hpp \
-				vector.tpp \
+				vector_members.tpp \
 				vector_constructors.tpp \
 				vector_operators.tpp \
 				type_traits.hpp \
 				iterator.hpp \
 				iterator_base.hpp \
 
-OBJ		= $(SRC:%.cpp=$(OBJDIR)/%.o)
+OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	= obj
 
 $(NAME):	$(OBJDIR) $(OBJ)
@@ -26,7 +26,7 @@ $(GTEST):	$(OBJDIR) $(OBJ) tests/unit.cpp
 		$(CC) $(CFLAGS) $(SRCT) -o perfstd $(STD) -I./
 		$(CC) $(CFLAGS) $(SRCT) -o perfft -I./
 
-$(OBJDIR)/%.o:	%.cpp $(INC)
+$(OBJDIR)/%.o: %.cpp $(INC)
 		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

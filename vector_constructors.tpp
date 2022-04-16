@@ -16,14 +16,6 @@ vector<T, Alloc>::vector(const alloc_type& alloc)
 }
 
 template<typename T, typename Alloc>
-template<typename IterT>
-vector<T, Alloc>::vector(IterT first, IterT last, alloc_type const& alloc)
-: _alloc(alloc) {
-  typedef typename is_integral<IterT>::type _integral;
-  constructor_dispatch(first, last, _integral());
-}
-
-template<typename T, typename Alloc>
 vector<T, Alloc>::vector(vector<T, Alloc> const& src)
 : _alloc(src.get_allocator()), _size(0) {
   std::cout << "vector copy constructor called\n";

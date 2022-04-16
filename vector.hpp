@@ -47,7 +47,11 @@ public:
                   const alloc_type& alloc = alloc_type());
   //range / fill constructor disambiguator
   template<typename IterT>
-  vector(IterT first, IterT last, alloc_type const& alloc = alloc_type());
+  vector(IterT first, IterT last, alloc_type const& alloc = alloc_type())
+  : _alloc(alloc) {
+    typedef typename is_integral<IterT>::type _integral;
+    constructor_dispatch(first, last, _integral());
+  }
   ~vector(void);
 
   //operators
@@ -63,12 +67,12 @@ public:
   alloc_type      get_allocator(void) const { return this->_alloc; }
 
   //element access
-  reference       at(size_type n);
-  const_reference at(size_type n) const;
-  reference       front(void);
-  const_reference front(void) const;
-  reference       back(void);
-  const_reference back(void) const;
+  reference       at(size_type n)         { return _data[n]; }
+  const_reference at(size_type n) const   { return _data[n]; }
+  reference       front(void)             { return _data[0]; }
+  const_reference front(void) const       { return _data[0]; }
+  reference       back(void)              { return _data[_size - 1]; }
+  const_reference back(void) const        { return _data[_size - 1]; }
 
   //member functions
   void            reserve(size_t n);
@@ -164,7 +168,7 @@ Integer const& val, true_type) {
   };
 } //namespace ft
 
-#include "vector.tpp"
+#include "vector_members.tpp"
 #include "vector_operators.tpp"
 #include "vector_constructors.tpp"
 

@@ -209,8 +209,6 @@ typename reverse_iterator<Iter>::difference_type
             reverse_iterator<Iter> const& lhs)
 { return lhs.base() + rhs.base(); }
 
-
-
 } // namespace ft
 
 #endif // ITERATOR_HPP

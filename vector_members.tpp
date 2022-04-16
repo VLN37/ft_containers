@@ -93,44 +93,6 @@ void vector<T, Alloc>::clear(void) {
 }
 
 template<typename T, typename Alloc>
-typename vector<T, Alloc>::reference
-  vector<T, Alloc>::at(size_type n) {
-  if (n >= _size)
-    throw(std::out_of_range("at: index out of range\n"));
-  return _data[n];
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_reference
-  vector<T, Alloc>::at(size_type n) const {
-  if (n >= _size)
-    throw(std::out_of_range("at: index out of range\n"));
-  return _data[n];
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::reference
-  vector<T, Alloc>::front(void) {
-  return _data[0];
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_reference
-  vector<T, Alloc>::front(void) const {
-  return _data[0];
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::reference vector<T, Alloc>::back(void) {
-  return _data[_size - 1];
-}
-
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_reference vector<T, Alloc>::back(void) const {
-  return _data[_size - 1];
-}
-
-template<typename T, typename Alloc>
 typename vector<T, Alloc>::iterator vector<T, Alloc>::begin(void) {
   return iterator(_data);
 }

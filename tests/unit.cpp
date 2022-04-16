@@ -201,7 +201,7 @@ int main(void) {
   vec1.insert(vec1.begin() + 5, vec2.begin(), vec2.end());
   print(vec1);
   print(vec2);
-  ft::vector<int> vec3(vec1.begin(), vec1.end());
+  ft::vector<int> vec3(vec2.begin(), vec2.end());
   print(vec3);
   ft::vector<int> vec4(5, 50);
   print(vec4);
