@@ -13,15 +13,6 @@ int main(void) {
   ft::vector<int> vec1;
   ft::vector<int> vec2(5, 42);
 
-  int *ptr = vec1.test(50);
-
-  *ptr = 10;
-  ptr[1] = 20;
-  ptr[2] = 30;
-  std::cout << *ptr << '\n';
-  std::cout << *(ptr + 1) << '\n';
-  std::cout << ptr[2] << '\n';
-
   std::vector<int> stdvec;
   ft::vector<int> ftvec;
 
@@ -289,6 +280,5 @@ int main(void) {
   std::cout << ftvec5;
 }
 
-  delete ptr;
   return (0);
 }

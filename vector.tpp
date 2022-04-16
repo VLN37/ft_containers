@@ -6,11 +6,6 @@
 namespace ft {
 
 template<typename T, typename Alloc>
-typename vector<T, Alloc>::pointer vector<T, Alloc>::test(size_t n) {
-  return _alloc.allocate(n);
-}
-
-template<typename T, typename Alloc>
 size_t vector<T, Alloc>::size(void) const {
   return _size;
 }
