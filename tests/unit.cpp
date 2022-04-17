@@ -236,6 +236,8 @@ int main(void) {
   ft::vector<int>::iterator it1 = vec1.begin();
   ft::advance(it1, 5);
   std::cout << *it1 << '\n';
+  vec2.assign(5, 42);
+  vec3.assign(10, 42);
   std::cout << ft::lexicographical_compare
     (vec1.begin(), vec1.end(), vec2.begin(), vec2.end()) << '\n';
   std::cout << ft::lexicographical_compare
@@ -266,7 +268,24 @@ int main(void) {
 {
   std::cout << "STACK\n";
 
-  ft::stack<int> stk;
+  ft::stack<int> stk1;
+  std::cout << stk1.empty() << '\n';
+  for (int i = 0; i < 43; i++) {
+    stk1.push(i);
+    std::cout << stk1.top() << " ";
+  }
+  std::cout << '\n';
+  std::cout << stk1.size() << '\n';
+  while (stk1.size())
+    stk1.pop();
+  std::cout << stk1.empty() << " empty\n\n";
+  ft::stack<int> stk2(stk1);
+  std::cout << (stk1 == stk2) << '\n';
+  std::cout << (stk1 != stk2) << '\n';
+  std::cout << (stk1 >= stk2) << '\n';
+  std::cout << (stk1 <= stk2) << '\n';
+  std::cout << (stk1  < stk2) << '\n';
+  std::cout << (stk1  > stk2) << '\n';
 }
 
 
