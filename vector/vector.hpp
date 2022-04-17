@@ -8,6 +8,7 @@
 #include <iostream>
 #include "iterator.hpp"
 #include "type_traits.hpp"
+#include "algo.hpp"
 
 namespace ft {
   typedef integral_constant<bool, false>              false_type;
@@ -23,8 +24,8 @@ public:
   typedef typename std::allocator<T>::const_pointer   const_pointer;
   typedef typename std::allocator<T>::reference       reference;
   typedef typename std::allocator<T>::const_reference const_reference;
-  typedef vector<T, Alloc>&                           vec_ref;
-  typedef vector<T, Alloc> const&                     vec_constref;
+  typedef ft::vector<T, Alloc>&                       vec_ref;
+  typedef ft::vector<T, Alloc> const&                 vec_constref;
   typedef random_access_iterator<pointer>             iterator;
   typedef random_access_iterator<const_pointer>       const_iterator;
   typedef ft::reverse_iterator<iterator>              reverse_iterator;
@@ -167,7 +168,48 @@ Integer const& val, true_type) {
   void assign_dispatch(IterT first, IterT last, false_type) {
     assign_range(first, last);
   }
-  };
+};
+
+template<typename T, typename Alloc>
+bool operator==(vector<T, Alloc> const& lhs,
+                vector<T, Alloc> const& rhs) {
+  if (lhs.size() != rhs.size())
+    return false;
+  return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+template<typename T, typename Alloc>
+bool operator!=(vector<T, Alloc> const& lhs,
+                vector<T, Alloc> const& rhs) {
+  return !(lhs == rhs);
+}
+
+template<typename T, typename Alloc>
+bool operator<(vector<T, Alloc> const& lhs,
+               vector<T, Alloc> const& rhs) {
+  return ft::lexicographical_compare(lhs.begin(), lhs.end(),
+                                     lhs.begin(), rhs.end());
+}
+
+template<typename T, typename Alloc>
+bool operator>(vector<T, Alloc> const& lhs,
+               vector<T, Alloc> const& rhs) {
+  return !ft::lexicographical_compare(lhs.begin(), lhs.end(),
+                                      lhs.begin(), rhs.end());
+}
+
+template<typename T, typename Alloc>
+bool operator>=(vector<T, Alloc> const& lhs,
+                vector<T, Alloc> const& rhs) {
+  return lhs > rhs || lhs == rhs;
+}
+
+template<typename T, typename Alloc>
+bool operator<=(vector<T, Alloc> const& lhs,
+                vector<T, Alloc> const& rhs) {
+  return lhs < rhs || lhs == rhs;
+}
+
 } //namespace ft
 
 #include "vector_members.tpp"

@@ -252,6 +252,15 @@ int main(void) {
     (vec4.begin(), vec4.end(), vec3.begin(), bool_pred<int>) << '\n';
   std::cout << ft::equal
     (vec2.begin(), vec2.end(), vec3.begin(), bool_pred<int>) << '\n';
+
+  std::cout << "\nVECTOR COMPARISON OPERATORS\n\n";
+
+  std::cout << (vec2 == vec3) << '\n';
+  std::cout << (vec2 >= vec3) << '\n';
+  std::cout << (vec2 <= vec3) << '\n';
+  std::cout << (vec2 != vec3) << '\n';
+  std::cout << (vec2 > vec3)  << '\n';
+  std::cout << (vec2 < vec3)  << '\n';
 }
 
 {
