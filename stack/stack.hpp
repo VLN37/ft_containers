@@ -9,6 +9,9 @@
 namespace ft {
 template<typename T, typename Container = ft::vector<T> >
 class stack {
+private:
+  typedef stack const&                        stk_constref;
+
 public:
   typedef typename Container::value_type      value_type;
   typedef typename Container::reference       reference;
@@ -28,15 +31,19 @@ public:
   void            pop(void)                   { _c.pop_back(); }
   void            push(const_reference value) { _c.push_back(value); }
 
-friend bool operator==(stack rhs, stack lhs)  { return rhs._c == lhs._c; }
-friend bool operator!=(stack rhs, stack lhs)  { return rhs._c != lhs._c; }
-friend bool operator>=(stack rhs, stack lhs)  { return rhs._c >= lhs._c; }
-friend bool operator<=(stack rhs, stack lhs)  { return rhs._c <= lhs._c; }
-friend bool operator>(stack rhs,  stack lhs)  { return rhs._c > lhs._c; }
-friend bool operator<(stack rhs,  stack lhs)  { return rhs._c < lhs._c; }
+friend bool operator==(stk_constref rhs, stk_constref lhs)
+  { return rhs._c == lhs._c; }
+friend bool operator!=(stk_constref rhs, stk_constref lhs)
+  { return rhs._c != lhs._c; }
+friend bool operator>=(stk_constref rhs, stk_constref lhs)
+  { return rhs._c >= lhs._c; }
+friend bool operator<=(stk_constref rhs, stk_constref lhs)
+  { return rhs._c <= lhs._c; }
+friend bool operator>(stk_constref rhs,  stk_constref lhs)
+  { return rhs._c > lhs._c; }
+friend bool operator<(stk_constref rhs,  stk_constref lhs)
+  { return rhs._c < lhs._c; }
 };
-
-
 } // namespace ft
 
 #endif
