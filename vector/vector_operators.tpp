@@ -7,7 +7,6 @@ namespace ft {
 
 template<typename T, typename Alloc>
 vector<T, Alloc>& vector<T, Alloc>::operator=(vec_constref rhs) {
-  std::cout << "vector assignment operator called\n";
   for (size_t i = 0; i < _size; i++)
     _alloc.destroy(_data + i);
   _alloc.deallocate(_data, size_type());

@@ -8,7 +8,6 @@ namespace ft {
 template <typename T, typename Alloc>
 vector<T, Alloc>::vector(const alloc_type& alloc)
 : _alloc(alloc) {
-  std::cout << "default constructor called\n";
   _data = _alloc.allocate(0);
   _size = 0;
   _capacity = 0;
@@ -18,7 +17,6 @@ vector<T, Alloc>::vector(const alloc_type& alloc)
 template<typename T, typename Alloc>
 vector<T, Alloc>::vector(vector<T, Alloc> const& src)
 : _alloc(src.get_allocator()), _size(0) {
-  std::cout << "vector copy constructor called\n";
   _data = _alloc.allocate(0);
   *this = src;
 }
@@ -26,7 +24,6 @@ vector<T, Alloc>::vector(vector<T, Alloc> const& src)
 template<typename T, typename Alloc>
 vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
 : _alloc(alloc) {
-  std::cout << "size parametric constructor called\n";
   _data = _alloc.allocate(n);
   _size = n;
   _capacity = n;
@@ -49,7 +46,6 @@ void vector<T, Alloc>::constructor_range(IterT first, IterT last) {
 template<typename T, typename Alloc>
 template<typename Integer>
 void vector<T, Alloc>::constructor_fill(size_type n, Integer value) {
-  std::cout << "size parametric constructor called\n";
   _data = _alloc.allocate(n);
   _size = n;
   _capacity = n;
@@ -60,7 +56,6 @@ void vector<T, Alloc>::constructor_fill(size_type n, Integer value) {
 
 template<typename T, typename Alloc>
 vector<T, Alloc>::~vector(void) {
-  std::cout << "default destructor called\n";
   for (size_t i = 0; i < _size; i++)
     _alloc.destroy(_data + i);
   _alloc.deallocate(_data, size_type());
