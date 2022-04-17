@@ -9,6 +9,18 @@
 #include "iterator_base.hpp"
 
 namespace ft {
+
+template<typename IterT>
+typename iterator_traits<IterT>::difference_type
+distance(IterT first, IterT last) {
+  return last - first;
+}
+
+template<typename IterT, typename Distance>
+void advance(IterT& it, Distance n) {
+  it += n;
+}
+
 template <typename IterT>
 class random_access_iterator
 : public iterator<std::random_access_iterator_tag, IterT> {
