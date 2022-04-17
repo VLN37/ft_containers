@@ -20,16 +20,59 @@ protected:
   Container _c;
 
 public:
-  explicit stack(Container const& c = Container()) : _c(c) {
-    std::cout << "stack constructor called\n";
-  }
+  explicit stack(Container const& c = Container()) : _c(c) { }
   bool            empty(void) const           { return _c.empty(); }
   size_type       size(void) const            { return _c.size(); }
   reference       top(void)                   { return _c.back(); }
   const_reference top(void) const             { return _c.back(); }
   void            pop(void)                   { _c.pop_back(); }
   void            push(const_reference value) { _c.push_back(value); }
+
+friend bool operator==(stack rhs, stack lhs) { return rhs._c == lhs._c; }
+friend bool operator!=(stack rhs, stack lhs) { return rhs._c != lhs._c; }
+friend bool operator>=(stack rhs, stack lhs) { return rhs._c >= lhs._c; }
+friend bool operator<=(stack rhs, stack lhs) { return rhs._c <= lhs._c; }
+friend bool operator>(stack rhs,  stack lhs) { return rhs._c > lhs._c; }
+friend bool operator<(stack rhs,  stack lhs) { return rhs._c < lhs._c; }
+
+// template<typename T_, typename Container_>
+// friend bool operator==(stack<T_, Container_> const& lhs,
+//                 stack<T_, Container_> const& rhs) {
+//   return lhs._c == rhs._c;
+// }
+
+// template<typename T_, typename Container_>
+// friend bool operator!=(stack<T_, Container_> const& lhs,
+//                 stack<T_, Container_> const& rhs) {
+//   return lhs._c != rhs._c;
+// }
+
+// template<typename T_, typename Container_>
+// friend bool operator<(stack<T_, Container_> const& lhs,
+//                stack<T_, Container_> const& rhs) {
+//   return lhs._c < rhs._c;
+// }
+
+// template<typename T_, typename Container_>
+// friend bool operator>(stack<T_, Container_> const& lhs,
+//                stack<T_, Container_> const& rhs) {
+//   return lhs._c > rhs._c;
+// }
+
+// template<typename T_, typename Container_>
+// friend bool operator>=(stack<T_, Container_> const& lhs,
+//                 stack<T_, Container_> const& rhs) {
+//   return lhs._c >= rhs._c;
+// }
+
+// template<typename T_, typename Container_>
+// friend bool operator<=(stack<T_, Container_> const& lhs,
+//                 stack<T_, Container_> const& rhs) {
+//   return lhs._c <= rhs._c;
+// }
 };
+
+
 } // namespace ft
 
 #endif
