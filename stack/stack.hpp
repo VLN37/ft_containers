@@ -28,12 +28,12 @@ public:
   void            pop(void)                   { _c.pop_back(); }
   void            push(const_reference value) { _c.push_back(value); }
 
-friend bool operator==(stack rhs, stack lhs) { return rhs._c == lhs._c; }
-friend bool operator!=(stack rhs, stack lhs) { return rhs._c != lhs._c; }
-friend bool operator>=(stack rhs, stack lhs) { return rhs._c >= lhs._c; }
-friend bool operator<=(stack rhs, stack lhs) { return rhs._c <= lhs._c; }
-friend bool operator>(stack rhs,  stack lhs) { return rhs._c > lhs._c; }
-friend bool operator<(stack rhs,  stack lhs) { return rhs._c < lhs._c; }
+friend bool operator==(stack rhs, stack lhs)  { return rhs._c == lhs._c; }
+friend bool operator!=(stack rhs, stack lhs)  { return rhs._c != lhs._c; }
+friend bool operator>=(stack rhs, stack lhs)  { return rhs._c >= lhs._c; }
+friend bool operator<=(stack rhs, stack lhs)  { return rhs._c <= lhs._c; }
+friend bool operator>(stack rhs,  stack lhs)  { return rhs._c > lhs._c; }
+friend bool operator<(stack rhs,  stack lhs)  { return rhs._c < lhs._c; }
 };
 
 
