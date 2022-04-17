@@ -188,14 +188,13 @@ template<typename T, typename Alloc>
 bool operator<(vector<T, Alloc> const& lhs,
                vector<T, Alloc> const& rhs) {
   return ft::lexicographical_compare(lhs.begin(), lhs.end(),
-                                     lhs.begin(), rhs.end());
+                                     rhs.begin(), rhs.end());
 }
 
 template<typename T, typename Alloc>
 bool operator>(vector<T, Alloc> const& lhs,
                vector<T, Alloc> const& rhs) {
-  return !ft::lexicographical_compare(lhs.begin(), lhs.end(),
-                                      lhs.begin(), rhs.end());
+  return (rhs < lhs);
 }
 
 template<typename T, typename Alloc>
