@@ -2,8 +2,8 @@
 //Creation date: 15/04/2022
 
 #include <iostream>
-#include <algorithm>
 #include <exception>
+#include <algorithm>
 
 #ifdef STD
 namespace ft = std;
@@ -14,6 +14,7 @@ namespace ft = std;
 # include "type_traits.hpp"
 # include "vector.hpp"
 # include "stack.hpp"
+# include "algo.hpp"
 #endif
 
 void out(int var) {
@@ -35,6 +36,11 @@ template<typename T>
 void reverse_print(T& vec) {
 	std::for_each(vec.rbegin(), vec.rend(), out);
 	std::cout << '\n';
+}
+
+template<typename T>
+bool bool_pred(T const& var1, T const& var2) {
+  return var1 == var2;
 }
 
 int main(void) {
@@ -211,6 +217,41 @@ int main(void) {
     vec4.pop_back();
     print(vec4);
   }
+}
+
+{
+  std::cout << "STANDALONE ALGO / DISTANCE / ADVANCE\n\n";
+  ft::vector<int> vec1;
+  for (int i = 0; i < 30; i++)
+    vec1.push_back(i);
+  ft::vector<int> vec2;
+  for (int i = 0; i < 15; i++)
+    vec2.push_back(i);
+  ft::vector<int> vec3;
+  for (int i = 0; i < 45; i++)
+    vec3.push_back(i);
+  vec3[10] = 11;
+  ft::vector<int> vec4(vec3);
+  std::cout << ft::distance(vec1.begin(), vec1.end()) << '\n';
+  ft::vector<int>::iterator it1 = vec1.begin();
+  ft::advance(it1, 5);
+  std::cout << *it1 << '\n';
+  std::cout << ft::lexicographical_compare
+    (vec1.begin(), vec1.end(), vec2.begin(), vec2.end()) << '\n';
+  std::cout << ft::lexicographical_compare
+    (vec2.begin(), vec2.end(), vec1.begin(), vec1.end()) << '\n';
+  std::cout << ft::equal
+    (vec2.begin(), vec2.end(), vec3.begin()) << '\n';
+  std::cout << ft::equal
+    (vec4.begin(), vec4.end(), vec3.begin()) << '\n';
+  std::cout << ft::equal
+    (vec2.begin(), vec2.end(), vec3.begin()) << '\n';
+  std::cout << ft::equal
+    (vec2.begin(), vec2.end(), vec3.begin(), bool_pred<int>) << '\n';
+  std::cout << ft::equal
+    (vec4.begin(), vec4.end(), vec3.begin(), bool_pred<int>) << '\n';
+  std::cout << ft::equal
+    (vec2.begin(), vec2.end(), vec3.begin(), bool_pred<int>) << '\n';
 }
 
 {
