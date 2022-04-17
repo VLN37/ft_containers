@@ -125,6 +125,25 @@ public:
     return o;
   }
 
+  //vector relational operators
+  friend bool operator==(vec_constref lhs, vec_constref rhs) {
+    if (lhs.size() != rhs.size())
+      return false;
+    return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+  }
+  friend bool operator<(vec_constref lhs, vec_constref rhs) {
+    return ft::lexicographical_compare(lhs.begin(), lhs.end(),
+                                       rhs.begin(), rhs.end());
+  }
+  friend bool operator!=(vec_constref lhs, vec_constref rhs)
+  { return !(lhs == rhs); }
+  friend bool operator>(vec_constref lhs, vec_constref rhs)
+  { return (rhs < lhs); }
+  friend bool operator>=(vec_constref lhs, vec_constref rhs)
+  { return lhs > rhs || lhs == rhs; }
+  friend bool operator<=(vec_constref lhs, vec_constref rhs)
+  { return lhs < rhs || lhs == rhs; }
+
 private:
   template<typename Integer>
   void constructor_fill(size_type n, Integer value);
@@ -169,45 +188,6 @@ Integer const& val, true_type) {
     assign_range(first, last);
   }
 };
-
-template<typename T, typename Alloc>
-bool operator==(vector<T, Alloc> const& lhs,
-                vector<T, Alloc> const& rhs) {
-  if (lhs.size() != rhs.size())
-    return false;
-  return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
-}
-
-template<typename T, typename Alloc>
-bool operator!=(vector<T, Alloc> const& lhs,
-                vector<T, Alloc> const& rhs) {
-  return !(lhs == rhs);
-}
-
-template<typename T, typename Alloc>
-bool operator<(vector<T, Alloc> const& lhs,
-               vector<T, Alloc> const& rhs) {
-  return ft::lexicographical_compare(lhs.begin(), lhs.end(),
-                                     rhs.begin(), rhs.end());
-}
-
-template<typename T, typename Alloc>
-bool operator>(vector<T, Alloc> const& lhs,
-               vector<T, Alloc> const& rhs) {
-  return (rhs < lhs);
-}
-
-template<typename T, typename Alloc>
-bool operator>=(vector<T, Alloc> const& lhs,
-                vector<T, Alloc> const& rhs) {
-  return lhs > rhs || lhs == rhs;
-}
-
-template<typename T, typename Alloc>
-bool operator<=(vector<T, Alloc> const& lhs,
-                vector<T, Alloc> const& rhs) {
-  return lhs < rhs || lhs == rhs;
-}
 
 } //namespace ft
 
