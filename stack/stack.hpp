@@ -34,42 +34,6 @@ friend bool operator>=(stack rhs, stack lhs) { return rhs._c >= lhs._c; }
 friend bool operator<=(stack rhs, stack lhs) { return rhs._c <= lhs._c; }
 friend bool operator>(stack rhs,  stack lhs) { return rhs._c > lhs._c; }
 friend bool operator<(stack rhs,  stack lhs) { return rhs._c < lhs._c; }
-
-// template<typename T_, typename Container_>
-// friend bool operator==(stack<T_, Container_> const& lhs,
-//                 stack<T_, Container_> const& rhs) {
-//   return lhs._c == rhs._c;
-// }
-
-// template<typename T_, typename Container_>
-// friend bool operator!=(stack<T_, Container_> const& lhs,
-//                 stack<T_, Container_> const& rhs) {
-//   return lhs._c != rhs._c;
-// }
-
-// template<typename T_, typename Container_>
-// friend bool operator<(stack<T_, Container_> const& lhs,
-//                stack<T_, Container_> const& rhs) {
-//   return lhs._c < rhs._c;
-// }
-
-// template<typename T_, typename Container_>
-// friend bool operator>(stack<T_, Container_> const& lhs,
-//                stack<T_, Container_> const& rhs) {
-//   return lhs._c > rhs._c;
-// }
-
-// template<typename T_, typename Container_>
-// friend bool operator>=(stack<T_, Container_> const& lhs,
-//                 stack<T_, Container_> const& rhs) {
-//   return lhs._c >= rhs._c;
-// }
-
-// template<typename T_, typename Container_>
-// friend bool operator<=(stack<T_, Container_> const& lhs,
-//                 stack<T_, Container_> const& rhs) {
-//   return lhs._c <= rhs._c;
-// }
 };
 
 
