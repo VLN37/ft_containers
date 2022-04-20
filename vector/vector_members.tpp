@@ -84,12 +84,8 @@ typename vector<T, Alloc>::iterator
 
 template<typename T, typename Alloc>
 void vector<T, Alloc>::clear(void) {
-  iterator it = end();
-  for (; it != begin(); it--)
-    erase(it);
-  if (it != end())
-    erase(it);
-  _size = 0;
+  while(_size)
+    pop_back();
 }
 
 template<typename T, typename Alloc>
