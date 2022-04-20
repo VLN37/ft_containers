@@ -165,20 +165,23 @@ typename vector<T, Alloc>::iterator
   vector<T, Alloc>::insert(iterator pos, value_type const& val) {
   if (_size == _max_size)
     throw(std::length_error("max_size exceeded\n"));
-  if (_size == _capacity)
+  if (_size == _capacity) {
+    size_t diff = ft::distance(begin(), pos);
+    std::cout << "reserve\n";
     reserve(_size ? _size * 2 : 1);
+    pos = begin() + diff;
+  }
   if (pos == end()) {
     push_back(val);
     return pos;
   }
-  _alloc.construct(_data + _size, value_type());
+  _alloc.construct(_data + _size, val);
   iterator it = end() - 1;
   iterator to = end();
-  for (; it > pos; --it, --to)
-    *to = *it;
-  *to = *it;
-  *it = val;
   ++_size;
+  for (; it >= pos; --it, --to)
+    *to = *it;
+  *pos = val;
   return pos;
 }
 
