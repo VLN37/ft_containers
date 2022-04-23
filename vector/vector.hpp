@@ -41,10 +41,10 @@ protected:
 public:
   //constructors
   explicit vector(const alloc_type& alloc = alloc_type());
-  explicit vector(vec_constref src);
   explicit vector(size_type n,
                   value_type val = value_type(),
                   const alloc_type& alloc = alloc_type());
+  vector(vec_constref src);
   //range / fill constructor disambiguator
   template<typename IterT>
   vector(IterT first, IterT last, alloc_type const& alloc = alloc_type())
