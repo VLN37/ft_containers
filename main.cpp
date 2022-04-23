@@ -303,8 +303,8 @@ int main(void) {
   ft::pair<int, int> pair2(42, 21);
   ft::pair<int, int> pair3(pair1);
   ft::pair<int, int> pair4 = pair2;
-  // ft::pair<ft::vector<int>, ft::vector<int>>
-    // pair2(ft::vector<int>(5, 42), ft::vector<int>(5, 21));
+  ft::pair<ft::vector<int>, ft::vector<int> >
+    pair5(ft::vector<int>(5, 42), ft::vector<int>(5, 21));
   std::cout << pair1.first << " " << pair1.second << "\n";
   std::cout << pair2.first << " " << pair2.second << "\n";
   std::cout << pair3.first << " " << pair3.second << "\n";
