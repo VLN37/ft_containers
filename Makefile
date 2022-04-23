@@ -16,8 +16,10 @@ INC			=	vector.hpp \
 					stack.hpp \
 					iterator.hpp \
 					iterator_base.hpp \
+					iterator_funcs.hpp \
 					type_traits.hpp \
 					algo.hpp \
+					pair.hpp \
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR	= obj

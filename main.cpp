@@ -7,7 +7,7 @@
 #include "iterator.hpp"
 #include "type_traits.hpp"
 #include "stack.hpp"
-
+#include "pair.hpp"
 
 int main(void) {
   std::cout << "this compiles!\n";
@@ -281,6 +281,7 @@ int main(void) {
   std::cout << ftvec5;
 }
 
+//stack
 {
   ft::stack<int> stk;
   std::cout << stk.empty() << '\n';
@@ -294,6 +295,22 @@ int main(void) {
     stk.pop();
   std::cout << stk.empty() << '\n';
 }
+//stack
+
+//pair
+{
+  ft::pair<int, int> pair1(21, 42);
+  ft::pair<int, int> pair2(42, 21);
+  ft::pair<int, int> pair3(pair1);
+  ft::pair<int, int> pair4 = pair2;
+  // ft::pair<ft::vector<int>, ft::vector<int>>
+    // pair2(ft::vector<int>(5, 42), ft::vector<int>(5, 21));
+  std::cout << pair1.first << " " << pair1.second << "\n";
+  std::cout << pair2.first << " " << pair2.second << "\n";
+  std::cout << pair3.first << " " << pair3.second << "\n";
+  std::cout << pair4.first << " " << pair4.second << "\n";
+}
+//pair
 
   return (0);
 }
