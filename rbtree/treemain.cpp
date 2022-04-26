@@ -7,9 +7,11 @@
 int main(void) {
   std::cout << "this compiles!\n";
   ft::rbtree tree;
-  for (int i = 0; i < 10; i++) {
-    tree.insert(i);
-  }
+  tree.insert(40);
+  tree.insert(20);
+  tree.insert(60);
+  tree.insert(50);
+  tree.insert(30);
   tree.print();
   tree.inorder();
   tree.preorder();

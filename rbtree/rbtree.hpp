@@ -64,13 +64,17 @@ public:
       delete node;
     }
   }
-
+  /**
+   * cases:
+   * 1 - tree is empty - newnode is black
+   * 2 - tree is not empty - newnode is red
+   * 3 - parent of newnode is black - exit
+   */
   void insert(int value) {
     nodeptr node = init_node(value);
     nodeptr prev = NULL;
     nodeptr curr = root;
 
-    curr = root;
     while (curr != SENT) {
       prev = curr;
       if (node->data < curr->data)
@@ -78,8 +82,6 @@ public:
       else
         curr = curr->right;
     }
-
-    //determine node pointers
     curr->parent = prev;
     if (prev == NULL)
       root = node;
@@ -88,16 +90,69 @@ public:
     else
       prev->right = node;
 
+    //case 1
     if (node->parent == NULL) {
       node->color = BLACK;
       return;
     }
-
+    //determine if this is the second node
     if (node->parent->parent == NULL)
       return;
+    fix_insert(node);
   }
 
-
+  /**
+   * 4 - rebalance if parent's brother is red (parent->parent->left/right)
+   * 5 - decide rotation rules
+   * 5.1 - LEFT rotate
+   * 5.2 - RIGHT LEFT rotate
+   * 5.3 - RIGHT rotate
+   * 5.4 - LEFT RIGHT rotate
+   */
+  void fix_insert(nodeptr node) {
+    nodeptr uncle;
+    while (node->parent->color == RED) {
+      if (node->parent == node->parent->parent->right) {    // 5.1 and/or 5.2
+        uncle = node->parent->parent->left;
+        if (uncle->color == RED) {
+          uncle->color = BLACK;
+          node->parent->color = BLACK;
+          node->parent->parent->color = BLACK;
+          node = node->parent->parent;
+        }
+        else {
+          if (node == node->parent->left) {                 // 5.2
+            node = node->parent;
+            //to do right rotate right_rotate(node);
+          }
+          node->parent->color = BLACK;
+          node->parent->parent->color = RED;
+          //to do left rotate left_rotate(node->parent->parent );
+        }
+    }
+      else {                                                // 5.3 and/or 5.4
+        uncle = node->parent->parent->right;
+        if (uncle->color == RED) {
+            uncle->color = BLACK;
+            node->parent->color = BLACK;
+            node->parent->parent->color = BLACK;
+            node = node->parent->parent;
+        }
+        else {
+          if (node == node->parent->right) {
+            node = node->parent;
+            //to do left rotate left_rotate(node);              // 5.4
+          }
+          node->parent->color = BLACK;
+          node->parent->parent->color = RED;
+          //to do right rotate right_rotate(node);
+        }
+    }
+    if (node == root)
+      break;
+  }
+  root->color = BLACK;
+}
   //DEBUG
   void preOrderHelper(nodeptr node) {
     if (node != SENT) {
@@ -153,10 +208,10 @@ public:
       if (root != SENT) {
       std::cout << indent;
       if (last) {
-        std::cout << "R----";
+        std::cout << "R---- ";
         indent += "     ";
       } else {
-        std::cout << "L----";
+        std::cout << "L---- ";
         indent += "|    ";
       }
 
