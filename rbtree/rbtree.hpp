@@ -31,22 +31,14 @@ typedef Node* nodeptr;
 
 class rbtree {
 private:
-  nodeptr root;
   nodeptr SENT;
 
-  nodeptr init_node(int value) {
-    nodeptr node = new Node;
-    node->parent = NULL;
-    node->right = SENT;
-    node->left = SENT;
-    node->color = RED;
-    node->data = value;
-    return node;
-  }
 
 public:
+  nodeptr root;
   rbtree(void): SENT(new Node) {
     SENT->color = BLACK;
+    SENT->parent = NULL;
     SENT->left = NULL;
     SENT->right = NULL;
     root = SENT;
@@ -64,6 +56,17 @@ public:
       delete node;
     }
   }
+
+  nodeptr init_node(int value) {
+    nodeptr node = new Node;
+    node->parent = NULL;
+    node->data = value;
+    node->right = SENT;
+    node->left = SENT;
+    node->color = RED;
+    return node;
+  }
+
   /**
    * cases:
    * 1 - tree is empty - newnode is black
@@ -82,7 +85,7 @@ public:
       else
         curr = curr->right;
     }
-    curr->parent = prev;
+    node->parent = prev;
     if (prev == NULL)
       root = node;
     else if (node->data < prev->data)
@@ -98,6 +101,7 @@ public:
     //determine if this is the second node
     if (node->parent->parent == NULL)
       return;
+    std::cout << "here\n";
     fix_insert(node);
   }
 
@@ -111,48 +115,87 @@ public:
    */
   void fix_insert(nodeptr node) {
     nodeptr uncle;
+    if (node->parent == node->parent->parent->right)
+          std::cout << "one\n";
+    if (node->parent == node->parent->parent->left)
+          std::cout << "two\n";
     while (node->parent->color == RED) {
-      if (node->parent == node->parent->parent->right) {    // 5.1 and/or 5.2
+      if (node->parent == node->parent->parent->right) {
         uncle = node->parent->parent->left;
         if (uncle->color == RED) {
+          std::cout << "three\n";
           uncle->color = BLACK;
           node->parent->color = BLACK;
-          node->parent->parent->color = BLACK;
+          node->parent->parent->color = RED;
           node = node->parent->parent;
         }
         else {
-          if (node == node->parent->left) {                 // 5.2
+          if (node == node->parent->left) {
             node = node->parent;
-            //to do right rotate right_rotate(node);
+            right_rotate(node);                               // 5.2
           }
           node->parent->color = BLACK;
           node->parent->parent->color = RED;
-          //to do left rotate left_rotate(node->parent->parent );
+          left_rotate(node->parent->parent);                  // 5.1 or 5.2
         }
-    }
-      else {                                                // 5.3 and/or 5.4
+      }
+      else {
         uncle = node->parent->parent->right;
         if (uncle->color == RED) {
             uncle->color = BLACK;
             node->parent->color = BLACK;
-            node->parent->parent->color = BLACK;
+            node->parent->parent->color = RED;
             node = node->parent->parent;
         }
         else {
           if (node == node->parent->right) {
             node = node->parent;
-            //to do left rotate left_rotate(node);              // 5.4
+            left_rotate(node);                               // 5.4
           }
           node->parent->color = BLACK;
           node->parent->parent->color = RED;
-          //to do right rotate right_rotate(node);
+          right_rotate(node->parent->parent);                // 5.3 or 5.4
         }
-    }
+      }
     if (node == root)
       break;
-  }
+    }
   root->color = BLACK;
+  }
+
+void left_rotate(nodeptr node) {
+  nodeptr tmp = node->right;
+  node->right = tmp->left;
+  if (tmp->left != SENT) {
+    tmp->left->parent = node;
+  }
+  tmp->parent = node->parent;
+  if (node->parent == NULL)
+    root = tmp;
+  else if (node == node->parent->left)
+    node->parent->left = tmp;
+  else
+    node->parent->right = tmp;
+  tmp->left  = node;
+  node->parent = tmp;
 }
+
+void right_rotate(nodeptr node) {
+  nodeptr tmp = node->left;
+  node->left = tmp->right;
+  if (tmp->right != SENT)
+    tmp->right->parent = node;
+  tmp->parent = node->parent;
+  if (node->parent == NULL)
+    root = tmp;
+  else if (node == node->parent->right)
+    node->parent->right = tmp;
+  else
+    node->parent->left = tmp;
+  tmp->right = node;
+  node->parent = tmp;
+}
+
   //DEBUG
   void preOrderHelper(nodeptr node) {
     if (node != SENT) {

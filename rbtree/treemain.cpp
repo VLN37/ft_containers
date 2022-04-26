@@ -7,13 +7,13 @@
 int main(void) {
   std::cout << "this compiles!\n";
   ft::rbtree tree;
-  tree.insert(40);
-  tree.insert(20);
-  tree.insert(60);
-  tree.insert(50);
-  tree.insert(30);
+  for (int i = 0; i < 20; i++) {
+    tree.insert(i);
+  }
   tree.print();
   tree.inorder();
   tree.preorder();
   tree.postorder();
+  std::cout << "hello darkness my old friend\n";
+  tree.print();
 }
