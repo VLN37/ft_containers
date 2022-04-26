@@ -52,6 +52,19 @@ public:
     root = SENT;
   }
 
+  ~rbtree(void) {
+    recurse_delete(root);
+    delete SENT;
+  }
+
+  void recurse_delete(nodeptr node) {
+    if (node != SENT) {
+      recurse_delete(node->left);
+      recurse_delete(node->right);
+      delete node;
+    }
+  }
+
   void insert(int value) {
     nodeptr node = init_node(value);
     nodeptr prev = NULL;
