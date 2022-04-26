@@ -6,8 +6,12 @@
 
 int main(void) {
   std::cout << "this compiles!\n";
-  ft::tree_base base;
-  ft::tree_node<int> node;
-  (void)base;
-  (void)node;
+  ft::rbtree tree;
+  for (int i = 0; i < 10; i++) {
+    tree.insert(i);
+  }
+  tree.print();
+  tree.inorder();
+  tree.preorder();
+  tree.postorder();
 }
