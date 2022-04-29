@@ -61,6 +61,35 @@ public:
     }
   }
 
+  nodeptr search(int key) {
+    nodeptr curr = root;
+    if (curr == SENT || curr->data == key)
+      return curr;
+    while (curr != SENT && curr->data != key) {
+      if (key < curr->data)
+        curr = curr->left;
+      else
+        curr = curr->right;
+    }
+    return curr;
+  }
+
+  nodeptr minimum(nodeptr node) {
+    if (node == SENT)
+      return node;
+    while (node->left != SENT)
+      node = node->left;
+    return node;
+  }
+
+  nodeptr maximum(nodeptr node) {
+    if (node == SENT)
+      return node;
+    while (node->right != SENT)
+      node = node->right;
+    return node;
+  }
+
   nodeptr init_node(int value) {
     nodeptr node = new Node;
     node->parent = NULL;
@@ -69,6 +98,39 @@ public:
     node->left = SENT;
     node->color = RED;
     return node;
+  }
+
+  void left_rotate(nodeptr node) {
+    nodeptr tmp = node->right;
+    node->right = tmp->left;
+    if (tmp->left != SENT) {
+      tmp->left->parent = node;
+    }
+    tmp->parent = node->parent;
+    if (node->parent == NULL)
+      root = tmp;
+    else if (node == node->parent->left)
+      node->parent->left = tmp;
+    else
+      node->parent->right = tmp;
+    tmp->left  = node;
+    node->parent = tmp;
+  }
+
+  void right_rotate(nodeptr node) {
+    nodeptr tmp = node->left;
+    node->left = tmp->right;
+    if (tmp->right != SENT)
+      tmp->right->parent = node;
+    tmp->parent = node->parent;
+    if (node->parent == NULL)
+      root = tmp;
+    else if (node == node->parent->right)
+      node->parent->right = tmp;
+    else
+      node->parent->left = tmp;
+    tmp->right = node;
+    node->parent = tmp;
   }
 
   /**
@@ -119,15 +181,10 @@ public:
    */
   void fix_insert(nodeptr node) {
     nodeptr uncle;
-    if (node->parent == node->parent->parent->right)
-          std::cout << "one\n";
-    if (node->parent == node->parent->parent->left)
-          std::cout << "two\n";
     while (node->parent->color == RED) {
       if (node->parent == node->parent->parent->right) {
         uncle = node->parent->parent->left;
         if (uncle->color == RED) {
-          std::cout << "three\n";
           uncle->color = BLACK;
           node->parent->color = BLACK;
           node->parent->parent->color = RED;
@@ -167,38 +224,35 @@ public:
   root->color = BLACK;
   }
 
-void left_rotate(nodeptr node) {
-  nodeptr tmp = node->right;
-  node->right = tmp->left;
-  if (tmp->left != SENT) {
-    tmp->left->parent = node;
-  }
-  tmp->parent = node->parent;
-  if (node->parent == NULL)
-    root = tmp;
-  else if (node == node->parent->left)
-    node->parent->left = tmp;
-  else
-    node->parent->right = tmp;
-  tmp->left  = node;
-  node->parent = tmp;
-}
+  // void delete_node(int key) {
+  //   nodeptr curr = root;
+  //   nodeptr del, tmp;
 
-void right_rotate(nodeptr node) {
-  nodeptr tmp = node->left;
-  node->left = tmp->right;
-  if (tmp->right != SENT)
-    tmp->right->parent = node;
-  tmp->parent = node->parent;
-  if (node->parent == NULL)
-    root = tmp;
-  else if (node == node->parent->right)
-    node->parent->right = tmp;
-  else
-    node->parent->left = tmp;
-  tmp->right = node;
-  node->parent = tmp;
-}
+  //   //find node to delete
+  //   while(curr != SENT) {
+  //     if (curr->data == key)
+  //       del = curr;
+  //     if (curr->data <= key) // less or less equal??
+  //         curr = curr->right;
+  //     else
+  //       curr = curr->left;
+  //   }
+
+  //   //key not found
+  //   if (del == SENT)
+  //     return;
+
+  //   tmp = del;
+  //   e_color color_backup = del->color;
+  //   if (del->left == SENT) {
+  //     del = curr->left;
+  //     // tree_transplant(curr, curr->left);
+  //   }
+  //   else {
+  //     tmp =
+  //   }
+
+  // }
 
   //DEBUG
   void preOrderHelper(nodeptr node) {

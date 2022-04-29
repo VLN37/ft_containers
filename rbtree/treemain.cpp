@@ -16,4 +16,6 @@ int main(void) {
   tree.postorder();
   std::cout << "hello darkness my old friend\n";
   tree.print();
+  std::cout << tree.minimum(tree.get_root())->data << '\n';
+  std::cout << tree.maximum(tree.get_root())->data << '\n';
 }
