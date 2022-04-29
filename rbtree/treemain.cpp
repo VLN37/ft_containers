@@ -7,7 +7,7 @@
 int main(void) {
   std::cout << "this compiles!\n";
   ft::rbtree tree;
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < 10; i++) {
     tree.insert(i);
   }
   tree.print();

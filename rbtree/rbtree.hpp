@@ -49,6 +49,10 @@ public:
     delete SENT;
   }
 
+  nodeptr get_root(void) {
+    return root;
+  }
+
   void recurse_delete(nodeptr node) {
     if (node != SENT) {
       recurse_delete(node->left);
@@ -221,6 +225,8 @@ void right_rotate(nodeptr node) {
     }
   }
 
+	// Pre-Order traversal
+	// Node->Left Subtree->Right Subtree
   void preorder() {
     preOrderHelper(this->root);
     std::cout << '\n';
