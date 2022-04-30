@@ -71,6 +71,8 @@ public:
       else
         curr = curr->right;
     }
+    if (curr == SENT)
+      std::cout << "key is not in the tree\n";
     return curr;
   }
 
@@ -224,35 +226,119 @@ public:
   root->color = BLACK;
   }
 
-  // void delete_node(int key) {
-  //   nodeptr curr = root;
-  //   nodeptr del, tmp;
+  void transplant_tree(nodeptr u, nodeptr v) {
+    if (u->parent == NULL)
+      root = v;
+    else if (u == u->parent->left)
+      u->parent->left = v;
+    else
+      u->parent->right = v;
+    v->parent = u->parent; //lose reference of children?
+  }
 
-  //   //find node to delete
-  //   while(curr != SENT) {
-  //     if (curr->data == key)
-  //       del = curr;
-  //     if (curr->data <= key) // less or less equal??
-  //         curr = curr->right;
-  //     else
-  //       curr = curr->left;
-  //   }
+  void delete_node(int key) {
+    nodeptr z = SENT;
+    nodeptr x, y;
+    e_color y_backup;
 
-  //   //key not found
-  //   if (del == SENT)
-  //     return;
+    z = search(key);
+    if (z == SENT) //key not found
+      return;
 
-  //   tmp = del;
-  //   e_color color_backup = del->color;
-  //   if (del->left == SENT) {
-  //     del = curr->left;
-  //     // tree_transplant(curr, curr->left);
-  //   }
-  //   else {
-  //     tmp =
-  //   }
+    y = z;
+    y_backup = y->color;
+    if (z->left == SENT) {
+      x = z->right; // x = tmp?
+      transplant_tree(z, z->right);
+    }
+    else if (z->right == SENT) {
+      x = z->left;
+      transplant_tree(z, z->left);
+    }
+    else {
+      y = minimum(z->right);
+      y_backup = y->color;
+      x = y->right;
+      if (y->parent == z) {
+        x->parent = y;
+      }
+      else {
+        transplant_tree(y, y->right);
+        y->right = z->right;
+        y->right->parent = y;
+      }
+      transplant_tree(z, y);
+      y->left = z->left;
+      y->left->parent = y;
+      y->color = z->color;
+    }
+    delete z;
+    if (y_backup == BLACK)
+      fix_insert(x);
+  }
 
-  // }
+  //s == sibling - x == deleted node
+  void fix_delete(nodeptr x) {
+    nodeptr s;
+
+    while (x != root && x->color == BLACK) {
+      if (x == x->parent->left) {
+        s = x->parent->right;
+        //sibling of deleted node is red
+        if (s->color == RED) {
+          s->color = BLACK;
+          x->parent->color = RED;
+          left_rotate(x->parent);
+          s = x->parent->right;
+        }
+        //sibling and children are black
+        if (s->left->color == BLACK && s->right->color == BLACK) {
+          s->color = BLACK;
+          x = x->parent;
+        }
+        else {
+          if (s->right->color == BLACK) {
+            s->left->color = BLACK;
+            s->color = RED;
+            right_rotate(s);
+            s = x->parent->right;
+          }
+          s->color = x->parent->color;
+          x->parent->color = BLACK;
+          s->right->color = BLACK;
+          left_rotate(x->parent);
+          x = root;
+        }
+      }
+      else {
+        s = x->parent->left;
+        if (s->color == RED) {
+          s->color = BLACK;
+          x->parent->color = RED;
+          right_rotate(x->parent);
+          s = x->parent->left;
+        }
+        if (s->right->color == BLACK && s->right->color == BLACK) {
+          s->color = RED;
+          x = x->parent;
+        }
+        else {
+          if (s->left->color == BLACK) {
+            s->right->color = BLACK;
+            s->color = RED;
+            left_rotate(s);
+            s = x->parent->left;
+          }
+          s->color = x->parent->color;
+          x->parent->color = BLACK;
+          s->left->color = BLACK;
+          right_rotate(x->parent);
+          x = root;
+        }
+      }
+    }
+    x->color = BLACK;
+  }
 
   //DEBUG
   void preOrderHelper(nodeptr node) {
@@ -307,7 +393,6 @@ public:
   }
 
   void printHelper(nodeptr root, std::string indent, bool last) {
-    // print the tree structure on the screen
       if (root != SENT) {
       std::cout << indent;
       if (last) {
@@ -317,7 +402,6 @@ public:
         std::cout << "L---- ";
         indent += "|    ";
       }
-
       std::string sColor = root->color ? "RED" : "BLACK";
       std::cout << root->data << "(" << sColor << ")\n";
       printHelper(root->left, indent, false);
