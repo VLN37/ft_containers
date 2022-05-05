@@ -275,7 +275,7 @@ public:
     }
     delete z;
     if (y_backup == BLACK)
-      fix_insert(x);
+      fix_delete(x);
   }
 
   //s == sibling - x == deleted node
@@ -319,7 +319,7 @@ public:
           right_rotate(x->parent);
           s = x->parent->left;
         }
-        if (s->right->color == BLACK && s->right->color == BLACK) {
+        if (s->right->color == BLACK && s->left->color == BLACK) { //investigate
           s->color = RED;
           x = x->parent;
         }
