@@ -127,7 +127,7 @@ public:
       tmp->right->parent = node;
     tmp->parent = node->parent;
     if (node->parent == NULL)
-      root = tmp;
+      this->root = tmp;
     else if (node == node->parent->right)
       node->parent->right = tmp;
     else
