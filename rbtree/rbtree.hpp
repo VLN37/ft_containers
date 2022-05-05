@@ -20,6 +20,7 @@ enum e_color { BLACK, RED };
 // };
 
 struct Node {
+  Node(void) : parent(NULL), left(NULL), right(NULL), color(RED) { }
   int     data;
   Node*   parent;
   Node*   left;
@@ -28,25 +29,25 @@ struct Node {
 };
 
 typedef Node* nodeptr;
+static Node SENTRY = Node();
 
 class rbtree {
-private:
-  nodeptr SENT;
-
-
 public:
   nodeptr root;
-  rbtree(void): SENT(new Node) {
+  nodeptr SENT;
+
+  rbtree(void) {
+    SENT = &SENTRY;
+    SENT->right = SENT;
+    SENT->left = SENT;
+    // SENT->parent = SENT;
     SENT->color = BLACK;
-    SENT->parent = NULL;
-    SENT->left = NULL;
-    SENT->right = NULL;
     root = SENT;
   }
 
   ~rbtree(void) {
     recurse_delete(root);
-    delete SENT;
+    // delete SENT;
   }
 
   nodeptr get_root(void) {
