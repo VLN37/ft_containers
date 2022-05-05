@@ -393,8 +393,8 @@ public:
       }
   }
 
-  void printHelper(nodeptr root, std::string indent, bool last) {
-      if (root != SENT) {
+  void printHelper(nodeptr node, std::string indent, bool last) {
+      if (node != SENT) {
       std::cout << indent;
       if (last) {
         std::cout << "R---- ";
@@ -403,10 +403,10 @@ public:
         std::cout << "L---- ";
         indent += "|    ";
       }
-      std::string sColor = root->color ? "RED" : "BLACK";
-      std::cout << root->data << "(" << sColor << ")\n";
-      printHelper(root->left, indent, false);
-      printHelper(root->right, indent, true);
+      std::string sColor = node->color ? "RED" : "BLACK";
+      std::cout << node->data << "(" << sColor << ")\n";
+      printHelper(node->left, indent, false);
+      printHelper(node->right, indent, true);
     }
   }
 };

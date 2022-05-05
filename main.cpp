@@ -8,6 +8,7 @@
 #include "type_traits.hpp"
 #include "stack.hpp"
 #include "pair.hpp"
+#include "rbtree.hpp"
 
 int main(void) {
   std::cout << "this compiles!\n";
