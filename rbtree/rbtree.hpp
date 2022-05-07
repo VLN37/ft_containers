@@ -32,6 +32,13 @@ struct Node {
   e_color color;
 };
 
+template <typename T>
+struct KeyOfValue {
+  std::string operator()(T const& src) const {
+    return (src.first);
+  }
+};
+
 // template <typename T>
 // static Node<T> SENTRY = Node<T>();
 
@@ -74,7 +81,7 @@ public:
     }
   }
 
-  nodeptr search(int key) {
+  nodeptr search(int key) { // chave
     nodeptr curr = root;
     if (curr == SENT || curr->data == key)
       return curr;
@@ -105,7 +112,7 @@ public:
     return node;
   }
 
-  nodeptr init_node(int value) {
+  nodeptr init_node(Val value) { // val
     nodeptr node = new Node<Val>;
     node->parent = NULL;
     node->data = value;
@@ -154,7 +161,7 @@ public:
    * 2 - tree is not empty - newnode is red
    * 3 - parent of newnode is black - exit
    */
-  void insert(int value) {
+  void insert(Val value) { // val
     nodeptr node = init_node(value);
     nodeptr prev = NULL;
     nodeptr curr = root;
@@ -249,7 +256,7 @@ public:
     v->parent = u->parent; //lose reference of children?
   }
 
-  void delete_node(int key) {
+  void delete_node(int key) { // val
     nodeptr z = SENT;
     nodeptr x, y;
     e_color y_backup;

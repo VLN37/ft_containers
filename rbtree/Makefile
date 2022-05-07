@@ -5,15 +5,19 @@ NAME		= rbtree
 SRC			= treemain.cpp \
 
 INC			= rbtree.hpp \
+					pair.hpp \
+
+INCPATH = -I../utils
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR  = obj
+VPATH		= ../utils
 
 $(NAME):	$(OBJDIR) $(OBJ) $(INC)
 					$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJDIR)/%.o:	%.cpp $(INC)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCPATH)
 
 clean:
 	rm -rf $(OBJDIR)

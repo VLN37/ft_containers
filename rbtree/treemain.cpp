@@ -3,10 +3,14 @@
 
 #include <iostream>
 #include "rbtree.hpp"
+#include "pair.hpp"
 
 int main(void) {
   std::cout << "this compiles!\n";
-  ft::rbtree<int, int, int> tree;
+  ft::rbtree< std::string,
+              ft::pair<std::string, int>,
+              ft::KeyOfValue<ft::pair<std::string, int> > > tree;
+  tree.insert(ft::pair<std::string, int>("a", 1));
   // for (int i = 0; i < 10; i++) {
   //   tree.insert(i);
   // }
