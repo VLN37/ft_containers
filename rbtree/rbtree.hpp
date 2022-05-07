@@ -62,7 +62,7 @@ public:
   rbtree(void): SENT(new Node<Val>) {
     SENT->right = SENT;
     SENT->left = SENT;
-    // SENT->parent = SENT;
+    SENT->parent = NULL;
     SENT->color = BLACK;
     root = SENT;
   }
@@ -180,7 +180,7 @@ public:
     node->parent = prev;
     if (prev == NULL)
       root = node;
-    else if (Compare()(KeyOfValue()(node->data), KeyOfValue()(prev->data) ))
+    else if (Compare()(KeyOfValue()(node->data), KeyOfValue()(prev->data)))
       prev->left = node;
     else
       prev->right = node;
@@ -296,8 +296,9 @@ public:
       y->color = z->color;
     }
     delete z;
-    if (y_backup == BLACK)
+    if (y_backup == BLACK) {
       fix_delete(x);
+    }
   }
 
   //s == sibling - x == deleted node
@@ -316,7 +317,7 @@ public:
         }
         //sibling and children are black
         if (s->left->color == BLACK && s->right->color == BLACK) {
-          s->color = BLACK;
+          s->color = RED;
           x = x->parent;
         }
         else {
@@ -410,9 +411,11 @@ public:
   }
 
   void print(void) {
-      if (root) {
-        printHelper(this->root, "", true);
-      }
+    std::cout << "***************************\n";
+    if (root) {
+      printHelper(this->root, "", true);
+    }
+    std::cout << "***************************\n";
   }
 
   void printHelper(nodeptr node, std::string indent, bool last) {
