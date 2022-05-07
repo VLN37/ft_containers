@@ -25,31 +25,35 @@ public:
 
   type_1 first;
   type_2 second;
+  friend std::ostream& operator<<(std::ostream& o, pair const& rhs)
+  { o << rhs.first << " " << rhs.second; return o; }
 };
 
 template<typename T1, typename T2>
 bool operator==(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
-{ return lhs == rhs; }
-
-template<typename T1, typename T2>
-bool operator!=(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
-{ return lhs != rhs; }
-
-template<typename T1, typename T2>
-bool operator<=(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
-{ return lhs <= rhs; }
-
-template<typename T1, typename T2>
-bool operator>=(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
-{ return lhs >= rhs; }
-
-template<typename T1, typename T2>
-bool operator>(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
-{ return lhs > rhs; }
+{ return lhs.first == rhs.first && lhs.second == rhs.second; }
 
 template<typename T1, typename T2>
 bool operator<(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
+{ return lhs.first < rhs.first
+|| (!(lhs.first < rhs.first) && rhs.second < lhs.second); }
+
+template<typename T1, typename T2>
+bool operator!=(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
+{ return !(lhs == rhs); }
+
+template<typename T1, typename T2>
+bool operator<=(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
+{ return !(rhs < lhs); }
+
+template<typename T1, typename T2>
+bool operator>=(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
+{ return !(lhs < rhs); }
+
+template<typename T1, typename T2>
+bool operator>(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
 { return lhs < rhs; }
+
 
 } // namespace ft
 #endif // PAIR_HPP
