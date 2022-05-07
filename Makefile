@@ -1,13 +1,15 @@
 CC			= c++
 CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
 INCPATH = -I./ -I./vector -I./iterator -I./utils -I./stack -I./rbtree
-STD			= -DSTD=1
+OBJDIR	= obj
+STD			?=
 NAME		= containers
-GTEST		= perfft
+NAMET		?=
+GTEST		= test
 
 SRC			=	main.cpp \
 
-SRCT		=	tests/unit.cpp \
+SRCT		=	unit.cpp \
 
 INC			=	vector.hpp \
 					vector_members.tpp \
@@ -23,25 +25,31 @@ INC			=	vector.hpp \
 					rbtree.hpp \
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
-OBJDIR	= obj
+OBJT			= $(SRCT:%.cpp=$(OBJDIR)/%.o)
 
-VPATH		= vector stack utils iterator rbtree
+#this bugs when rbtree obj dir is already created -- investigate
+VPATH		= vector stack utils iterator rbtree tests
 
 $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
+$(NAMET):	$(OBJDIR) $(OBJT)
+		$(CC) $(CFLAGS) $(OBJT) -o $(NAMET)
+
 $(GTEST):	$(OBJDIR) $(OBJ) tests/unit.cpp
-		$(CC) $(CFLAGS) $(SRCT) -o perfstd $(STD) $(INCPATH)
-		$(CC) $(CFLAGS) $(SRCT) -o perfft $(INCPATH)
+		# rm obj/unit.o
+		STD=-DSTD=1 NAMET=accstd make accstd
+		# rm obj/unit.o
+		NAMET=accft make accft
 
 $(OBJDIR)/%.o: %.cpp $(INC)
-		$(CC) $(CFLAGS) -c $< -o $@ $(INCPATH)
+		$(CC) $(CFLAGS) $(STD) -c $< -o $@ $(INCPATH)
 
 clean:
 		rm -rf $(OBJDIR)
 
 fclean:	clean
-		rm -rf $(NAME) perfft perfstd
+		rm -rf $(NAME) accft accstd
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)

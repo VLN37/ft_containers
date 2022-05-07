@@ -1,9 +1,9 @@
 #!/bin/bash
 
-make perfft
+make test
 
-time ./perfft > ft
-time ./perfstd > std
-diff -s -y --color std ft
+time ./accft > ft
+time ./accstd > std
+diff --color -y -s --suppress-common-lines std ft
 
-rm ft std perfft perfstd
+rm ft std accft accstd
