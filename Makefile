@@ -37,15 +37,16 @@ $(NAMET):	$(OBJDIR) $(OBJT)
 		$(CC) $(CFLAGS) $(OBJT) -o $(NAMET)
 
 $(GTEST):	$(OBJDIR) $(OBJ) tests/unit.cpp
-		# rm obj/unit.o
 		STD=-DSTD=1 NAMET=accstd make accstd
-		# rm obj/unit.o
+		rm obj/unit.o
 		NAMET=accft make accft
+		rm obj/unit.o
 
 $(OBJDIR)/%.o: %.cpp $(INC)
 		$(CC) $(CFLAGS) $(STD) -c $< -o $@ $(INCPATH)
 
 clean:
+		make -C ./rbtree clean
 		rm -rf $(OBJDIR)
 
 fclean:	clean
