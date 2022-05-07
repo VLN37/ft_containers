@@ -30,7 +30,10 @@ struct Node {
   Node*   left;
   Node*   right;
   e_color color;
+  friend std::ostream operator<<(std::ostream const& o, Node const& rhs)
+  { return o << rhs.data.first; }
 };
+
 
 template <typename T>
 struct KeyOfValue {
@@ -189,7 +192,6 @@ public:
     //determine if this is the second node
     if (node->parent->parent == NULL)
       return;
-    std::cout << "here\n";
     fix_insert(node);
   }
 

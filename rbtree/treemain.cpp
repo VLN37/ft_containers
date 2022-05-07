@@ -11,6 +11,9 @@ int main(void) {
               ft::pair<std::string, int>,
               ft::KeyOfValue<ft::pair<std::string, int> > > tree;
   tree.insert(ft::pair<std::string, int>("a", 1));
+  tree.print();
+
+  // tree.print();
   // for (int i = 0; i < 10; i++) {
   //   tree.insert(i);
   // }
