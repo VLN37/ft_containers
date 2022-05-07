@@ -7,11 +7,21 @@
 
 int main(void) {
   std::cout << "this compiles!\n";
-  ft::rbtree< std::string,
-              ft::pair<std::string, int>,
-              ft::KeyOfValue<ft::pair<std::string, int> > > tree;
-  tree.insert(ft::pair<std::string, int>("a", 1));
+  ft::rbtree< int,
+              ft::pair<int, std::string>,
+              ft::KeyOfValue<ft::pair<int, std::string> > > tree;
+  tree.insert(ft::pair<int, std::string>(1, "tde-cama"));
+  tree.insert(ft::pair<int, std::string>(2, "guiga"));
+  tree.insert(ft::pair<int, std::string>(3, "iwillens"));
+  tree.insert(ft::pair<int, std::string>(4, "adrian"));
+  tree.insert(ft::pair<int, std::string>(5, "flavio"));
+  tree.insert(ft::pair<int, std::string>(6, "nayran"));
+  tree.insert(ft::pair<int, std::string>(7, "paula"));
+  tree.insert(ft::pair<int, std::string>(8, "laiz"));
+  tree.insert(ft::pair<int, std::string>(9, "welton"));
+  tree.insert(ft::pair<int, std::string>(10, "joao"));
   tree.print();
+  tree.inorder();
 
   // tree.print();
   // for (int i = 0; i < 10; i++) {

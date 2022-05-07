@@ -37,7 +37,7 @@ struct Node {
 
 template <typename T>
 struct KeyOfValue {
-  std::string operator()(T const& src) const {
+  int operator()(T const& src) const {
     return (src.first);
   }
 };
@@ -171,7 +171,8 @@ public:
 
     while (curr != SENT) {
       prev = curr;
-      if (node->data < curr->data)
+      // if (node->data < curr->data)
+      if (Compare()(KeyOfValue()(node->data), KeyOfValue()(curr->data)))
         curr = curr->left;
       else
         curr = curr->right;
@@ -179,7 +180,7 @@ public:
     node->parent = prev;
     if (prev == NULL)
       root = node;
-    else if (node->data < prev->data)
+    else if (Compare()(KeyOfValue()(node->data), KeyOfValue()(prev->data) ))
       prev->left = node;
     else
       prev->right = node;
