@@ -1,5 +1,6 @@
 CC			= c++
 CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
+CFLAGS	+= -MMD -MP #compiler flags to generate the dependancy file
 INCPATH = -I./ -I./vector -I./iterator -I./utils -I./stack -I./rbtree
 OBJDIR	= obj
 STD			?=
@@ -25,10 +26,13 @@ INC			=	vector.hpp \
 					rbtree.hpp \
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
+DEPS		= $(SRC:%.cpp=$(OBJDIR)/%.d)
 OBJT			= $(SRCT:%.cpp=$(OBJDIR)/%.o)
 
 #this bugs when rbtree obj dir is already created -- investigate
-VPATH		= vector stack utils iterator rbtree tests
+# VPATH = vector stack utils iterator rbtree tests
+vpath %.cpp vector stack utils iterator rbtree tests
+vpath %.hpp vector stack utils iterator rbtree tests
 
 $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
@@ -42,11 +46,10 @@ $(GTEST):	$(OBJDIR) $(OBJ) tests/unit.cpp
 		NAMET=accft make accft
 		rm obj/unit.o
 
-$(OBJDIR)/%.o: %.cpp $(INC)
+$(OBJDIR)/%.o: %.cpp
 		$(CC) $(CFLAGS) $(STD) -c $< -o $@ $(INCPATH)
 
 clean:
-		make -C ./rbtree clean
 		rm -rf $(OBJDIR)
 
 fclean:	clean
@@ -56,3 +59,5 @@ $(OBJDIR):
 		mkdir -p $(OBJDIR)
 
 re:		fclean $(NAME)
+
+-include $(DEPS)
