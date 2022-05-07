@@ -20,6 +20,7 @@ public:
   pair& operator=(pair const& rhs) {
     this->first = rhs.first;
     this->second = rhs.second;
+    return *this;
   }
 
   type_1 first;
