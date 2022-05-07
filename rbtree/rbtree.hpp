@@ -4,7 +4,9 @@
 #ifndef RB_TREE
 # define RB_TREE
 
-#include<string>
+#include <string>
+#include <memory>
+#include <functional>
 
 namespace ft {
 enum e_color { BLACK, RED };
@@ -19,25 +21,35 @@ enum e_color { BLACK, RED };
 //   typedef tree_node<val>* node_type;
 // };
 
+template <typename T>
 struct Node {
   Node(void) : parent(NULL), left(NULL), right(NULL), color(RED) { }
-  int     data;
+  typedef Node* nodeptr;
+  T       data;
   Node*   parent;
   Node*   left;
   Node*   right;
   e_color color;
 };
 
-typedef Node* nodeptr;
-static Node SENTRY = Node();
+// template <typename T>
+// static Node<T> SENTRY = Node<T>();
 
+template <typename Key,
+          typename Val,
+          typename KeyOfValue,
+          typename Compare = std::less<Key>,
+          typename Alloc = std::allocator<Val> >
 class rbtree {
 public:
+  typedef Node<Val>*                                         nodeptr;
+  typedef Node<Val>                                          node_type;
+  typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
+
   nodeptr root;
   nodeptr SENT;
 
-  rbtree(void) {
-    SENT = &SENTRY;
+  rbtree(void): SENT(new Node<Val>) {
     SENT->right = SENT;
     SENT->left = SENT;
     // SENT->parent = SENT;
@@ -47,7 +59,7 @@ public:
 
   ~rbtree(void) {
     recurse_delete(root);
-    // delete SENT;
+    delete SENT;
   }
 
   nodeptr get_root(void) {
@@ -94,7 +106,7 @@ public:
   }
 
   nodeptr init_node(int value) {
-    nodeptr node = new Node;
+    nodeptr node = new Node<Val>;
     node->parent = NULL;
     node->data = value;
     node->right = SENT;
