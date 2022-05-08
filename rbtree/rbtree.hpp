@@ -170,10 +170,13 @@ public:
    * 3 - parent of newnode is black - exit
    */
   void insert(Val value) { // val
-    nodeptr node = init_node(value);
+    nodeptr node = search(KeyOfValue()(value));
     nodeptr prev = NULL;
     nodeptr curr = root;
 
+    if (node != SENT)
+      delete_node(KeyOfValue()(value));
+    node = init_node(value);
     while (curr != SENT) {
       prev = curr;
       if (Compare()(KeyOfValue()(node->data), KeyOfValue()(curr->data)))
