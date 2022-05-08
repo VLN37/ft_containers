@@ -84,19 +84,18 @@ public:
     }
   }
 
-  nodeptr search(int key) { // chave
-    nodeptr curr = root;
-    if (curr == SENT || curr->data == key)
-      return curr;
-    while (curr != SENT && curr->data != key) {
-      if (key < curr->data)
-        curr = curr->left;
-      else
-        curr = curr->right;
-    }
-    if (curr == SENT)
-      std::cout << "key is not in the tree\n";
-    return curr;
+  nodeptr searchHelper(nodeptr node, Key key) {
+    if (node == SENT || (!Compare()(KeyOfValue()(node->data), key)
+                     &&  !Compare()(key, KeyOfValue()(node->data))))
+      return node;
+    if (Compare()(key, KeyOfValue()(node->data)))
+      return searchHelper(node->left, key);
+    else
+      return searchHelper(node->right, key);
+  }
+
+  nodeptr search(Key key) { // chave
+    return searchHelper(root, key);
   }
 
   nodeptr minimum(nodeptr node) {
@@ -259,12 +258,15 @@ public:
     v->parent = u->parent; //lose reference of children?
   }
 
-  void delete_node(int key) { // val
+  void delete_node(Key key) { // val
     nodeptr z = SENT;
     nodeptr x, y;
     e_color y_backup;
 
     z = search(key);
+    if (z == SENT)
+      std::cout << "aff\n";
+    std::cout << KeyOfValue()(z->data) << '\n';
     if (z == SENT) //key not found
       return;
 
