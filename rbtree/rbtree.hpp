@@ -56,10 +56,13 @@ public:
   typedef Node<Val>                                          node_type;
   typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
 
-  nodeptr root;
-  nodeptr SENT;
+  nodeptr        root;
+  nodeptr        SENT;
+  Alloc          _alloc;
+  Node_allocator _nodealloc;
 
-  rbtree(void): SENT(new Node<Val>) {
+  rbtree(void): SENT(_nodealloc.allocate(1)) {
+    _nodealloc.construct(SENT, Node<Val>());
     SENT->right = SENT;
     SENT->left = SENT;
     SENT->parent = NULL;
@@ -69,7 +72,8 @@ public:
 
   ~rbtree(void) {
     recurse_delete(root);
-    delete SENT;
+    _nodealloc.destroy(SENT);
+    _nodealloc.deallocate(SENT, 1);
   }
 
   nodeptr get_root(void) {
@@ -80,7 +84,8 @@ public:
     if (node != SENT) {
       recurse_delete(node->left);
       recurse_delete(node->right);
-      delete node;
+      _nodealloc.destroy(node);
+      _nodealloc.deallocate(node, 1);
     }
   }
 
@@ -115,7 +120,8 @@ public:
   }
 
   nodeptr init_node(Val value) { // val
-    nodeptr node = new Node<Val>;
+    nodeptr node = _nodealloc.allocate(1);
+    _nodealloc.construct(node, Node<Val>());
     node->parent = NULL;
     node->data = value;
     node->right = SENT;
@@ -170,7 +176,6 @@ public:
 
     while (curr != SENT) {
       prev = curr;
-      // if (node->data < curr->data)
       if (Compare()(KeyOfValue()(node->data), KeyOfValue()(curr->data)))
         curr = curr->left;
       else
@@ -264,9 +269,6 @@ public:
     e_color y_backup;
 
     z = search(key);
-    if (z == SENT)
-      std::cout << "aff\n";
-    std::cout << KeyOfValue()(z->data) << '\n';
     if (z == SENT) //key not found
       return;
 
@@ -297,7 +299,8 @@ public:
       y->left->parent = y;
       y->color = z->color;
     }
-    delete z;
+    _nodealloc.destroy(z);
+    _nodealloc.deallocate(z, 1);
     if (y_backup == BLACK) {
       fix_delete(x);
     }
