@@ -10,6 +10,7 @@ INC			= rbtree.hpp \
 					rbtree_static.tpp \
 					rbtree_rotation.tpp \
 					rbtree_trasversal.tpp \
+					rbtree_constructors.tpp \
 					iterator_tree.hpp \
 					pair.hpp \
 

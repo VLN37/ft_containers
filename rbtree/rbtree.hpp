@@ -11,8 +11,6 @@
 
 namespace ft {
 
-static Node<int> SENTRY = Node<int>(BLACK);
-
 template <typename Key,
           typename Val,
           typename KeyOfValue,
@@ -38,6 +36,7 @@ public:
   rbtree(void)  { root = SENT; }
   ~rbtree(void) { recurse_delete(root); }
   void recurse_delete(nodeptr node);
+  nodeptr init_node(Val value);
 
   static nodeptr sucessor(nodeptr x);
   static nodeptr predecessor(nodeptr x);
@@ -48,18 +47,6 @@ public:
 
   nodeptr searchHelper(nodeptr node, Key key);
   nodeptr search(Key key) { return searchHelper(root, key); }
-
-
-  nodeptr init_node(Val value) {
-    nodeptr node = _nodealloc.allocate(1);
-    _nodealloc.construct(node, Node<Val>(RED));
-    node->parent = NULL;
-    node->data = value;
-    node->right = SENT;
-    node->left = SENT;
-    node->color = RED;
-    return node;
-  }
 
   void left_rotate(nodeptr node);
   void right_rotate(nodeptr node);
@@ -84,19 +71,7 @@ public:
   // Post-Order traversal
   // Left Subtree -> Right Subtree -> Node
   void postorder() { postOrderHelper(this->root); std::cout << '\n'; }
-
-
 };
-
-template <typename Key,
-          typename Val,
-          typename KeyOfValue,
-          typename Compare,
-          typename Alloc >
-typename ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
- ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::SENT
-= reinterpret_cast<Node<Val>*>(&ft::SENTRY);
-
 
 } //namespace ft
 
@@ -105,5 +80,6 @@ typename ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
 #include "rbtree_static.tpp"
 #include "rbtree_rotation.tpp"
 #include "rbtree_trasversal.tpp"
+#include "rbtree_constructors.tpp"
 
 #endif
