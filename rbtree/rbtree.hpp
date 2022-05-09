@@ -66,11 +66,13 @@ public:
     // _nodealloc.deallocate(SENT, 1);
   }
 
+  iterator begin(void) { return iterator(minimum(root)); }
+
   nodeptr get_root(void) {
     return root;
   }
 
-  friend nodeptr sucessor(nodeptr x) {
+  static nodeptr sucessor(nodeptr x) {
     if (x->right != SENT)
       return minimum(x->right);
 
@@ -82,7 +84,7 @@ public:
     return y;
   }
 
-  friend nodeptr predecessor(nodeptr x) {
+  static nodeptr predecessor(nodeptr x) {
     if (x->left != SENT)
       return maximum(x->left);
 
@@ -92,6 +94,22 @@ public:
       y = y->parent;
     }
     return y;
+  }
+
+  static nodeptr minimum(nodeptr node) {
+    if (node == SENT)
+      return node;
+    while (node->left != SENT)
+      node = node->left;
+    return node;
+  }
+
+  static nodeptr maximum(nodeptr node) {
+    if (node == SENT)
+      return node;
+    while (node->right != SENT)
+      node = node->right;
+    return node;
   }
 
   void recurse_delete(nodeptr node) {
