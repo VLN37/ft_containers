@@ -5,6 +5,7 @@
 #include "rbtree.hpp"
 #include "pair.hpp"
 
+
 template <typename T>
 struct returnint {
   T operator()(T const& src) { return src; };
@@ -16,6 +17,10 @@ struct returnstring {
     return (src.first);
   }
 };
+
+typedef  typename ft::rbtree< std::string,
+              ft::pair<std::string, int>,
+              returnstring<ft::pair<std::string, int> > > STRINT_TREE;
 
 int main(void) {
   std::cout << "this compiles!\n";
@@ -63,6 +68,7 @@ int main(void) {
   tree2.delete_node(9);
 
   std::cout << "this compiles!\n";
+
   ft::rbtree< std::string,
               ft::pair<std::string, int>,
               returnstring<ft::pair<std::string, int> > > tree3;
@@ -77,9 +83,24 @@ int main(void) {
   tree3.insert(ft::pair<std::string, int>("i", 1));
   tree3.insert(ft::pair<std::string, int>("i", 15));
   tree3.print();
-  tree3.delete_node("h");
-  tree3.delete_node("d"); //root case
-  tree3.delete_node("g"); //red node case
-  tree3.print();
-  tree3.inorder();
+  // tree3.delete_node("h");
+  // tree3.delete_node("d"); //root case
+  // tree3.delete_node("g"); //red node case
+  // tree3.delete_node("f"); //red node case
+  // tree3.delete_node("i"); //black node
+  // tree3.delete_node("a"); //black node
+  // tree3.delete_node("b"); //black node
+  // tree3.delete_node("c"); //black node
+  // tree3.delete_node("e"); //black node
+  // tree3.print();
+  // tree3.inorder();
+
+  STRINT_TREE::nodeptr ptr = tree3.root;
+  // (void)ptr;
+  std::cout << ptr->data << '\n';
+  ptr = STRINT_TREE::sucessor(ptr);
+  // std::cout << ptr->data << '\n';
+  std::cout << ft::SENTRY.color << '\n';
+
+
 }

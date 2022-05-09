@@ -11,19 +11,10 @@
 namespace ft {
 enum e_color { BLACK, RED };
 
-// struct tree_base {
-//   typedef tree_base*        base_ptr;
-//   typedef const tree_base*  const_base_ptr;
-// };
-
-// template<typename val>
-// struct tree_node : public tree_base {
-//   typedef tree_node<val>* node_type;
-// };
-
 template <typename T>
 struct Node {
   Node(void) : parent(NULL), left(NULL), right(NULL), color(RED) { }
+  Node(ft::e_color i) : parent(NULL), left(this), right(this), color(i) { }
   typedef Node* nodeptr;
   T       data;
   Node*   parent;
@@ -34,7 +25,6 @@ struct Node {
   { return o << rhs.data.first; }
 };
 
-
 template <typename T>
 struct KeyOfValue {
   int operator()(T const& src) const {
@@ -42,8 +32,7 @@ struct KeyOfValue {
   }
 };
 
-// template <typename T>
-// static Node<T> SENTRY = Node<T>();
+static Node<int> SENTRY = Node<int>(BLACK);
 
 template <typename Key,
           typename Val,
@@ -56,13 +45,14 @@ public:
   typedef Node<Val>                                          node_type;
   typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
 
+  // static const nodeptr        SENT = &(Node<Val>());
+  static nodeptr SENT;
   nodeptr        root;
-  nodeptr        SENT;
   Alloc          _alloc;
   Node_allocator _nodealloc;
 
-  rbtree(void): SENT(_nodealloc.allocate(1)) {
-    _nodealloc.construct(SENT, Node<Val>());
+  rbtree(void) { // : SENT(_nodealloc.allocate(1))
+    // _nodealloc.construct(SENT, Node<Val>());
     SENT->right = SENT;
     SENT->left = SENT;
     SENT->parent = NULL;
@@ -72,12 +62,36 @@ public:
 
   ~rbtree(void) {
     recurse_delete(root);
-    _nodealloc.destroy(SENT);
-    _nodealloc.deallocate(SENT, 1);
+    // _nodealloc.destroy(SENT);
+    // _nodealloc.deallocate(SENT, 1);
   }
 
   nodeptr get_root(void) {
     return root;
+  }
+
+  friend nodeptr sucessor(nodeptr x) {
+    if (x->right != SENT)
+      return minimum(x->right);
+
+    nodeptr y = x->parent;
+    while (y != SENT && x == y->right) {
+      y = x;
+      y = y->parent;
+    }
+    return y;
+  }
+
+  friend nodeptr predecessor(nodeptr x) {
+    if (x->left != SENT)
+      return maximum(x->left);
+
+    nodeptr y = x->parent;
+    while (y != SENT && x == y->left) {
+      x = y;
+      y = y->parent;
+    }
+    return y;
   }
 
   void recurse_delete(nodeptr node) {
@@ -443,6 +457,16 @@ public:
     }
   }
 };
+
+//TPP
+template <typename Key,
+          typename Val,
+          typename KeyOfValue,
+          typename Compare,
+          typename Alloc >
+typename ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
+ ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::SENT
+= reinterpret_cast<Node<Val>*>(&ft::SENTRY);
 
 } //namespace ft
 
