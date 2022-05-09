@@ -5,9 +5,10 @@ NAME		= rbtree
 SRC			= treemain.cpp \
 
 INC			= rbtree.hpp \
+					iterator_tree.hpp \
 					pair.hpp \
 
-INCPATH = -I../utils
+INCPATH = -I../iterator -I../utils
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR  = obj

@@ -7,32 +7,9 @@
 #include <string>
 #include <memory>
 #include <functional>
+#include "iterator_tree.hpp"
 
 namespace ft {
-enum e_color { BLACK, RED };
-
-template <typename T>
-struct Node {
-  Node(void) : parent(NULL), left(NULL), right(NULL), color(RED) { }
-  Node(ft::e_color i) : parent(NULL), left(this), right(this), color(i) { }
-  typedef Node* nodeptr;
-  T       data;
-  Node*   parent;
-  Node*   left;
-  Node*   right;
-  e_color color;
-  friend std::ostream operator<<(std::ostream const& o, Node const& rhs)
-  { return o << rhs.data.first; }
-};
-
-template <typename T>
-struct KeyOfValue {
-  int operator()(T const& src) const {
-    return (src.first);
-  }
-};
-
-static Node<int> SENTRY = Node<int>(BLACK);
 
 template <typename Key,
           typename Val,
@@ -41,9 +18,14 @@ template <typename Key,
           typename Alloc = std::allocator<Val> >
 class rbtree {
 public:
-  typedef Node<Val>*                                         nodeptr;
-  typedef Node<Val>                                          node_type;
-  typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
+  typedef Node<Val>*                                          nodeptr;
+  typedef Node<Val>                                           node_type;
+  typedef Val                                                 value_type;
+  typedef value_type*                                         pointer;
+  typedef const pointer                                       const_pointer;
+  typedef typename Alloc::template rebind<Node<Val> >::other  Node_allocator;
+  typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>        tree_type;
+  typedef tree_iterator<pointer, tree_type>                   iterator;
 
   // static const nodeptr        SENT = &(Node<Val>());
   static nodeptr SENT;
@@ -53,10 +35,10 @@ public:
 
   rbtree(void) { // : SENT(_nodealloc.allocate(1))
     // _nodealloc.construct(SENT, Node<Val>());
-    SENT->right = SENT;
-    SENT->left = SENT;
-    SENT->parent = NULL;
-    SENT->color = BLACK;
+    // SENT->right = SENT;
+    // SENT->left = SENT;
+    // SENT->parent = NULL;
+    // SENT->color = BLACK;
     root = SENT;
   }
 
@@ -135,25 +117,10 @@ public:
     return searchHelper(root, key);
   }
 
-  nodeptr minimum(nodeptr node) {
-    if (node == SENT)
-      return node;
-    while (node->left != SENT)
-      node = node->left;
-    return node;
-  }
-
-  nodeptr maximum(nodeptr node) {
-    if (node == SENT)
-      return node;
-    while (node->right != SENT)
-      node = node->right;
-    return node;
-  }
 
   nodeptr init_node(Val value) { // val
     nodeptr node = _nodealloc.allocate(1);
-    _nodealloc.construct(node, Node<Val>());
+    _nodealloc.construct(node, Node<Val>(RED));
     node->parent = NULL;
     node->data = value;
     node->right = SENT;
@@ -403,7 +370,6 @@ public:
     }
     x->color = BLACK;
   }
-
   //DEBUG
   void preOrderHelper(nodeptr node) {
     if (node != SENT) {
