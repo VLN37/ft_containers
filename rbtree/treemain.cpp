@@ -95,7 +95,7 @@ int main(void) {
   // tree3.print();
   // tree3.inorder();
 
-  STRINT_TREE::nodeptr ptr = tree3.root;
+  STRINT_TREE::nodeptr ptr = tree3.getroot();
   // (void)ptr;
   std::cout << ptr->data << '\n';
   ptr = STRINT_TREE::sucessor(ptr);

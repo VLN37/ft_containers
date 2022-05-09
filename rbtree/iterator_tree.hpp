@@ -24,17 +24,17 @@ class tree_iterator
   typedef typename iterator_traits<IterT>::reference       reference;
 
 protected:
+  Node<value_type>* current;
 
 public:
-  Node<value_type>* current;
   tree_iterator(void): current(NULL) { }
   explicit tree_iterator(pointer src): current(src) { }
   tree_iterator(nodeptr node): current(node) { }
   template <typename Iterator>
     tree_iterator(Iterator const& iterator): current(iterator.current) { }
 
-  reference   operator*(void) const { return current->data; }
-  pointer     operator->(void) const { return &operator*(); }
+  reference      operator*(void) const { return current->data; }
+  pointer        operator->(void) const { return &operator*(); }
   tree_iterator& operator++(void)
   { current = _Container::sucessor(current); return *this; }
   tree_iterator operator++(int) {
@@ -42,7 +42,6 @@ public:
     current = _Container::sucessor(current);
     return tmp;
   }
-
 };
 
 }

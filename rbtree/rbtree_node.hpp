@@ -33,8 +33,6 @@ struct KeyOfValue {
 };
 
 static Node<int> SENTRY = Node<int>(BLACK);
-
-
 } // namespace ft
 
 
