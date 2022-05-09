@@ -5,6 +5,11 @@ NAME		= rbtree
 SRC			= treemain.cpp \
 
 INC			= rbtree.hpp \
+					rbtree_insert.tpp \
+					rbtree_delete.tpp \
+					rbtree_static.tpp \
+					rbtree_rotation.tpp \
+					rbtree_trasversal.tpp \
 					iterator_tree.hpp \
 					pair.hpp \
 
