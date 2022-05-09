@@ -33,20 +33,8 @@ public:
   Alloc          _alloc;
   Node_allocator _nodealloc;
 
-  rbtree(void) { // : SENT(_nodealloc.allocate(1))
-    // _nodealloc.construct(SENT, Node<Val>());
-    // SENT->right = SENT;
-    // SENT->left = SENT;
-    // SENT->parent = NULL;
-    // SENT->color = BLACK;
-    root = SENT;
-  }
-
-  ~rbtree(void) {
-    recurse_delete(root);
-    // _nodealloc.destroy(SENT);
-    // _nodealloc.deallocate(SENT, 1);
-  }
+  rbtree(void)  { root = SENT; }
+  ~rbtree(void) { recurse_delete(root); }
 
   iterator begin(void) { return iterator(minimum(root)); }
 

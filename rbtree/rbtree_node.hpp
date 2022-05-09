@@ -9,15 +9,18 @@ enum e_color { BLACK, RED };
 
 template <typename T>
 struct Node {
+  typedef Node* nodeptr;
+
   Node(void) : parent(NULL), left(this), right(this), color(RED) { }
   explicit Node(ft::e_color i)
   : parent(NULL), left(this), right(this), color(i) { }
-  typedef Node* nodeptr;
+
   T       data;
   Node*   parent;
   Node*   left;
   Node*   right;
   e_color color;
+
   friend std::ostream& operator<<(std::ostream& o, Node& rhs)
   { return o << rhs.data.first; }
 };
