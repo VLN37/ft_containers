@@ -99,8 +99,14 @@ int main(void) {
   // (void)ptr;
   std::cout << ptr->data << '\n';
   ptr = STRINT_TREE::sucessor(ptr);
-  // std::cout << ptr->data << '\n';
+  std::cout << ptr->data << '\n';
   std::cout << ft::SENTRY.color << '\n';
-
+  STRINT_TREE::iterator it = tree3.begin();
+  std::cout << it->first << '\n';
+  std::cout << (*it).first << '\n';
+  std::cout << *it << '\n';
+  std::cout << *++it << '\n';
+  std::cout << *it++ << '\n';
+  std::cout << *it << '\n';
 
 }
