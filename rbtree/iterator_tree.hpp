@@ -32,19 +32,21 @@ protected:
 
 public:
   tree_iterator(void): current(NULL) { }
-  explicit tree_iterator(pointer src): current(src) { }
+  // explicit tree_iterator(pointer src): current(src) { }
   tree_iterator(nodeptr node): current(node) { }
 
-  template <typename Iterator>
-  tree_iterator(Iterator const& iterator): current(iterator.current) { }
-  template<typename Iterator>
-  iter& operator=(tree_iterator<Iterator, _Container> const& rhs) {
+  template <typename Iter2>
+  tree_iterator(tree_iterator<Iter2, _Container> const& iterator)
+  : current(iterator.base()) { }
+
+  template<typename Iter2>
+  iter& operator=(tree_iterator<Iter2, _Container> const& rhs) {
     current = rhs.base();
     return *this;
   }
 
 
-  iterator_type  base(void) const       { return current; }
+  nodeptr        base(void) const       { return current; }
   reference      operator*(void) const  { return current->data; }
   pointer        operator->(void) const { return &operator*(); }
   iter&          operator++(void)

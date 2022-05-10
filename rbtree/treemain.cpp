@@ -138,5 +138,9 @@ int main(void) {
     std::cout << *it1 << '\n';
   for_each(tree3.begin(), tree3.end(), printpair<std::string, int>);
 
-  // STRINT_TREE::const_iterator itc1 = tree3.begin();
+  it1 = tree3.begin();
+  ptr = it1.base();
+  std::cout << ptr->data << '\n';
+  STRINT_TREE::const_iterator itc1; // = tree3.begin();
+
 }

@@ -22,7 +22,7 @@ public:
   typedef Node<Val>                                       node_type;
   typedef Val                                             value_type;
   typedef value_type*                                     pointer;
-  typedef const pointer                                   const_pointer;
+  typedef const value_type*                               const_pointer;
   typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>    tree_type;
   typedef tree_iterator<pointer, tree_type>               iterator;
   typedef tree_iterator<const_pointer, tree_type>         const_iterator;
