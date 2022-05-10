@@ -65,6 +65,23 @@ public:
   bool operator!=(iter const& rhs) const { return current != rhs.current; }
 };
 
+template<typename IterA, typename IterB, typename _Container>
+bool operator==(tree_iterator<IterA, _Container> lhs,
+                tree_iterator<IterB, _Container> rhs)
+  { return (lhs.current == rhs.current); }
+
+template<typename IterA, typename IterB, typename _Container>
+bool operator!=(tree_iterator<IterA, _Container> lhs,
+                tree_iterator<IterB, _Container> rhs)
+  { return (lhs.current != rhs.current); }
+
+template<typename IterT, typename _Container>
+class tree_rev_iterator
+: public iterator<std::bidirectional_iterator_tag, IterT> {
+protected:
+  int randomgarbage;
+};
+
 }
 
 #endif

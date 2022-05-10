@@ -24,8 +24,12 @@ void printpair(ft::pair<T, V> pair) {
 }
 
 typedef  typename ft::rbtree< std::string,
-              ft::pair<std::string, int>,
-              returnstring<ft::pair<std::string, int> > > STRINT_TREE;
+                  ft::pair<std::string, int>,
+                  returnstring<ft::pair<std::string, int> > > STRINT_TREE;
+
+typedef  typename ft::rbtree< std::string,
+                  const ft::pair<std::string, int>,
+                  returnstring<ft::pair<std::string, int> > > CONST_STRINT_TREE;
 
 int main(void) {
   std::cout << "this compiles!\n";
@@ -133,4 +137,6 @@ int main(void) {
   for (; it1 != it2; ++it1)
     std::cout << *it1 << '\n';
   for_each(tree3.begin(), tree3.end(), printpair<std::string, int>);
+
+  // STRINT_TREE::const_iterator itc1 = tree3.begin();
 }

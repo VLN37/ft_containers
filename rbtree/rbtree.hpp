@@ -18,22 +18,25 @@ template <typename Key,
           typename Alloc = std::allocator<Val> >
 class rbtree {
 public:
-  typedef Node<Val>*                                          nodeptr;
-  typedef Node<Val>                                           node_type;
-  typedef Val                                                 value_type;
-  typedef value_type*                                         pointer;
-  typedef const pointer                                       const_pointer;
-  typedef typename Alloc::template rebind<Node<Val> >::other  Node_allocator;
-  typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>        tree_type;
-  typedef tree_iterator<pointer, tree_type>                   iterator;
+  typedef Node<Val>*                                      nodeptr;
+  typedef Node<Val>                                       node_type;
+  typedef Val                                             value_type;
+  typedef value_type*                                     pointer;
+  typedef const pointer                                   const_pointer;
+  typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>    tree_type;
+  typedef tree_iterator<pointer, tree_type>               iterator;
+  typedef tree_iterator<const_pointer, tree_type>         const_iterator;
+  typedef tree_rev_iterator<pointer, tree_type>           rev_iterator;
+  typedef tree_rev_iterator<const_pointer, tree_type>     const_rev_iterator;
+  typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
 
-  static nodeptr SENT;
 protected:
   nodeptr        root;
   Alloc          _alloc;
   Node_allocator _nodealloc;
 
 public:
+  static nodeptr SENT;
   rbtree(void)  { root = SENT; }
   ~rbtree(void) { recurse_delete(root); }
 
@@ -46,8 +49,10 @@ public:
   void insert(Val value);
   void delete_node(Key key);
 
-  iterator begin(void) { return iterator(minimum(root)); }
-  iterator end(void)   { return iterator(SENT); }
+  iterator       begin(void)       { return iterator(minimum(root)); }
+  const_iterator begin(void) const { return const_iterator(minimum(root)); }
+  iterator       end(void)         { return iterator(SENT); }
+  const_iterator end(void) const   { return const_iterator(SENT); }
 
   //DEBUG
   void print(void);
@@ -57,12 +62,12 @@ public:
   void inorder() { inOrderHelper(this->root); std::cout << '\n'; }
   // Left Subtree -> Right Subtree -> Node
   void postorder() { postOrderHelper(this->root); std::cout << '\n'; }
-  nodeptr search(Key key) { return searchHelper(root, key); }
 
 private:
-  void recurse_delete(nodeptr node);
+  void    recurse_delete(nodeptr node);
   nodeptr init_node(Val value);
   nodeptr searchHelper(nodeptr node, Key key);
+  nodeptr search(Key key) { return searchHelper(root, key); }
 
   void left_rotate(nodeptr node);
   void right_rotate(nodeptr node);
