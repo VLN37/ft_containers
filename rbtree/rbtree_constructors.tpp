@@ -22,6 +22,18 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::init_node(Val value) {
 
 template <typename Key, typename Val, typename KeyOfValue,
           typename Compare, typename Alloc >
+rbtree<Key, Val, KeyOfValue, Compare, Alloc>&
+rbtree<Key, Val, KeyOfValue, Compare, Alloc>::operator=(rbtree const& src) {
+  recurse_delete(root);
+  rbtree::iterator it = src.begin();
+  rbtree::iterator ite = src.end();
+  for (; it != ite; ++it)
+    insert(*it);
+  return *this;
+}
+
+template <typename Key, typename Val, typename KeyOfValue,
+          typename Compare, typename Alloc >
 typename ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
  ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::SENT
 = reinterpret_cast<Node<Val>*>(&ft::SENTRY);

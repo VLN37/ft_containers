@@ -149,5 +149,22 @@ int main(void) {
   tree3.print();
   // it1++;
   // std::cout << *it1 << '\n';
+  ptr = STRINT_TREE::minimum(tree3.getroot());
+  std::cout << ptr << '\n';
+  ptr = STRINT_TREE::predecessor(ptr);
+  std::cout << ptr << '\n';
+  std::cout << &ft::SENTRY << '\n';
 
+  STRINT_TREE tree4;
+  tree4.insert(ft::pair<std::string, int>("z", 82));
+  tree4.insert(ft::pair<std::string, int>("x", 94));
+  tree4.insert(ft::pair<std::string, int>("y", 3));
+  tree4.insert(ft::pair<std::string, int>("v", 42));
+  tree4.insert(ft::pair<std::string, int>("t", 12));
+
+  tree3.print();
+  tree4.print();
+  tree4 = tree3;
+  tree3.print();
+  tree4.print();
 }

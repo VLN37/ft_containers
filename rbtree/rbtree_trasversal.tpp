@@ -15,6 +15,7 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::recurse_delete(nodeptr node) 
     _nodealloc.destroy(node);
     _nodealloc.deallocate(node, 1);
   }
+  root = SENT;
 }
 
 template <typename Key, typename Val, typename KeyOfValue,

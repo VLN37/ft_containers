@@ -22,7 +22,7 @@ public:
   typedef Node<Val>                                       node_type;
   typedef Val                                             value_type;
   typedef value_type*                                     pointer;
-  typedef const value_type*                               const_pointer;
+  typedef value_type const*                               const_pointer;
   typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>    tree_type;
   typedef tree_iterator<pointer, tree_type>               iterator;
   typedef tree_iterator<const_pointer, tree_type>         const_iterator;
@@ -38,7 +38,9 @@ protected:
 public:
   static nodeptr SENT;
   rbtree(void)  { root = SENT; }
+  rbtree(rbtree const& src) { *this = src; }
   ~rbtree(void) { recurse_delete(root); }
+  rbtree& operator=(rbtree const& src);
 
   static nodeptr sucessor(nodeptr x);
   static nodeptr predecessor(nodeptr x);
