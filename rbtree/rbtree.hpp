@@ -27,8 +27,8 @@ public:
   typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>        tree_type;
   typedef tree_iterator<pointer, tree_type>                   iterator;
 
-protected:
   static nodeptr SENT;
+protected:
   nodeptr        root;
   Alloc          _alloc;
   Node_allocator _nodealloc;
@@ -47,6 +47,7 @@ public:
   void delete_node(Key key);
 
   iterator begin(void) { return iterator(minimum(root)); }
+  iterator end(void)   { return iterator(NULL); }
 
   //DEBUG
   void print(void);
@@ -56,12 +57,12 @@ public:
   void inorder() { inOrderHelper(this->root); std::cout << '\n'; }
   // Left Subtree -> Right Subtree -> Node
   void postorder() { postOrderHelper(this->root); std::cout << '\n'; }
+  nodeptr search(Key key) { return searchHelper(root, key); }
 
 private:
   void recurse_delete(nodeptr node);
   nodeptr init_node(Val value);
   nodeptr searchHelper(nodeptr node, Key key);
-  nodeptr search(Key key) { return searchHelper(root, key); }
 
   void left_rotate(nodeptr node);
   void right_rotate(nodeptr node);

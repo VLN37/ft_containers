@@ -12,7 +12,7 @@ typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
 rbtree<Key, Val, KeyOfValue, Compare, Alloc>::init_node(Val value) {
   nodeptr node = _nodealloc.allocate(1);
   _nodealloc.construct(node, Node<Val>(RED));
-  node->parent = NULL;
+  node->parent = SENT;
   node->data = value;
   node->right = SENT;
   node->left = SENT;

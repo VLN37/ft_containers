@@ -11,9 +11,9 @@ template <typename T>
 struct Node {
   typedef Node* nodeptr;
 
-  Node(void) : parent(NULL), left(this), right(this), color(RED) { }
+  Node(void) : parent(this), left(this), right(this), color(RED) { }
   explicit Node(ft::e_color i)
-  : parent(NULL), left(this), right(this), color(i) { }
+  : parent(this), left(this), right(this), color(i) { }
 
   T       data;
   Node*   parent;

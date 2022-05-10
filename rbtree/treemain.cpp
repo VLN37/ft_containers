@@ -5,7 +5,6 @@
 #include "rbtree.hpp"
 #include "pair.hpp"
 
-
 template <typename T>
 struct returnint {
   T operator()(T const& src) { return src; };
@@ -96,9 +95,16 @@ int main(void) {
   // tree3.inorder();
 
   STRINT_TREE::nodeptr ptr = tree3.getroot();
-  // (void)ptr;
-  std::cout << ptr->data << '\n';
-  ptr = STRINT_TREE::sucessor(ptr);
+  STRINT_TREE::iterator ptr1 = tree3.getroot();
+  STRINT_TREE::iterator ptr2(ptr1);
+  STRINT_TREE::iterator ptr3 = ptr2;
+  std::cout << (ptr3 == ptr2) << '\n';
+  std::cout << (ptr3 != ptr2) << '\n';
+  std::cout << (ptr3 == ++ptr2) << '\n';
+  std::cout << *ptr1 << '\n';
+  std::cout << *ptr2 << '\n';
+  std::cout << *ptr3 << '\n';
+  ptr1 = STRINT_TREE::sucessor(ptr);
   std::cout << ptr->data << '\n';
   std::cout << ft::SENTRY.color << '\n';
   STRINT_TREE::iterator it = tree3.begin();
@@ -108,5 +114,29 @@ int main(void) {
   std::cout << *++it << '\n';
   std::cout << *it++ << '\n';
   std::cout << *it << '\n';
+
+  STRINT_TREE::iterator it1 = tree3.begin();
+  // STRINT_TREE::iterator it2 = tree3.end();
+
+  std::cout << *it1 << '\n';
+  it1++;
+  std::cout << *it1 << '\n';
+  it1++;
+  std::cout << *it1 << '\n';
+
+  std::cout << &ft::SENTRY << '\n';
+  std::cout << tree3.SENT << '\n';
+  std::cout << tree3.getroot()->parent <<' '<< tree2.getroot()->parent << '\n';
+  std::cout << tree3.getroot() << ' ' << tree2.getroot() << '\n';
+
+  // STRINT_TREE::nodeptr node = tree3.search("c");
+  // std::cout << node->data << '\n';
+  // node = STRINT_TREE::sucessor(node);
+  // std::cout << node->data << '\n';
+
+  // tree3.print();
+  // for (; it1 != it2; ++it1)
+    // std::cout << *it1 << '\n';
+
 
 }

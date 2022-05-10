@@ -15,13 +15,17 @@ namespace ft {
 template<typename IterT, typename _Container>
 class tree_iterator
 : public iterator<std::bidirectional_iterator_tag, IterT> {
-  typedef ft::iterator_traits<IterT>                       my_traits;
+public:
   typedef IterT                                            iterator_type;
   typedef typename iterator_traits<IterT>::value_type      value_type;
-  typedef Node<value_type>*                                nodeptr;
   typedef typename iterator_traits<IterT>::difference_type difference_type;
   typedef typename iterator_traits<IterT>::pointer         pointer;
   typedef typename iterator_traits<IterT>::reference       reference;
+
+private:
+  typedef tree_iterator                                    iter;
+  typedef ft::iterator_traits<IterT>                       my_traits;
+  typedef Node<value_type>*                                nodeptr;
 
 protected:
   Node<value_type>* current;
@@ -30,18 +34,35 @@ public:
   tree_iterator(void): current(NULL) { }
   explicit tree_iterator(pointer src): current(src) { }
   tree_iterator(nodeptr node): current(node) { }
-  template <typename Iterator>
-    tree_iterator(Iterator const& iterator): current(iterator.current) { }
 
-  reference      operator*(void) const { return current->data; }
+  template <typename Iterator>
+  tree_iterator(Iterator const& iterator): current(iterator.current) { }
+  template<typename Iterator>
+  iter& operator=(tree_iterator<Iterator, _Container> const& rhs) {
+    current = rhs.base();
+    return *this;
+  }
+
+
+  iterator_type  base(void) const       { return current; }
+  reference      operator*(void) const  { return current->data; }
   pointer        operator->(void) const { return &operator*(); }
-  tree_iterator& operator++(void)
+  iter&          operator++(void)
   { current = _Container::sucessor(current); return *this; }
-  tree_iterator operator++(int) {
-    tree_iterator tmp(current);
+  iter&          operator--(void)
+  { current = _Container::predecessor(current); return *this; }
+  iter           operator++(int) {
+    iter tmp(current);
     current = _Container::sucessor(current);
     return tmp;
   }
+  iter           operator--(int) {
+    iter tmp(current);
+    current = _Container::predecessor(current);
+    return tmp;
+  }
+  bool operator==(iter const& rhs) const { return current == rhs.current; }
+  bool operator!=(iter const& rhs) const { return current != rhs.current; }
 };
 
 }
