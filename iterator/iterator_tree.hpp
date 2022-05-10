@@ -4,11 +4,9 @@
 #ifndef ITERATOR_TREE_HPP
 # define ITERATOR_TREE_HPP
 
-#include <iostream>
-#include "rbtree.hpp"
 #include "iterator_base.hpp"
-#include "iterator_funcs.hpp"
-#include "rbtree_node.hpp"
+#include "../rbtree/rbtree.hpp"
+#include "../rbtree/rbtree_node.hpp"
 
 namespace ft {
 

@@ -50,5 +50,4 @@ struct iterator_traits<T const*> {
 
 
 } // namespace ft
-
 #endif // ITERATOR_BASE_HPP

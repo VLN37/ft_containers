@@ -18,7 +18,7 @@ INCPATH = -I../iterator -I../utils
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR  = obj
-VPATH		= ../utils
+VPATH		= ../utils ../iterator
 
 $(NAME):	$(OBJDIR) $(OBJ) $(INC)
 					$(CC) $(CFLAGS) $(OBJ) -o $(NAME)

@@ -17,7 +17,7 @@ INC			=	vector.hpp \
 					vector_constructors.tpp \
 					vector_operators.tpp \
 					stack.hpp \
-					iterator.hpp \
+					iterator_vector.hpp \
 					iterator_base.hpp \
 					iterator_funcs.hpp \
 					type_traits.hpp \
