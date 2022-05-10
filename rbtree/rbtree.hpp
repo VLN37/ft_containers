@@ -47,7 +47,7 @@ public:
   void delete_node(Key key);
 
   iterator begin(void) { return iterator(minimum(root)); }
-  iterator end(void)   { return iterator(NULL); }
+  iterator end(void)   { return iterator(SENT); }
 
   //DEBUG
   void print(void);

@@ -2,6 +2,7 @@
 //Creation date: 23/04/2022
 
 #include <iostream>
+#include <algorithm>
 #include "rbtree.hpp"
 #include "pair.hpp"
 
@@ -16,6 +17,11 @@ struct returnstring {
     return (src.first);
   }
 };
+
+template<typename T, typename V>
+void printpair(ft::pair<T, V> pair) {
+  std::cout << pair.first << " " << pair.second << "\n";
+}
 
 typedef  typename ft::rbtree< std::string,
               ft::pair<std::string, int>,
@@ -116,27 +122,15 @@ int main(void) {
   std::cout << *it << '\n';
 
   STRINT_TREE::iterator it1 = tree3.begin();
-  // STRINT_TREE::iterator it2 = tree3.end();
-
-  std::cout << *it1 << '\n';
-  it1++;
-  std::cout << *it1 << '\n';
-  it1++;
-  std::cout << *it1 << '\n';
+  STRINT_TREE::iterator it2 = tree3.end();
 
   std::cout << &ft::SENTRY << '\n';
   std::cout << tree3.SENT << '\n';
   std::cout << tree3.getroot()->parent <<' '<< tree2.getroot()->parent << '\n';
   std::cout << tree3.getroot() << ' ' << tree2.getroot() << '\n';
 
-  // STRINT_TREE::nodeptr node = tree3.search("c");
-  // std::cout << node->data << '\n';
-  // node = STRINT_TREE::sucessor(node);
-  // std::cout << node->data << '\n';
-
-  // tree3.print();
-  // for (; it1 != it2; ++it1)
-    // std::cout << *it1 << '\n';
-
-
+  tree3.print();
+  for (; it1 != it2; ++it1)
+    std::cout << *it1 << '\n';
+  for_each(tree3.begin(), tree3.end(), printpair<std::string, int>);
 }

@@ -16,7 +16,7 @@ template <typename Key, typename Val, typename KeyOfValue,
           typename Compare, typename Alloc>
 void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
   nodeptr node = search(KeyOfValue()(value));
-  nodeptr prev = NULL;
+  nodeptr prev = SENT;
   nodeptr curr = root;
 
   if (node != SENT)
@@ -30,7 +30,7 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
       curr = curr->right;
   }
   node->parent = prev;
-  if (prev == NULL)
+  if (prev == SENT)
     root = node;
   else if (Compare()(KeyOfValue()(node->data), KeyOfValue()(prev->data)))
     prev->left = node;
@@ -38,12 +38,12 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
     prev->right = node;
 
   //case 1
-  if (node->parent == NULL) {
+  if (node->parent == SENT) {
     node->color = BLACK;
     return;
   }
   //determine if this is the second node
-  if (node->parent->parent == NULL)
+  if (node->parent->parent == SENT)
     return;
   fix_insert(node);
 }

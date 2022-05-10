@@ -15,7 +15,7 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::sucessor(nodeptr x) {
 
   nodeptr y = x->parent;
   while (y != SENT && x == y->right) {
-    y = x;
+    x = y;
     y = y->parent;
   }
   return y;

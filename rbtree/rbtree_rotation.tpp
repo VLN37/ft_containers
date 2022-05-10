@@ -15,7 +15,7 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::left_rotate(nodeptr node) {
     tmp->left->parent = node;
   }
   tmp->parent = node->parent;
-  if (node->parent == NULL)
+  if (node->parent == SENT)
     root = tmp;
   else if (node == node->parent->left)
     node->parent->left = tmp;
@@ -33,7 +33,7 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::right_rotate(nodeptr node) {
   if (tmp->right != SENT)
     tmp->right->parent = node;
   tmp->parent = node->parent;
-  if (node->parent == NULL)
+  if (node->parent == SENT)
     this->root = tmp;
   else if (node == node->parent->right)
     node->parent->right = tmp;

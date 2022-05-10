@@ -120,7 +120,7 @@ template <typename Key, typename Val, typename KeyOfValue,
           typename Compare, typename Alloc>
 void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::
 transplant_tree(nodeptr u, nodeptr v) {
-  if (u->parent == NULL)
+  if (u->parent == SENT)
     root = v;
   else if (u == u->parent->left)
     u->parent->left = v;
