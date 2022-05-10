@@ -43,7 +43,7 @@ template<typename T>
 struct iterator_traits<T const*> {
   typedef ptrdiff_t                            difference_type;
   typedef T                                    value_type;
-  typedef T*                                   pointer;
+  typedef T const*                             pointer;
   typedef T const&                             reference;
   typedef std::random_access_iterator_tag      iterator_category;
 };
