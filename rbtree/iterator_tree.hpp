@@ -28,17 +28,17 @@ private:
   typedef Node<value_type>*                                nodeptr;
 
 protected:
-  Node<value_type>* current;
 
 public:
+  Node<value_type>* current;
   tree_iterator(void): current(NULL) { }
-  // explicit tree_iterator(pointer src): current(src) { }
-  tree_iterator(nodeptr node): current(node) { }
+  explicit tree_iterator(nodeptr node): current(node) { }
 
   template <typename Iter2>
   tree_iterator(tree_iterator<Iter2, _Container> const& iterator)
   : current(iterator.base()) { }
 
+  iter& operator=(nodeptr rhs) { current = rhs; return *this; }
   template<typename Iter2>
   iter& operator=(tree_iterator<Iter2, _Container> const& rhs) {
     current = rhs.base();
@@ -70,12 +70,12 @@ public:
 template<typename IterA, typename IterB, typename _Container>
 bool operator==(tree_iterator<IterA, _Container> lhs,
                 tree_iterator<IterB, _Container> rhs)
-  { return (lhs.current == rhs.current); }
+  { return (lhs.base() == rhs.base()); }
 
 template<typename IterA, typename IterB, typename _Container>
 bool operator!=(tree_iterator<IterA, _Container> lhs,
                 tree_iterator<IterB, _Container> rhs)
-  { return (lhs.current != rhs.current); }
+  { return (lhs.base() != rhs.base()); }
 
 template<typename IterT, typename _Container>
 class tree_rev_iterator

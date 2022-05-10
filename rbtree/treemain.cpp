@@ -104,8 +104,8 @@ int main(void) {
   // tree3.print();
   // tree3.inorder();
 
-  STRINT_TREE::nodeptr ptr = tree3.getroot();
-  STRINT_TREE::iterator ptr1 = tree3.getroot();
+  STRINT_TREE::nodeptr ptr(tree3.getroot());
+  STRINT_TREE::iterator ptr1(tree3.getroot());
   STRINT_TREE::iterator ptr2(ptr1);
   STRINT_TREE::iterator ptr3 = ptr2;
   std::cout << (ptr3 == ptr2) << '\n';
@@ -141,6 +141,13 @@ int main(void) {
   it1 = tree3.begin();
   ptr = it1.base();
   std::cout << ptr->data << '\n';
-  STRINT_TREE::const_iterator itc1; // = tree3.begin();
+  STRINT_TREE::const_iterator itc1 = tree3.begin();
+  STRINT_TREE::iterator       itc2 = tree3.begin();
+  std::cout << (itc1 == itc2) << '\n';
+  std::cout << (itc1 != itc2) << '\n';
+  it1 = tree3.end();
+  tree3.print();
+  // it1++;
+  // std::cout << *it1 << '\n';
 
 }
