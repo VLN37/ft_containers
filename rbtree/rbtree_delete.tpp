@@ -8,7 +8,7 @@ namespace ft {
 
 template <typename Key, typename Val, typename KeyOfValue,
           typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::delete_node(Key key) {
+void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::erase(Key key) {
   nodeptr z = SENT;
   nodeptr x, y;
   e_color y_backup;

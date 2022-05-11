@@ -20,7 +20,7 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
   nodeptr curr = root;
 
   if (node != SENT)
-    delete_node(KeyOfValue()(value));
+    erase(KeyOfValue()(value));
   else
     _size++;
   node = init_node(value);

@@ -17,6 +17,9 @@ template <typename Key,
           typename Compare = std::less<Key>,
           typename Alloc = std::allocator<Val> >
 class rbtree {
+  // ###########################################################################
+  // #                               TYPEDEFS                                  #
+  // ###########################################################################
 public:
   typedef Node<Val>*                                      nodeptr;
   typedef Node<Val>                                       node_type;
@@ -30,6 +33,9 @@ public:
   typedef tree_rev_iterator<const_pointer, tree_type>     const_rev_iterator;
   typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
 
+  // ###########################################################################
+  // #                            INTERVAL VARIABLES                           #
+  // ###########################################################################
 protected:
   nodeptr        root;
   Alloc          _alloc;
@@ -37,12 +43,18 @@ protected:
   size_t         _size;
 
 public:
+  // ###########################################################################
+  // #                              CONSTRUCTORS                               #
+  // ###########################################################################
   static nodeptr SENT;
-  rbtree(void): _size(0), root(SENT) { }
-  rbtree(rbtree const& src): _size(0) { *this = src; }
+  rbtree(void) { root = SENT; _size = 0; }
+  rbtree(rbtree const& src) { *this = src; _size = 0; }
   ~rbtree(void) { recurse_delete(root); }
   rbtree& operator=(rbtree const& src);
 
+  // ###########################################################################
+  // #                                ASSESSORS                                #
+  // ###########################################################################
   static nodeptr sucessor(nodeptr x);
   static nodeptr predecessor(nodeptr x);
   static nodeptr minimum(nodeptr node);
@@ -51,9 +63,17 @@ public:
   nodeptr getroot(void) { return root; }
   size_t  getsize(void) { return _size; }
 
-  void insert(Val value);
-  void delete_node(Key key);
+  // ###########################################################################
+  // #                            MEMBER FUNCTIONS                             #
+  // ###########################################################################
+  void    insert(Val value);
+  void    erase(Key key);
+  void    recurse_delete(nodeptr node);
+  nodeptr search(Key key) { return searchHelper(root, key); }
 
+  // ###########################################################################
+  // #                            ITERATOR SUPPORT                             #
+  // ###########################################################################
   iterator       begin(void)        { return iterator(minimum(root)); }
   const_iterator begin(void) const  { return const_iterator(minimum(root)); }
   iterator       end(void)          { return iterator(SENT); }
@@ -63,7 +83,9 @@ public:
   const_rev_iterator rbegin(void) const { return rev_iterator(maximum(root)); }
   const_rev_iterator rend(void)   const { return rev_iterator(SENT); }
 
-  //DEBUG
+  // ###########################################################################
+  // #                                 DEBUG                                   #
+  // ###########################################################################
   void print(void);
   // Node         -> Left Subtree -> Right Subtree
   void preorder(void) { preOrderHelper(this->root); std::cout << '\n'; }
@@ -73,10 +95,8 @@ public:
   void postorder() { postOrderHelper(this->root); std::cout << '\n'; }
 
 private:
-  void    recurse_delete(nodeptr node);
   nodeptr init_node(Val value);
   nodeptr searchHelper(nodeptr node, Key key);
-  nodeptr search(Key key) { return searchHelper(root, key); }
 
   void left_rotate(nodeptr node);
   void right_rotate(nodeptr node);

@@ -60,21 +60,21 @@ int main(void) {
   tree2.postorder();
   std::cout << "hello darkness my old friend\n";
   tree2.print();
-  tree2.delete_node(3);
+  tree2.erase(3);
   tree2.print();
-  tree2.delete_node(4);
+  tree2.erase(4);
   tree2.print();
-  tree2.delete_node(5);
+  tree2.erase(5);
   tree2.print();
 
-  tree2.delete_node(1);
-  tree2.delete_node(2);
-  tree2.delete_node(0);
-  tree2.delete_node(7);
+  tree2.erase(1);
+  tree2.erase(2);
+  tree2.erase(0);
+  tree2.erase(7);
   tree2.print();
-  tree2.delete_node(8);
+  tree2.erase(8);
   tree2.print();
-  tree2.delete_node(9);
+  tree2.erase(9);
 
   std::cout << "this compiles!\n";
 
@@ -92,15 +92,15 @@ int main(void) {
   tree3.insert(ft::pair<std::string, int>("i", 1));
   tree3.insert(ft::pair<std::string, int>("i", 15));
   tree3.print();
-  // tree3.delete_node("h");
-  // tree3.delete_node("d"); //root case
-  // tree3.delete_node("g"); //red node case
-  // tree3.delete_node("f"); //red node case
-  // tree3.delete_node("i"); //black node
-  // tree3.delete_node("a"); //black node
-  // tree3.delete_node("b"); //black node
-  // tree3.delete_node("c"); //black node
-  // tree3.delete_node("e"); //black node
+  // tree3.erase("h");
+  // tree3.erase("d"); //root case
+  // tree3.erase("g"); //red node case
+  // tree3.erase("f"); //red node case
+  // tree3.erase("i"); //black node
+  // tree3.erase("a"); //black node
+  // tree3.erase("b"); //black node
+  // tree3.erase("c"); //black node
+  // tree3.erase("e"); //black node
   // tree3.print();
   // tree3.inorder();
 
