@@ -175,5 +175,15 @@ int main(void) {
   STRINT_TREE::rev_iterator itrev1;
   STRINT_TREE::rev_iterator itrev2(itrev1);
   STRINT_TREE::rev_iterator itrev3(tree4.getroot());
-  // (void)itrev3;
+  STRINT_TREE::const_rev_iterator itrevc(tree4.getroot());
+  itrev1 = tree4.rbegin();
+  itrev2 = tree4.rend();
+  std::cout << (itrev1 == itrev2) << '\n';
+  std::cout << (itrev1 != itrev2) << '\n';
+  for (; itrev1 != itrev2; ++itrev1)
+    std::cout << *itrev1 << '\n';
+  for_each(tree4.rbegin(), itrev2, printpair<std::string, int>);
+  itrev1 = tree4.rbegin();
+  std::cout << (itrev1 == itrevc) << '\n';
+  std::cout << (itrev1 != itrevc) << '\n';
 }
