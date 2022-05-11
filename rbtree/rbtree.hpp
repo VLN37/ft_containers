@@ -52,10 +52,14 @@ public:
   void insert(Val value);
   void delete_node(Key key);
 
-  iterator       begin(void)       { return iterator(minimum(root)); }
-  const_iterator begin(void) const { return const_iterator(minimum(root)); }
-  iterator       end(void)         { return iterator(SENT); }
-  const_iterator end(void) const   { return const_iterator(SENT); }
+  iterator       begin(void)        { return iterator(minimum(root)); }
+  const_iterator begin(void) const  { return const_iterator(minimum(root)); }
+  iterator       end(void)          { return iterator(SENT); }
+  const_iterator end(void) const    { return const_iterator(SENT); }
+  rev_iterator   rbegin(void)       { return rev_iterator(maximum(root)); }
+  rev_iterator   rend(void)         { return rev_iterator(SENT); }
+  const_rev_iterator rbegin(void) const { return rev_iterator(maximum(root)); }
+  const_rev_iterator rend(void)   const { return rev_iterator(SENT); }
 
   //DEBUG
   void print(void);
