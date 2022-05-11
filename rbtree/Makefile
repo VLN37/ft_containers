@@ -5,6 +5,7 @@ NAME		= rbtree
 SRC			= treemain.cpp \
 
 INC			= rbtree.hpp \
+					rbtree_utils.tpp \
 					rbtree_insert.tpp \
 					rbtree_delete.tpp \
 					rbtree_static.tpp \

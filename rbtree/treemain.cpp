@@ -190,4 +190,16 @@ int main(void) {
   STRINT_TREE::c_rev_iterator itrev6(tree4.rbegin());
   STRINT_TREE::c_rev_iterator itrev7(tree4.end());
   STRINT_TREE::c_rev_iterator itrev8(tree4.rend());
+
+  STRINT_TREE tree5;
+  tree5.insert(ft::pair<std::string, int>("z", 12));
+  tree5.insert(ft::pair<std::string, int>("x", 52));
+  tree5.insert(ft::pair<std::string, int>("c", 444));
+  STRINT_TREE::iterator tree1begin = tree3.begin();
+  STRINT_TREE::iterator tree2begin = tree5.begin();
+  std::cout << tree3.getroot() << " " << tree5.getroot() << '\n';
+  std::cout << *tree1begin << "       " << *tree2begin << '\n';
+  tree3.swap(tree5);
+  std::cout << tree3.getroot() << " " << tree5.getroot() << '\n';
+  std::cout << *tree1begin << "       " << *tree2begin << '\n';
 }

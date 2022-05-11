@@ -60,8 +60,9 @@ public:
   static nodeptr minimum(nodeptr node);
   static nodeptr maximum(nodeptr node);
   static nodeptr relative_root(nodeptr node);
-  nodeptr getroot(void) { return root; }
-  size_t  getsize(void) { return _size; }
+  nodeptr getroot(void)        { return root; }
+  void    setroot(nodeptr src) { root = src; }
+  size_t  getsize(void)        { return _size; }
 
   // ###########################################################################
   // #                            MEMBER FUNCTIONS                             #
@@ -70,6 +71,7 @@ public:
   void    erase(Key key);
   void    recurse_delete(nodeptr node);
   nodeptr search(Key key) { return searchHelper(root, key); }
+  void    swap(tree_type& other);
 
   // ###########################################################################
   // #                            ITERATOR SUPPORT                             #
@@ -112,6 +114,7 @@ private:
 
 } //namespace ft
 
+#include "rbtree_utils.tpp"
 #include "rbtree_insert.tpp"
 #include "rbtree_delete.tpp"
 #include "rbtree_static.tpp"
