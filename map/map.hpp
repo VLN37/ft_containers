@@ -18,7 +18,7 @@ template <typename Key,
           typename Alloc   = std::allocator<ft::pair<const Key, Val> > >
 class map {
 struct KoV {
-  Key operator()(ft::pair<const Key, Val> src) {
+  Key const& operator()(ft::pair<const Key, Val> const& src) {
     return src.first;
   }
 };
@@ -37,10 +37,10 @@ public:
   typedef typename std::allocator<Val>::pointer               pointer;
   typedef typename std::allocator<Val>::const_pointer         const_pointer;
   typedef typename std::allocator<Val>::size_type             size_type;
-  typedef rbtree<value_type, Val, KoV, Compare, Alloc>        _storage;
+  typedef rbtree<Key, Val, KoV, Compare, Alloc>               _Container;
 
 protected:
-  rbtree<value_type, Val, KoV, Compare, Alloc> tree;
+  rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
 
 private:
   typedef typename _Container::iterator                       iterator;
@@ -48,6 +48,22 @@ private:
   typedef typename _Container::rev_iterator                   rev_iterator;
   typedef typename _Container::c_rev_iterator                 c_rev_iterator;
   typedef ptrdiff_t                                           difference_type;
+
+public:
+// #############################################################################
+// #                              CONSTRUCTORS                                 #
+// #############################################################################
+  explicit map(key_compare const& = key_compare(),
+               allocator_type const& = allocator_type()) { };
+  map(map const& src) { tree = src.tree; }
+  map& operator=(map const& src) { tree = src.tree; return *this; }
+
+// #############################################################################
+// #                                CAPACITY                                   #
+// #############################################################################
+  size_type size(void) const     { return tree.size(); }
+  bool      empty(void) const    { return !tree.size(); }
+  size_type max_size(void) const { return tree.max_size(); }
 
 };
 
