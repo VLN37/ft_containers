@@ -172,4 +172,8 @@ int main(void) {
   roottest = STRINT_TREE::relative_root(roottest);
   std::cout << roottest->data << '\n';
 
+  STRINT_TREE::rev_iterator itrev1;
+  STRINT_TREE::rev_iterator itrev2(itrev1);
+  STRINT_TREE::rev_iterator itrev3(tree4.getroot());
+  // (void)itrev3;
 }
