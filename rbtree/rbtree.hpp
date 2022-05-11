@@ -34,11 +34,12 @@ protected:
   nodeptr        root;
   Alloc          _alloc;
   Node_allocator _nodealloc;
+  size_t         _size;
 
 public:
   static nodeptr SENT;
-  rbtree(void)  { root = SENT; }
-  rbtree(rbtree const& src) { *this = src; }
+  rbtree(void): _size(0), root(SENT) { }
+  rbtree(rbtree const& src): _size(0) { *this = src; }
   ~rbtree(void) { recurse_delete(root); }
   rbtree& operator=(rbtree const& src);
 
@@ -48,6 +49,7 @@ public:
   static nodeptr maximum(nodeptr node);
   static nodeptr relative_root(nodeptr node);
   nodeptr getroot(void) { return root; }
+  size_t  getsize(void) { return _size; }
 
   void insert(Val value);
   void delete_node(Key key);

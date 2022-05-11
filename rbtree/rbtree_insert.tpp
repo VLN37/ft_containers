@@ -21,6 +21,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
 
   if (node != SENT)
     delete_node(KeyOfValue()(value));
+  else
+    _size++;
   node = init_node(value);
   while (curr != SENT) {
     prev = curr;

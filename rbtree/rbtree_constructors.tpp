@@ -29,6 +29,7 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::operator=(rbtree const& src) {
   rbtree::iterator ite = src.end();
   for (; it != ite; ++it)
     insert(*it);
+  _size = src._size;
   return *this;
 }
 

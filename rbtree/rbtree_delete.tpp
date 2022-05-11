@@ -16,7 +16,7 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::delete_node(Key key) {
   z = search(key);
   if (z == SENT) //key not found
     return;
-
+  _size--;
   y = z;
   y_backup = y->color;
   if (z->left == SENT) {
