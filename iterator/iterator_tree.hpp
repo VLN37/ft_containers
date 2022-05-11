@@ -26,9 +26,9 @@ private:
   typedef Node<value_type>*                                nodeptr;
 
 protected:
+  Node<value_type>* current;
 
 public:
-  Node<value_type>* current;
   tree_iterator(void): current(NULL) { }
   explicit tree_iterator(nodeptr node): current(node) { }
 
@@ -37,12 +37,12 @@ public:
   : current(iterator.base()) { }
 
   iter& operator=(nodeptr rhs) { current = rhs; return *this; }
+
   template<typename Iter2>
   iter& operator=(tree_iterator<Iter2, _Container> const& rhs) {
     current = rhs.base();
     return *this;
   }
-
 
   nodeptr        base(void) const       { return current; }
   reference      operator*(void) const  { return current->data; }
@@ -98,11 +98,17 @@ protected:
 
 public:
   tree_rev_iterator(void): current(NULL) { }
-  //parameter is a pair, investigate if this is being called or if it even works
-  tree_rev_iterator(iterator_type src): current(src) { }
-  tree_rev_iterator(nodeptr src): current(src) { }
+  // tree_rev_iterator(iterator_type src): current(src) { }
+  explicit tree_rev_iterator(nodeptr src): current(src) { }
   tree_rev_iterator(rev const& src): current(src.current) { }
   ~tree_rev_iterator(void) { }
+
+  template<typename Iter>
+  tree_rev_iterator(tree_iterator<Iter, _Container> src)
+  : current(src.base()){ }
+  template<typename Iter>
+  tree_rev_iterator(tree_rev_iterator<Iter, _Container> src)
+  : current(src.base()){ }
 
   template<typename Iter>
   rev& operator=(tree_rev_iterator<Iter, _Container> const& rhs)
@@ -139,6 +145,5 @@ bool operator!=(tree_rev_iterator<IterA, _Container> const& lhs,
                 tree_rev_iterator<IterB, _Container> const& rhs)
   { return (lhs.base() != rhs.base()); }
 
-}
-
+} //namespace ft
 #endif

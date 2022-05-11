@@ -30,7 +30,7 @@ public:
   typedef tree_iterator<pointer, tree_type>               iterator;
   typedef tree_iterator<const_pointer, tree_type>         const_iterator;
   typedef tree_rev_iterator<pointer, tree_type>           rev_iterator;
-  typedef tree_rev_iterator<const_pointer, tree_type>     const_rev_iterator;
+  typedef tree_rev_iterator<const_pointer, tree_type>     c_rev_iterator;
   typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
 
   // ###########################################################################
@@ -75,13 +75,13 @@ public:
   // #                            ITERATOR SUPPORT                             #
   // ###########################################################################
   iterator       begin(void)        { return iterator(minimum(root)); }
-  const_iterator begin(void) const  { return const_iterator(minimum(root)); }
   iterator       end(void)          { return iterator(SENT); }
+  const_iterator begin(void) const  { return const_iterator(minimum(root)); }
   const_iterator end(void) const    { return const_iterator(SENT); }
   rev_iterator   rbegin(void)       { return rev_iterator(maximum(root)); }
   rev_iterator   rend(void)         { return rev_iterator(SENT); }
-  const_rev_iterator rbegin(void) const { return rev_iterator(maximum(root)); }
-  const_rev_iterator rend(void)   const { return rev_iterator(SENT); }
+  c_rev_iterator rbegin(void) const { return c_rev_iterator(maximum(root)); }
+  c_rev_iterator rend(void)   const { return c_rev_iterator(SENT); }
 
   // ###########################################################################
   // #                                 DEBUG                                   #
@@ -118,5 +118,4 @@ private:
 #include "rbtree_rotation.tpp"
 #include "rbtree_trasversal.tpp"
 #include "rbtree_constructors.tpp"
-
 #endif

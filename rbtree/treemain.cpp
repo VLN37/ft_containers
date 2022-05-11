@@ -175,7 +175,7 @@ int main(void) {
   STRINT_TREE::rev_iterator itrev1;
   STRINT_TREE::rev_iterator itrev2(itrev1);
   STRINT_TREE::rev_iterator itrev3(tree4.getroot());
-  STRINT_TREE::const_rev_iterator itrevc(tree4.getroot());
+  STRINT_TREE::c_rev_iterator itrevc(tree4.getroot());
   itrev1 = tree4.rbegin();
   itrev2 = tree4.rend();
   std::cout << (itrev1 == itrev2) << '\n';
@@ -186,4 +186,10 @@ int main(void) {
   itrev1 = tree4.rbegin();
   std::cout << (itrev1 == itrevc) << '\n';
   std::cout << (itrev1 != itrevc) << '\n';
+  STRINT_TREE::rev_iterator itrev4(itc2);
+  std::cout << (itrev4 == itc2) << '\n';
+  STRINT_TREE::c_rev_iterator itrev5(tree4.begin());
+  STRINT_TREE::c_rev_iterator itrev6(tree4.rbegin());
+  STRINT_TREE::c_rev_iterator itrev7(tree4.end());
+  STRINT_TREE::c_rev_iterator itrev8(tree4.rend());
 }
