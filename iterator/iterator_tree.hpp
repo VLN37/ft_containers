@@ -66,21 +66,78 @@ public:
 };
 
 template<typename IterA, typename IterB, typename _Container>
-bool operator==(tree_iterator<IterA, _Container> lhs,
-                tree_iterator<IterB, _Container> rhs)
+bool operator==(tree_iterator<IterA, _Container> const& lhs,
+                tree_iterator<IterB, _Container> const& rhs)
   { return (lhs.base() == rhs.base()); }
 
 template<typename IterA, typename IterB, typename _Container>
-bool operator!=(tree_iterator<IterA, _Container> lhs,
-                tree_iterator<IterB, _Container> rhs)
+bool operator!=(tree_iterator<IterA, _Container> const& lhs,
+                tree_iterator<IterB, _Container> const& rhs)
   { return (lhs.base() != rhs.base()); }
 
 template<typename IterT, typename _Container>
 class tree_rev_iterator
 : public iterator<std::bidirectional_iterator_tag, IterT> {
+private:
+  typedef tree_rev_iterator<IterT, _Container>                rev;
+  typedef tree_rev_iterator<IterT, _Container>&               rev_ref;
+  typedef tree_rev_iterator<IterT, _Container> const&         rev_constref;
+
+
+public:
+  typedef IterT                                               iterator_type;
+  typedef typename iterator_traits<IterT>::iterator_category  iterator_category;
+  typedef typename iterator_traits<IterT>::value_type         value_type;
+  typedef typename iterator_traits<IterT>::difference_type    difference_type;
+  typedef typename iterator_traits<IterT>::pointer            pointer;
+  typedef typename iterator_traits<IterT>::reference          reference;
+  typedef Node<value_type>*                          nodeptr;
+
 protected:
-  int randomgarbage;
+  Node<value_type>* current;
+
+public:
+  tree_rev_iterator(void): current(NULL) { }
+  //parameter is a pair, investigate if this is being called or if it even works
+  tree_rev_iterator(iterator_type src): current(src) { }
+  tree_rev_iterator(nodeptr src): current(src) { }
+  tree_rev_iterator(rev const& src): current(src.current) { }
+  ~tree_rev_iterator(void) { }
+
+  template<typename Iter>
+  rev& operator=(tree_rev_iterator<Iter, _Container> const& rhs)
+  { current = rhs.base(); return *this; }
+
+  nodeptr    base(void) const { return current; }
+  reference  operator*(void) const { return current->data; }
+  pointer    operator->(void) const { return &operator*(); }
+  rev&       operator++(void)
+  { current =  _Container::predecessor(current); return *this; }
+  rev&       operator--(void)
+  { current =  _Container::sucessor(current); return *this; }
+  rev        operator++(int) {
+    rev tmp(current);
+    current = _Container::predecessor(current);
+    return tmp;
+  }
+  rev        operator--(int) {
+    rev tmp(current);
+    current = _Container::sucessor(current);
+    return tmp;
+  }
+  bool operator==(rev const& rhs) const { return current == rhs.current; }
+  bool operator!=(rev const& rhs) const { return current != rhs.current; }
 };
+
+template<typename IterA, typename IterB, typename _Container>
+bool operator==(tree_rev_iterator<IterA, _Container> const& lhs,
+                tree_rev_iterator<IterB, _Container> const& rhs)
+  { return (lhs.base() == rhs.base()); }
+
+template<typename IterA, typename IterB, typename _Container>
+bool operator!=(tree_rev_iterator<IterA, _Container> const& lhs,
+                tree_rev_iterator<IterB, _Container> const& rhs)
+  { return (lhs.base() != rhs.base()); }
 
 }
 
