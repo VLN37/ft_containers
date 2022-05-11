@@ -13,13 +13,14 @@ namespace ft {
 template <typename IterT>
 class random_access_iterator
 : public iterator<std::random_access_iterator_tag, IterT> {
+  // ###########################################################################
+  // #                               TYPEDEFS                                  #
+  // ###########################################################################
 private:
   typedef const random_access_iterator& rai_constref;
   typedef random_access_iterator&       rai_ref;
   typedef random_access_iterator        rai;
 
-protected:
-  IterT current;
 
 public:
   typedef IterT                                               iterator_type;
@@ -29,7 +30,16 @@ public:
   typedef typename iterator_traits<IterT>::pointer            pointer;
   typedef typename iterator_traits<IterT>::reference          reference;
 
+  // ###########################################################################
+  // #                            INTERVAL VARIABLES                           #
+  // ###########################################################################
+protected:
+  IterT current;
 
+  // ###########################################################################
+  // #                              CONSTRUCTORS                               #
+  // ###########################################################################
+public:
   random_access_iterator(void): current(NULL) { };
   explicit random_access_iterator(iterator_type const& src) : current(src) { }
   random_access_iterator(rai_constref src): current(src.current) { }
@@ -45,6 +55,9 @@ public:
     return *this;
 }
 
+  // ###########################################################################
+  // #                                OPERATORS                                #
+  // ###########################################################################
   iterator_type base(void) const  { return current; }
   reference operator*(void) const { return *current; }
   rai_ref operator++(void)  { current++; return *this; }
@@ -72,6 +85,9 @@ public:
   }
 };
 
+// #############################################################################
+// #                           NON-MEMBER OPERATORS                            #
+// #############################################################################
 template<typename IteratorL, typename IteratorR>
 bool operator==(random_access_iterator<IteratorL> const& rhs,
                 random_access_iterator<IteratorR> const& lhs)
@@ -111,13 +127,13 @@ typename random_access_iterator<IteratorL>::difference_type
 template <typename IterT>
 class reverse_iterator
 : public iterator<std::random_access_iterator_tag, IterT> {
+  // ###########################################################################
+  // #                               TYPEDEFS                                  #
+  // ###########################################################################
 private:
   typedef reverse_iterator const& rev_constref;
   typedef reverse_iterator&       rev_ref;
   typedef reverse_iterator        rev;
-
-protected:
-  IterT current;
 
 public:
   typedef IterT                                               iterator_type;
@@ -127,6 +143,16 @@ public:
   typedef typename iterator_traits<IterT>::pointer            pointer;
   typedef typename iterator_traits<IterT>::reference          reference;
 
+  // ###########################################################################
+  // #                            INTERVAL VARIABLES                           #
+  // ###########################################################################
+protected:
+  IterT current;
+
+public:
+  // ###########################################################################
+  // #                              CONSTRUCTORS                               #
+  // ###########################################################################
   reverse_iterator(void): current(NULL) { }
   explicit reverse_iterator(iterator_type src) : current(src) { }
   reverse_iterator(rev_constref src) : current(src.current) { }
@@ -141,6 +167,9 @@ public:
     return *this;
   }
 
+  // ###########################################################################
+  // #                                OPERATORS                                #
+  // ###########################################################################
   iterator_type base(void) const  { return current; }
   reference operator*(void) const { IterT tmp = current; return *--tmp; }
   rev_ref operator++(void)        { --current; return *this; }
@@ -168,6 +197,9 @@ public:
   }
 };
 
+// #############################################################################
+// #                           NON-MEMBER OPERATORS                            #
+// #############################################################################
 template<typename Iter>
 bool operator==(reverse_iterator<Iter> const& rhs,
                 reverse_iterator<Iter> const& lhs)

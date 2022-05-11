@@ -16,6 +16,9 @@ namespace ft {
 
 template<typename T, typename Alloc = std::allocator<T> >
 class vector {
+  // ###########################################################################
+  // #                               TYPEDEFS                                  #
+  // ###########################################################################
 public:
   typedef Alloc                                       alloc_type;
   typedef T                                           value_type;
@@ -31,6 +34,9 @@ public:
   typedef ft::reverse_iterator<iterator>              reverse_iterator;
   typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
 
+  // ###########################################################################
+  // #                            INTERVAL VARIABLES                           #
+  // ###########################################################################
 protected:
   std::allocator<T> _alloc;
   pointer           _data;
@@ -39,7 +45,9 @@ protected:
   size_type         _capacity;
 
 public:
-  //constructors
+  // ###########################################################################
+  // #                              CONSTRUCTORS                               #
+  // ###########################################################################
   explicit vector(const alloc_type& alloc = alloc_type());
   explicit vector(size_type n,
                   value_type val = value_type(),
@@ -59,14 +67,17 @@ public:
   reference       operator[](size_type n);
   const_reference operator[](size_type n) const;
 
-  //getters
-  pointer         test(size_t n);
+  // ###########################################################################
+  // #                                ASSESSORS                                #
+  // ###########################################################################
   size_t          size(void) const;
   size_t          max_size(void) const;
   size_t          capacity(void) const;
   alloc_type      get_allocator(void) const { return this->_alloc; }
 
-  //element access
+  // ###########################################################################
+  // #                              ELEMENT ACCESS                             #
+  // ###########################################################################
   reference       at(size_type n)
   { if (n >= _size) throw(std::range_error("range error\n")); return _data[n]; }
   const_reference at(size_type n) const
@@ -77,7 +88,9 @@ public:
   const_reference back(void) const        { return _data[_size - 1]; }
   bool             empty(void) const      { return !_size; }
 
-  //member functions
+  // ###########################################################################
+  // #                            MEMBER FUNCTIONS                             #
+  // ###########################################################################
   void            reserve(size_t n);
   void            resize(size_t n, value_type val = value_type());
   void            push_back(value_type const& val);
@@ -106,7 +119,9 @@ public:
   void      swap(vector& src);
 
 
-  //iterator support
+  // ###########################################################################
+  // #                            ITERATOR SUPPORT                             #
+  // ###########################################################################
   iterator                 begin(void);
   const_iterator           begin(void) const;
   reverse_iterator         rbegin(void);
@@ -116,7 +131,9 @@ public:
   reverse_iterator         rend(void);
   const_reverse_iterator   rend(void) const;
 
-  //debug
+  // ###########################################################################
+  // #                                 DEBUG                                   #
+  // ###########################################################################
   friend std::ostream& operator<<(std::ostream& o, vec_ref rhs) {
     std::cout << "Vector debug\n";
     for (iterator it = rhs.begin(); it != rhs.end(); it++)
@@ -125,7 +142,9 @@ public:
     return o;
   }
 
-  //vector relational operators
+  // ###########################################################################
+  // #                           RELATIONAL OPERATORS                          #
+  // ###########################################################################
   friend bool operator==(vec_constref lhs, vec_constref rhs) {
     if (lhs.size() != rhs.size())
       return false;
@@ -145,6 +164,9 @@ public:
   { return lhs < rhs || lhs == rhs; }
 
 private:
+  // ###########################################################################
+  // #                                DISPATCHERS                              #
+  // ###########################################################################
   template<typename Integer>
   void constructor_fill(size_type n, Integer value);
   template<typename Integer>

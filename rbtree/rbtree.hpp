@@ -41,12 +41,12 @@ protected:
   Alloc          _alloc;
   Node_allocator _nodealloc;
   size_t         _size;
+  static nodeptr SENT;
 
 public:
   // ###########################################################################
   // #                              CONSTRUCTORS                               #
   // ###########################################################################
-  static nodeptr SENT;
   rbtree(void) { root = SENT; _size = 0; }
   rbtree(rbtree const& src) { *this = src; _size = 0; }
   ~rbtree(void) { recurse_delete(root); }

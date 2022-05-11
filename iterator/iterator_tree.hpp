@@ -13,6 +13,9 @@ namespace ft {
 template<typename IterT, typename _Container>
 class tree_iterator
 : public iterator<std::bidirectional_iterator_tag, IterT> {
+  // ###########################################################################
+  // #                               TYPEDEFS                                  #
+  // ###########################################################################
 public:
   typedef IterT                                            iterator_type;
   typedef typename iterator_traits<IterT>::value_type      value_type;
@@ -25,10 +28,16 @@ private:
   typedef ft::iterator_traits<IterT>                       my_traits;
   typedef Node<value_type>*                                nodeptr;
 
+  // ###########################################################################
+  // #                            INTERVAL VARIABLES                           #
+  // ###########################################################################
 protected:
   Node<value_type>* current;
 
 public:
+  // ###########################################################################
+  // #                              CONSTRUCTORS                               #
+  // ###########################################################################
   tree_iterator(void): current(NULL) { }
   explicit tree_iterator(nodeptr node): current(node) { }
 
@@ -36,14 +45,16 @@ public:
   tree_iterator(tree_iterator<Iter2, _Container> const& iterator)
   : current(iterator.base()) { }
 
-  iter& operator=(nodeptr rhs) { current = rhs; return *this; }
-
   template<typename Iter2>
   iter& operator=(tree_iterator<Iter2, _Container> const& rhs) {
     current = rhs.base();
     return *this;
   }
+  iter& operator=(nodeptr rhs) { current = rhs; return *this; }
 
+  // ###########################################################################
+  // #                                OPERATORS                                #
+  // ###########################################################################
   nodeptr        base(void) const       { return current; }
   reference      operator*(void) const  { return current->data; }
   pointer        operator->(void) const { return &operator*(); }
@@ -65,6 +76,9 @@ public:
   bool operator!=(iter const& rhs) const { return current != rhs.current; }
 };
 
+// #############################################################################
+// #                           NON-MEMBER OPERATORS                            #
+// #############################################################################
 template<typename IterA, typename IterB, typename _Container>
 bool operator==(tree_iterator<IterA, _Container> const& lhs,
                 tree_iterator<IterB, _Container> const& rhs)
@@ -78,6 +92,9 @@ bool operator!=(tree_iterator<IterA, _Container> const& lhs,
 template<typename IterT, typename _Container>
 class tree_rev_iterator
 : public iterator<std::bidirectional_iterator_tag, IterT> {
+  // ###########################################################################
+  // #                               TYPEDEFS                                  #
+  // ###########################################################################
 private:
   typedef tree_rev_iterator<IterT, _Container>                rev;
   typedef tree_rev_iterator<IterT, _Container>&               rev_ref;
@@ -93,9 +110,15 @@ public:
   typedef typename iterator_traits<IterT>::reference          reference;
   typedef Node<value_type>*                          nodeptr;
 
+  // ###########################################################################
+  // #                            INTERVAL VARIABLES                           #
+  // ###########################################################################
 protected:
   Node<value_type>* current;
 
+  // ###########################################################################
+  // #                              CONSTRUCTORS                               #
+  // ###########################################################################
 public:
   tree_rev_iterator(void): current(NULL) { }
   // tree_rev_iterator(iterator_type src): current(src) { }
@@ -114,6 +137,10 @@ public:
   rev& operator=(tree_rev_iterator<Iter, _Container> const& rhs)
   { current = rhs.base(); return *this; }
 
+
+  // ###########################################################################
+  // #                                OPERATORS                                #
+  // ###########################################################################
   nodeptr    base(void) const { return current; }
   reference  operator*(void) const { return current->data; }
   pointer    operator->(void) const { return &operator*(); }
@@ -135,6 +162,9 @@ public:
   bool operator!=(rev const& rhs) const { return current != rhs.current; }
 };
 
+// #############################################################################
+// #                           NON-MEMBER OPERATORS                            #
+// #############################################################################
 template<typename IterA, typename IterB, typename _Container>
 bool operator==(tree_rev_iterator<IterA, _Container> const& lhs,
                 tree_rev_iterator<IterB, _Container> const& rhs)

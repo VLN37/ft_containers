@@ -128,8 +128,6 @@ int main(void) {
   STRINT_TREE::iterator it1 = tree3.begin();
   STRINT_TREE::iterator it2 = tree3.end();
 
-  std::cout << &ft::SENTRY << '\n';
-  std::cout << tree3.SENT << '\n';
   std::cout << tree3.getroot()->parent <<' '<< tree2.getroot()->parent << '\n';
   std::cout << tree3.getroot() << ' ' << tree2.getroot() << '\n';
 
