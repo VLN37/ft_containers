@@ -167,4 +167,9 @@ int main(void) {
   tree4 = tree3;
   tree3.print();
   tree4.print();
+  STRINT_TREE::nodeptr roottest = tree4.maximum(tree4.getroot());
+  std::cout << roottest->data << '\n';
+  roottest = STRINT_TREE::relative_root(roottest);
+  std::cout << roottest->data << '\n';
+
 }

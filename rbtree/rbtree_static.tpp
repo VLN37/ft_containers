@@ -58,5 +58,14 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::maximum(nodeptr node) {
   return node;
 }
 
+template <typename Key, typename Val, typename KeyOfValue,
+          typename Compare, typename Alloc>
+typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
+rbtree<Key, Val, KeyOfValue, Compare, Alloc>::relative_root(nodeptr node) {
+  while (node->parent != SENT)
+    node = node->parent;
+  return node;
+}
+
 } // namespace ft
 #endif // RBTREE_STATIC_TPP

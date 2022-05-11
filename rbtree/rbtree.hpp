@@ -46,6 +46,7 @@ public:
   static nodeptr predecessor(nodeptr x);
   static nodeptr minimum(nodeptr node);
   static nodeptr maximum(nodeptr node);
+  static nodeptr relative_root(nodeptr node);
   nodeptr getroot(void) { return root; }
 
   void insert(Val value);
