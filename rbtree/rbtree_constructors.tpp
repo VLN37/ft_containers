@@ -11,9 +11,9 @@ namespace ft {
 template <TREE_TEMPLATE>
 typename TREE_TYPE::nodeptr TREE_TYPE::init_node(Val value) {
   nodeptr node = _nodealloc.allocate(1);
-  _nodealloc.construct(node, Node<Val>(RED));
+  _nodealloc.construct(node, Node<Val>(value));
   node->parent = SENT;
-  node->data = value;
+  // node->data = value;
   node->right = SENT;
   node->left = SENT;
   node->color = RED;
