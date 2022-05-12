@@ -14,7 +14,7 @@
 namespace ft {
 template <typename Key,
           typename Val,
-          typename Compare = std::less<Key>,
+          typename Compare = std::less<const Key>,
           typename Alloc   = std::allocator<ft::pair<const Key, Val> > >
 class map {
 struct KoV {
