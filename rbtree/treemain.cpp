@@ -202,4 +202,13 @@ int main(void) {
   tree3.swap(tree5);
   std::cout << tree3.getroot() << " " << tree5.getroot() << '\n';
   std::cout << *tree1begin << "       " << *tree2begin << '\n';
+
+  tree3.print();
+  tree4.print();
+  ptr = tree3.search("a");
+  if (ptr == tree3.getsent())
+    std::cout << "SENT\n";
+  it1 = tree3.begin();
+  std::cout << it1->first << '\n';
+  std::cout << it1->second << '\n';
 }
