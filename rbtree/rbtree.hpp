@@ -87,8 +87,8 @@ public:
   // ###########################################################################
   iterator       begin(void)        { return iterator(minimum(root)); }
   iterator       end(void)          { return iterator(SENT); }
-  const_iterator begin(void) const  { return const_iterator(minimum(root)); }
-  const_iterator end(void) const    { return const_iterator(SENT); }
+  const_iterator begin(void)  const { return const_iterator(minimum(root)); }
+  const_iterator end(void)    const { return const_iterator(SENT); }
   rev_iterator   rbegin(void)       { return rev_iterator(maximum(root)); }
   rev_iterator   rend(void)         { return rev_iterator(SENT); }
   c_rev_iterator rbegin(void) const { return c_rev_iterator(maximum(root)); }
