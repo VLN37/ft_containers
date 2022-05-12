@@ -12,6 +12,8 @@ struct Node {
   typedef Node* nodeptr;
 
   Node(void) : parent(this), left(this), right(this), color(RED) { }
+  Node(T const& pair)
+  : data(pair), parent(this), left(this), right(this), color(RED) { }
   explicit Node(ft::e_color i)
   : parent(this), left(this), right(this), color(i) { }
 
