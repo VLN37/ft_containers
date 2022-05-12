@@ -17,13 +17,13 @@ namespace ft {
 template <TREE_TEMPLATE>
 void TREE_TYPE::insert(Val value) {
   nodeptr node = search(KeyOfValue()(value));
-  nodeptr prev = SENT;
-  nodeptr curr = root;
-
   if (node != SENT)
     erase(KeyOfValue()(value));
   else
     _size++;
+
+  nodeptr prev = SENT;
+  nodeptr curr = root;
   node = init_node(value);
   while (curr != SENT) {
     prev = curr;
