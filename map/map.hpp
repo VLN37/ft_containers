@@ -27,35 +27,35 @@ struct KoV {
 // #                               TYPEDEFS                                    #
 // #############################################################################
 public:
-  typedef Key                                                 key_type;
-  typedef Val                                                 mapped_type;
-  typedef ft::pair<const Key, Val>                            value_type;
-  typedef Compare                                             key_compare;
-  typedef Alloc                                               allocator_type;
-  typedef typename std::allocator<Val>::reference             reference;
-  typedef typename std::allocator<Val>::const_reference       const_reference;
-  typedef typename std::allocator<Val>::pointer               pointer;
-  typedef typename std::allocator<Val>::const_pointer         const_pointer;
-  typedef typename std::allocator<Val>::size_type             size_type;
-  typedef rbtree<Key, Val, KoV, Compare, Alloc>               _Container;
+  typedef Key                                                  key_type;
+  typedef Val                                                  mapped_type;
+  typedef ft::pair<const Key, Val>                             value_type;
+  typedef Compare                                              key_compare;
+  typedef Alloc                                                allocator_type;
+  typedef typename std::allocator<value_type>::reference       reference;
+  typedef typename std::allocator<value_type>::const_reference const_reference;
+  typedef typename std::allocator<value_type>::pointer         pointer;
+  typedef typename std::allocator<value_type>::const_pointer   const_pointer;
+  typedef typename std::allocator<value_type>::size_type       size_type;
+  typedef rbtree<Key, Val, KoV, Compare, Alloc>                _Container;
 
 protected:
   rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
 
 private:
-  typedef typename _Container::iterator                       iterator;
-  typedef typename _Container::const_iterator                 const_iterator;
-  typedef typename _Container::rev_iterator                   rev_iterator;
-  typedef typename _Container::c_rev_iterator                 c_rev_iterator;
-  typedef ptrdiff_t                                           difference_type;
+  typedef typename _Container::iterator                        iterator;
+  typedef typename _Container::const_iterator                  const_iterator;
+  typedef typename _Container::rev_iterator                    rev_iterator;
+  typedef typename _Container::c_rev_iterator                  c_rev_iterator;
+  typedef ptrdiff_t                                            difference_type;
 
 public:
 // #############################################################################
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
 
-  explicit map(key_compare const& = key_compare(),
-               allocator_type const& = allocator_type()) { };
+  explicit map(key_compare const& comp = key_compare(),
+               allocator_type const& _alloc = allocator_type()) { };
   map(map const& src) { tree = src.tree; }
   map& operator=(map const& src) { tree = src.tree; return *this; }
 
