@@ -52,8 +52,8 @@ public:
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
 
-  explicit map(key_compare const      = key_compare(),
-               allocator_type const&  = allocator_type()) { };
+  explicit map(key_compare const     = key_compare(),
+               allocator_type const& = allocator_type()) { };
   map(map const& src) { tree = src.tree; }
   map& operator=(map const& src) { tree = src.tree; return *this; }
 
@@ -61,16 +61,15 @@ public:
 // #                                CAPACITY                                   #
 // #############################################################################
 
-  size_type size(void) const     { return tree.size(); }
-  bool      empty(void) const    { return !tree.size(); }
-  size_type max_size(void) const { return tree.max_size(); }
+  size_type size(void) const           { return tree.size(); }
+  bool      empty(void) const          { return !tree.size(); }
+  size_type max_size(void) const       { return tree.max_size(); }
 
 // #############################################################################
-// #                               MODIFIERS                                   #
+// #                               ASSESSORS                                   #
 // #############################################################################
 
-  void clear(void)      { tree.recurse_delete(tree.getroot()); }
-  void swap(map& other) { tree.swap(other.tree); }
+  allocator_type get_allocator() const { return allocator_type(); }
 
 // #############################################################################
 // #                            ITERATOR SUPPORT                               #
@@ -89,12 +88,17 @@ public:
 // #                               OPERATIONS                                  #
 // #############################################################################
 
-  iterator find(Key const& key) { return iterator(tree.search(key)); }
+//to do - const correctness on rbtree to work here
+  iterator  find(Key const& key) { return iterator(tree.search(key)); }
+  size_type count(Key const& key)
+  { return tree.search(key) == tree.getsent() ?  0 : 1; }
 
 // #############################################################################
 // #                               MODIFIERS                                   #
 // #############################################################################
 
+  void clear(void)      { tree.recurse_delete(tree.getroot()); }
+  void swap(map& other) { tree.swap(other.tree); }
   ft::pair<iterator, bool> insert(value_type const& val) {
     typename _Container::nodeptr ptr;
 

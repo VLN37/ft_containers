@@ -60,4 +60,9 @@ int main(void) {
   map6.insert(map5.begin(), map5.end());
   map5.print();
   map6.print();
+  std::cout << *map5.find('a') << '\n';
+  std::cout << *map5.find('d') << '\n';
+  std::cout << *map5.find('z') << '\n';
+  std::cout << map5.count('z') << ' ' << map5.count('a') << '\n';
+
 }
