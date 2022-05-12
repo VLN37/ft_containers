@@ -4,11 +4,12 @@
 #ifndef RBTREE_UTILS_HPP
 # define RBTREE_UTILS_HPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::swap(tree_type& src) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::swap(tree_type& src) {
   nodeptr tmp = root;
   root = src.getroot();
   src.setroot(tmp);

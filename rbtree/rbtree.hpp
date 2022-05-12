@@ -9,6 +9,13 @@
 #include <functional>
 #include "iterator_tree.hpp"
 
+#define TREE_TEMPLATE typename Key, \
+                      typename Val, \
+                      typename KeyOfValue, \
+                      typename Compare, \
+                      typename Alloc
+#define TREE_TYPE rbtree<Key, Val, KeyOfValue, Compare, Alloc>
+
 namespace ft {
 
 template <typename Key,
@@ -47,14 +54,14 @@ public:
   // ###########################################################################
   // #                              CONSTRUCTORS                               #
   // ###########################################################################
-  rbtree(void) { root = SENT; _size = 0; }
+  rbtree(void)              { root = SENT; _size = 0; }
   rbtree(rbtree const& src) { *this = src; _size = 0; }
-  ~rbtree(void) { recurse_delete(root); }
+  ~rbtree(void)             { recurse_delete(root); }
   rbtree& operator=(rbtree const& src);
 
-  // ###########################################################################
-  // #                                ASSESSORS                                #
-  // ###########################################################################
+// #############################################################################
+// #                                ASSESSORS                                  #
+// #############################################################################
   static nodeptr sucessor(nodeptr x);
   static nodeptr predecessor(nodeptr x);
   static nodeptr minimum(nodeptr node);

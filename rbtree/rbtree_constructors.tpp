@@ -4,12 +4,12 @@
 #ifndef RBTREE_CONSTRUCTORS_TPP
 # define RBTREE_CONSTRUCTORS_TPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::init_node(Val value) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::init_node(Val value) {
   nodeptr node = _nodealloc.allocate(1);
   _nodealloc.construct(node, Node<Val>(RED));
   node->parent = SENT;
@@ -20,10 +20,8 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::init_node(Val value) {
   return node;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc >
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>&
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::operator=(rbtree const& src) {
+template <TREE_TEMPLATE>
+TREE_TYPE& TREE_TYPE::operator=(rbtree const& src) {
   recurse_delete(root);
   rbtree::iterator it = src.begin();
   rbtree::iterator ite = src.end();
@@ -33,11 +31,9 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::operator=(rbtree const& src) {
   return *this;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc >
-typename ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
- ft::rbtree<Key, Val, KeyOfValue, Compare, Alloc>::SENT
-= reinterpret_cast<Node<Val>*>(&ft::SENTRY);
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::SENT =
+         reinterpret_cast<Node<Val>*>(&ft::SENTRY);
 
 } // namespace ft
 #endif // RBTREE_CONSTRUCTORS_TPP

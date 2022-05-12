@@ -4,11 +4,12 @@
 #ifndef RBTREE_ROTATION_TPP
 # define RBTREE_ROTATION_TPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::left_rotate(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::left_rotate(nodeptr node) {
   nodeptr tmp = node->right;
   node->right = tmp->left;
   if (tmp->left != SENT) {
@@ -25,9 +26,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::left_rotate(nodeptr node) {
   node->parent = tmp;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::right_rotate(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::right_rotate(nodeptr node) {
   nodeptr tmp = node->left;
   node->left = tmp->right;
   if (tmp->right != SENT)

@@ -4,12 +4,12 @@
 #ifndef RBTREE_STATIC_TPP
 # define RBTREE_STATIC_TPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::sucessor(nodeptr x) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::sucessor(nodeptr x) {
   if (x->right != SENT)
     return minimum(x->right);
 
@@ -21,10 +21,8 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::sucessor(nodeptr x) {
   return y;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::predecessor(nodeptr x) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::predecessor(nodeptr x) {
   if (x->left != SENT)
     return maximum(x->left);
 
@@ -36,10 +34,8 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::predecessor(nodeptr x) {
   return y;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::minimum(nodeptr node) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::minimum(nodeptr node) {
   if (node == SENT)
     return node;
   while (node->left != SENT)
@@ -47,10 +43,8 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::minimum(nodeptr node) {
   return node;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::maximum(nodeptr node) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::maximum(nodeptr node) {
   if (node == SENT)
     return node;
   while (node->right != SENT)
@@ -58,10 +52,8 @@ rbtree<Key, Val, KeyOfValue, Compare, Alloc>::maximum(nodeptr node) {
   return node;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::relative_root(nodeptr node) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::relative_root(nodeptr node) {
   while (node->parent != SENT)
     node = node->parent;
   return node;

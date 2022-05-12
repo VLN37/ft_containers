@@ -4,6 +4,8 @@
 #ifndef RBTREE_INSERT_TPP
 # define RBTREE_INSERT_TPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
 /**
@@ -12,9 +14,8 @@ namespace ft {
  * 2 - tree is not empty - newnode is red
  * 3 - parent of newnode is black - exit
  */
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::insert(Val value) {
   nodeptr node = search(KeyOfValue()(value));
   nodeptr prev = SENT;
   nodeptr curr = root;
@@ -58,9 +59,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::insert(Val value) {
  * 5.3 - RIGHT rotate
  * 5.4 - LEFT RIGHT rotate
  */
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::fix_insert(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::fix_insert(nodeptr node) {
     nodeptr uncle;
     while (node->parent->color == RED) {
       if (node->parent == node->parent->parent->right) {

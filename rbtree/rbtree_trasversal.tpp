@@ -4,11 +4,12 @@
 #ifndef RBTREE_TRASVERSAL_TPP
 # define RBTREE_TRASVERSAL_TPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::recurse_delete(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::recurse_delete(nodeptr node) {
   if (node != SENT) {
     recurse_delete(node->left);
     recurse_delete(node->right);
@@ -18,13 +19,10 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::recurse_delete(nodeptr node) 
   root = SENT;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-typename rbtree<Key, Val, KeyOfValue, Compare, Alloc>::nodeptr
-rbtree<Key, Val, KeyOfValue, Compare, Alloc>::
-searchHelper(nodeptr node, Key key) {
+template <TREE_TEMPLATE>
+typename TREE_TYPE::nodeptr TREE_TYPE::searchHelper(nodeptr node, Key key) {
   if (node == SENT || (!Compare()(KeyOfValue()(node->data), key)
-                    &&  !Compare()(key, KeyOfValue()(node->data))))
+                   &&  !Compare()(key, KeyOfValue()(node->data))))
     return node;
   if (Compare()(key, KeyOfValue()(node->data)))
     return searchHelper(node->left, key);
@@ -32,9 +30,8 @@ searchHelper(nodeptr node, Key key) {
     return searchHelper(node->right, key);
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::preOrderHelper(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::preOrderHelper(nodeptr node) {
   if (node != SENT) {
     std::cout << node->data << " ";
     preOrderHelper(node->left);
@@ -42,9 +39,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::preOrderHelper(nodeptr node) 
   }
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::inOrderHelper(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::inOrderHelper(nodeptr node) {
   if (node != SENT) {
     inOrderHelper(node->left);
     std::cout << node->data << " ";
@@ -52,9 +48,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::inOrderHelper(nodeptr node) {
   }
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::postOrderHelper(nodeptr node) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::postOrderHelper(nodeptr node) {
   if (node != SENT) {
     postOrderHelper(node->left);
     postOrderHelper(node->right);
@@ -62,9 +57,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::postOrderHelper(nodeptr node)
   }
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::print(void) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::print(void) {
   std::cout << "***************************\n";
   if (root) {
     printHelper(this->root, "", true);
@@ -72,10 +66,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::print(void) {
   std::cout << "***************************\n";
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::
-printHelper(nodeptr node, std::string indent, bool last) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::printHelper(nodeptr node, std::string indent, bool last) {
   if (node != SENT) {
     std::cout << indent;
     if (last) {

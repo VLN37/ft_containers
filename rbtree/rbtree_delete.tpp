@@ -4,11 +4,12 @@
 #ifndef RBTREE_DELETE_TPP
 # define RBTREE_DELETE_TPP
 
+#include "rbtree.hpp"
+
 namespace ft {
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::erase(Key key) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::erase(Key key) {
   nodeptr z = SENT;
   nodeptr x, y;
   e_color y_backup;
@@ -51,10 +52,9 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::erase(Key key) {
   }
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
 //s == sibling - x == deleted node
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::fix_delete(nodeptr x) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::fix_delete(nodeptr x) {
   nodeptr s;
 
   while (x != root && x->color == BLACK) {
@@ -116,10 +116,8 @@ void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::fix_delete(nodeptr x) {
   x->color = BLACK;
 }
 
-template <typename Key, typename Val, typename KeyOfValue,
-          typename Compare, typename Alloc>
-void rbtree<Key, Val, KeyOfValue, Compare, Alloc>::
-transplant_tree(nodeptr u, nodeptr v) {
+template <TREE_TEMPLATE>
+void TREE_TYPE::transplant_tree(nodeptr u, nodeptr v) {
   if (u->parent == SENT)
     root = v;
   else if (u == u->parent->left)
