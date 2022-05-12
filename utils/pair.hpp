@@ -14,15 +14,15 @@ private:
 public:
   pair(void): first(T1()), second(T2()) { }
   template<typename _T1, typename _T2>
-  pair(pair const& src): first(src.first), second(src.second) { }
+  pair(pair<_T1, _T2> const& src): first(src.first), second(src.second) { }
   pair(type_1 const& _first, type_2 const& _second):
   first(_first), second(_second) { }
 
-  pair& operator=(pair const& rhs) {
-    // this->first = rhs.first;
-    this->second = rhs.second;
-    return *this;
-  }
+  // pair& operator=(pair const& rhs) {
+  //   // this->first = rhs.first;
+  //   this->second = rhs.second;
+  //   return *this;
+  // }
 
   type_1 first;
   type_2 second;
