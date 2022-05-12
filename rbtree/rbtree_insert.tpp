@@ -19,9 +19,7 @@ void TREE_TYPE::insert(Val value) {
   nodeptr node = search(KeyOfValue()(value));
   if (node != SENT)
     erase(KeyOfValue()(value));
-  else
-    _size++;
-
+  _size++;
   nodeptr prev = SENT;
   nodeptr curr = root;
   node = init_node(value);
