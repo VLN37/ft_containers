@@ -105,7 +105,5 @@ void TREE_TYPE::fix_insert(nodeptr node) {
   root->color = BLACK;
   }
 
-}
-
-
+} //namespace ft
 #endif // RBTREE_INSERT_TPP

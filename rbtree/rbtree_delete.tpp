@@ -127,6 +127,5 @@ void TREE_TYPE::transplant_tree(nodeptr u, nodeptr v) {
   v->parent = u->parent; //lose reference of children?
 }
 
-}
-
+} // namespace ft
 #endif // RBTREE_DELETE_TPP

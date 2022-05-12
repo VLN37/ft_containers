@@ -84,4 +84,4 @@ void TREE_TYPE::printHelper(nodeptr node, std::string indent, bool last) {
   }
 }
 } //namespace ft
-#endif
+#endif // RB_TREE_TRASVERSAL

@@ -43,5 +43,5 @@ void TREE_TYPE::right_rotate(nodeptr node) {
   node->parent = tmp;
 }
 
-}
+} // namespace ft
 #endif // RBTREE_ROTATION_TPP
