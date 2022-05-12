@@ -83,15 +83,17 @@ public:
   ft::pair<iterator, bool> insert(value_type const& val) {
     typename _Container::nodeptr ptr;
 
-    ptr = tree.search(KoV()(val));
-    // std::cout << KoV()(val) << '\n';
-    // std::cout << ptr << " " << tree.getsent() << '\n';
-    // tree.print();
-    if (ptr == tree.getsent())
+    if (ptr != tree.getsent() && size())
       return ft::pair<iterator, bool>(iterator(ptr), false);
     tree.insert(val);
     return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
   }
+
+// #############################################################################
+// #                                 DEBUG                                     #
+// #############################################################################
+
+  void print(void) { tree.print(); }
 };
 
 } // namespace ft

@@ -17,8 +17,14 @@ int main(void) {
   std::cout << "max size: " << map1.max_size() << '\n';
   map1.clear();
   map1.swap(map2);
-  map1.insert(ft::pair<const std::string, int>("a", 1));
+  map1.insert(ft::pair<std::string, int>("a", 1));
   std::cout << "size    : " << map1.size() << '\n';
-  map1.insert(ft::pair<const std::string, int>("a", 1));
+  map1.insert(ft::pair<std::string, int>("a", 1));
   std::cout << "size    : " << map1.size() << '\n';
+  map1.insert(ft::pair<std::string, int>("a", 1));
+  std::cout << "size    : " << map1.size() << '\n';
+  map1.insert(ft::pair<std::string, int>("b", 2));
+  map1.insert(ft::pair<std::string, int>("c", 3));
+  std::cout << "size    : " << map1.size() << '\n';
+  map1.print();
 }
