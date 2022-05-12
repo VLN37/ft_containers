@@ -14,4 +14,6 @@ int main(void) {
   std::cout << "size    : " << map1.size() << '\n';
   std::cout << "empty   : " << map1.empty() << '\n';
   std::cout << "max size: " << map1.max_size() << '\n';
+  map1.clear();
+  map1.swap(map2);
 }

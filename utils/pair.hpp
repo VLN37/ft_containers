@@ -18,7 +18,7 @@ public:
   pair(type_1 _first, type_2 _second): first(_first), second(_second) { }
 
   pair& operator=(pair const& rhs) {
-    this->first = rhs.first;
+    // this->first = rhs.first;
     this->second = rhs.second;
     return *this;
   }

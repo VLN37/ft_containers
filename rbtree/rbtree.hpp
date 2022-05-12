@@ -60,9 +60,10 @@ public:
   static nodeptr minimum(nodeptr node);
   static nodeptr maximum(nodeptr node);
   static nodeptr relative_root(nodeptr node);
-  nodeptr getroot(void)        { return root; }
+  nodeptr getroot(void) const  { return root; }
   void    setroot(nodeptr src) { root = src; }
-  size_t  getsize(void)        { return _size; }
+  size_t  size(void) const     { return _size; }
+  size_t  max_size(void) const { return _nodealloc.max_size(); }
 
   // ###########################################################################
   // #                            MEMBER FUNCTIONS                             #

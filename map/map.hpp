@@ -53,6 +53,7 @@ public:
 // #############################################################################
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
+
   explicit map(key_compare const& = key_compare(),
                allocator_type const& = allocator_type()) { };
   map(map const& src) { tree = src.tree; }
@@ -61,10 +62,23 @@ public:
 // #############################################################################
 // #                                CAPACITY                                   #
 // #############################################################################
+
   size_type size(void) const     { return tree.size(); }
   bool      empty(void) const    { return !tree.size(); }
   size_type max_size(void) const { return tree.max_size(); }
 
+// #############################################################################
+// #                               MODIFIERS                                   #
+// #############################################################################
+
+  void clear(void)      { tree.recurse_delete(tree.getroot()); }
+  void swap(map& other) { tree.swap(other.tree); }
+
+// #############################################################################
+// #                               OPERATIONS                                  #
+// #############################################################################
+
+  iterator find(key_type const& key) { return iterator(tree.search(key)); }
 };
 
 } // namespace ft
