@@ -13,7 +13,8 @@ INCPATH = -I../iterator -I../utils -I../rbtree
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJDIR  = obj
-VPATH		= ../utils ../iterator ../rbtree
+vpath %.cpp		= ../utils ../iterator ../rbtree
+vpath %.hpp		= ../utils ../iterator ../rbtree
 
 $(NAME):	$(OBJDIR) $(OBJ) $(INC)
 					$(CC) $(CFLAGS) $(OBJ) -o $(NAME)

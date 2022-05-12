@@ -37,7 +37,7 @@ public:
   typedef typename std::allocator<value_type>::pointer         pointer;
   typedef typename std::allocator<value_type>::const_pointer   const_pointer;
   typedef typename std::allocator<value_type>::size_type       size_type;
-  typedef rbtree<Key, Val, KoV, Compare, Alloc>                _Container;
+  typedef rbtree<const Key, value_type, KoV, Compare, Alloc>   _Container;
 
 protected:
   rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
@@ -54,8 +54,8 @@ public:
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
 
-  explicit map(key_compare const& comp = key_compare(),
-               allocator_type const& _alloc = allocator_type()) { };
+  explicit map(key_compare const = key_compare(),
+               allocator_type const&  = allocator_type()) { };
   map(map const& src) { tree = src.tree; }
   map& operator=(map const& src) { tree = src.tree; return *this; }
 
@@ -78,7 +78,20 @@ public:
 // #                               OPERATIONS                                  #
 // #############################################################################
 
-  iterator find(key_type const& key) { return iterator(tree.search(key)); }
+  iterator find(Key const& key) { return iterator(tree.search(key)); }
+
+  ft::pair<iterator, bool> insert(value_type const& val) {
+    typename _Container::nodeptr ptr;
+
+    ptr = tree.search(KoV()(val));
+    // std::cout << KoV()(val) << '\n';
+    // std::cout << ptr << " " << tree.getsent() << '\n';
+    // tree.print();
+    if (ptr == tree.getsent())
+      return ft::pair<iterator, bool>(iterator(ptr), false);
+    tree.insert(val);
+    return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
+  }
 };
 
 } // namespace ft

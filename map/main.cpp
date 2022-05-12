@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "map.hpp"
+#include "pair.hpp"
 
 int main(void) {
   std::cout << "this compiles!\n";
@@ -16,4 +17,8 @@ int main(void) {
   std::cout << "max size: " << map1.max_size() << '\n';
   map1.clear();
   map1.swap(map2);
+  map1.insert(ft::pair<const std::string, int>("a", 1));
+  std::cout << "size    : " << map1.size() << '\n';
+  map1.insert(ft::pair<const std::string, int>("a", 1));
+  std::cout << "size    : " << map1.size() << '\n';
 }
