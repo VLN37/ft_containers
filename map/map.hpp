@@ -105,6 +105,12 @@ public:
     return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
   }
 
+  template<typename Iter>
+  void insert(Iter first, Iter last) {
+    for (; first != last; first++)
+      insert(value_type(*first));
+  }
+
 // #############################################################################
 // #                                 DEBUG                                     #
 // #############################################################################

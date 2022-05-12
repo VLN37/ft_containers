@@ -48,4 +48,14 @@ int main(void) {
   for (; crit1 != crite1; ++crit1)
     std::cout << *crit1 << '\n';
 
+  ft::map<char, int> map5;
+  char c = 'a';
+  int  i = 0;
+  for (; i < 20; ++i, ++c)
+    map5.insert(ft::pair<const char, int>(c, i));
+  map5.print();
+  ft::map<char, int> map6;
+  map6.insert(map5.begin(), map5.end());
+  map5.print();
+  map6.print();
 }
