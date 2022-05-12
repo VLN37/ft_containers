@@ -38,23 +38,21 @@ public:
   typedef typename std::allocator<value_type>::const_pointer   const_pointer;
   typedef typename std::allocator<value_type>::size_type       size_type;
   typedef rbtree<const Key, value_type, KoV, Compare, Alloc>   _Container;
-
-protected:
-  rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
-
-private:
   typedef typename _Container::iterator                        iterator;
   typedef typename _Container::const_iterator                  const_iterator;
   typedef typename _Container::rev_iterator                    rev_iterator;
   typedef typename _Container::c_rev_iterator                  c_rev_iterator;
   typedef ptrdiff_t                                            difference_type;
 
+protected:
+  rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
+
 public:
 // #############################################################################
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
 
-  explicit map(key_compare const = key_compare(),
+  explicit map(key_compare const      = key_compare(),
                allocator_type const&  = allocator_type()) { };
   map(map const& src) { tree = src.tree; }
   map& operator=(map const& src) { tree = src.tree; return *this; }
@@ -75,14 +73,32 @@ public:
   void swap(map& other) { tree.swap(other.tree); }
 
 // #############################################################################
+// #                            ITERATOR SUPPORT                               #
+// #############################################################################
+
+  iterator       begin(void)         { return tree.begin(); }
+  const_iterator begin(void)  const  { return tree.begin(); }
+  iterator       end(void)           { return tree.end(); }
+  const_iterator end(void)    const  { return tree.end(); }
+  rev_iterator   rbegin(void)        { return tree.rbegin(); }
+  c_rev_iterator rbegin(void) const  { return tree.rbegin(); }
+  rev_iterator   rend(void)          { return tree.rend(); }
+  c_rev_iterator rend(void)   const  { return tree.rend(); }
+
+// #############################################################################
 // #                               OPERATIONS                                  #
 // #############################################################################
 
   iterator find(Key const& key) { return iterator(tree.search(key)); }
 
+// #############################################################################
+// #                               MODIFIERS                                   #
+// #############################################################################
+
   ft::pair<iterator, bool> insert(value_type const& val) {
     typename _Container::nodeptr ptr;
 
+    ptr = tree.search(KoV()(val));
     if (ptr != tree.getsent() && size())
       return ft::pair<iterator, bool>(iterator(ptr), false);
     tree.insert(val);
