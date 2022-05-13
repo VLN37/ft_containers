@@ -2,8 +2,10 @@
 //Creation date: 11/05/2022
 
 #include <iostream>
+#include <map>
 #include "map.hpp"
 #include "pair.hpp"
+#include "iterator_funcs.hpp"
 
 int main(void) {
   std::cout << "this compiles!\n";
@@ -80,7 +82,13 @@ int main(void) {
   map.insert(it6, ft::pair<const char, int>(++c, ++i));
   map.insert(map.find('z'), ft::pair<const char, int>(++c, ++i));
   map.print();
-
+  it5 = map.begin();
+  it6 = map.end();
+  // ft::advance(it5, 2);
+  // for (; it5 != it6; ++it5)
+  std::cout << "ERASE ITERATOR #############################################\n";
+  map.erase(it5);
+  map.print();
 }
 
 }
