@@ -89,6 +89,24 @@ int main(void) {
   std::cout << "ERASE ITERATOR #############################################\n";
   map.erase(it5);
   map.print();
+  for (char ch = 'b'; ch < 'r'; ch++)
+    map.erase(ch);
+  map.print();
 }
+
+{
+  std::cout << "ERASE RANGE ################################################\n";
+  ft::map<char, int> map;
+  ft::map<char, int>::iterator it5;
+  ft::map<char, int>::iterator it6;
+  c = 'a';
+  i = 0;
+  for (; i < 20; ++i, ++c)
+    map.insert(ft::pair<const char, int>(c, i));
+  map.print();
+  map.erase(map.begin(), map.end());
+  map.print();
+}
+
 
 }

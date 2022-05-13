@@ -146,6 +146,24 @@ public:
     tree.erase(KoV()(position.base()->data));
   }
 
+  size_type erase(key_type const& key)
+  {
+    typename _Container::nodeptr ptr;
+    ptr = tree.search(key);
+    tree.erase(key);
+    return ptr == tree.getsent() ? 0 : 1;
+  }
+
+  void erase(iterator first, iterator last)
+  {
+    iterator next(first);
+    next++;
+    for (; first != last; next++) {
+      tree.erase(KoV()(first.base()->data));
+      first = next;
+    }
+  }
+
 // #############################################################################
 // #                                 DEBUG                                     #
 // #############################################################################
