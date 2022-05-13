@@ -56,17 +56,24 @@ class value_compare {
 };
 
 protected:
-  rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
+  _Container    tree;
+  key_compare   comp;
+  value_compare val_comp;
 
 // #############################################################################
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
 
 public:
-  explicit map(key_compare const     = key_compare(),
-               allocator_type const& = allocator_type()) { };
-  map(map const& src) { tree = src.tree; }
-  map& operator=(map const& src) { tree = src.tree; return *this; }
+  map(void): comp(key_compare()), val_comp(value_compare(key_compare())) { };
+  map(map const& s)
+  : comp(s.key_comp()), val_comp(s.value_comp()) { tree = s.tree; }
+  map& operator=(map const& src) {
+    tree = src.tree;
+    comp = src.key_comp();
+    val_comp = src.value_comp();
+    return *this;
+  }
 
 // #############################################################################
 // #                                CAPACITY                                   #
@@ -104,7 +111,7 @@ public:
 //to do - const correctness on rbtree to work here
   iterator  find(Key const& key) { return iterator(tree.search(key)); }
   size_type count(Key const& key)
-  { return tree.search(key) == tree.getsent() ?  0 : 1; }
+{ return tree.search(key) == tree.getsent() ?  0 : 1; }
 
 // #############################################################################
 // #                               MODIFIERS                                   #
@@ -112,6 +119,59 @@ public:
 
   void clear(void)      { tree.recurse_delete(tree.getroot()); }
   void swap(map& other) { tree.swap(other.tree); }
+
+  iterator upper_bound(key_type const& key)
+  {
+    iterator it = begin();
+    iterator ite = end();
+    for (; it != ite && !comp(key, it->first); ++it)
+      continue;
+    return it;
+  }
+
+  const_iterator upper_bound(key_type const& key) const
+  {
+    const_iterator it = begin();
+    const_iterator ite = end();
+    for (; it != ite && !comp(key, it->first); ++it)
+      continue;
+    return it;
+  }
+
+  iterator lower_bound(key_type const& key)
+  {
+    iterator it = begin();
+    iterator ite = end();
+    for (; it != ite && comp(it->first, key); ++it)
+      continue;
+    return it;
+  }
+
+  const_iterator lower_bound(key_type const& key) const
+  {
+    const_iterator it = begin();
+    const_iterator ite = end();
+    for (; it != ite && comp(it->first, key); ++it)
+      continue;
+    return it;
+  }
+
+  ft::pair<const_iterator, const_iterator> equal_range(key_type const& k) const
+  {
+    typename _Container::nodeptr ptr;
+
+    ptr = tree.search(k);
+    return ft::pair<const_iterator, const_iterator>(const_iterator(ptr),
+                                                    const_iterator(ptr));
+  }
+
+  ft::pair<iterator, iterator> equal_range(key_type const& k)
+  {
+    typename _Container::nodeptr ptr;
+
+    ptr = tree.search(k);
+    return ft::pair<iterator, iterator>(iterator(ptr), iterator(ptr));
+  }
 
   mapped_type& operator[](key_type const& key)
   {

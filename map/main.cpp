@@ -26,8 +26,9 @@ int main(void) {
   std::cout << "size    : " << map1.size() << '\n';
   std::cout << map1.insert(ft::pair<std::string, int>("a", 1)).second << '\n';
   std::cout << "size    : " << map1.size() << '\n';
-  map1.insert(ft::pair<std::string, int>("b", 2));
-  map1.insert(ft::pair<std::string, int>("c", 3));
+  std::cout << map1.insert(ft::pair<std::string, int>("b", 2)).second << '\n';
+  std::cout << "size    : " << map1.size() << '\n';
+  std::cout << map1.insert(ft::pair<std::string, int>("c", 3)).second << '\n';
   std::cout << "size    : " << map1.size() << '\n';
 
   map1.print();
@@ -129,5 +130,22 @@ int main(void) {
   map['h'] = 42;
   map['z'] = 42;
   map.print();
+  std::cout << "################################################ EQuAL RANGE\n";
+  std::cout << map.equal_range('h').first.base()->data << '\n';
+  std::cout << map.equal_range('b').first.base()->data << '\n';
+  std::cout << map.equal_range('c').first.base()->data << '\n';
+  std::cout << "################################################ UPPER BOUND\n";
+  std::cout << map.upper_bound('h').base()->data << '\n';
+  std::cout << map.upper_bound('b').base()->data << '\n';
+  std::cout << map.upper_bound('c').base()->data << '\n';
+  std::cout << "################################################ LOWER BOUND\n";
+  std::cout << map.lower_bound('a').base()->data << '\n';
+  map.erase('a');
+  std::cout << map.lower_bound('a').base()->data << '\n';
+  std::cout << map.lower_bound('b').base()->data << '\n';
+  std::cout << map.lower_bound('w').base()->data << '\n';
+  std::cout << map.lower_bound('z').base()->data << '\n';
+  map.erase('z');
+  std::cout << map.lower_bound('z').base()->data << '\n';
 }
 }
