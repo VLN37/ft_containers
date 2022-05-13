@@ -124,5 +124,10 @@ int main(void) {
   ft::map<char, int>::value_compare val_comp = map.value_comp();
   std::cout << key_comp(it5->first, it6->first) << '\n';
   std::cout << val_comp(*it5, *it6) << '\n';
+  std::cout << "################################################ OPERATOR []\n";
+  map.print();
+  map['h'] = 42;
+  map['z'] = 42;
+  map.print();
 }
 }

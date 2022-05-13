@@ -113,6 +113,18 @@ public:
   void clear(void)      { tree.recurse_delete(tree.getroot()); }
   void swap(map& other) { tree.swap(other.tree); }
 
+  mapped_type& operator[](key_type const& key)
+  {
+    typename _Container::nodeptr ptr;
+
+    ptr = tree.search(key);
+    if (ptr == tree.getsent())
+      tree.insert(value_type(key, mapped_type()));
+    else
+      return ptr->data.second;
+    return tree.search(key)->data.second;
+  }
+
   ft::pair<iterator, bool> insert(value_type const& val)
   {
     typename _Container::nodeptr ptr;
