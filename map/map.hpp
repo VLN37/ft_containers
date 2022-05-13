@@ -22,6 +22,7 @@ struct KoV {
     return src.first;
   }
 };
+
 // #############################################################################
 // #                               TYPEDEFS                                    #
 // #############################################################################
@@ -44,13 +45,14 @@ public:
   typedef ptrdiff_t                                            difference_type;
 
 class value_compare {
-protected:
-  Compare comp;
-  value_compare(Compare c): comp(c) { }
-public:
-  typedef bool result_type;
-  bool operator()(value_type const& x, value_type const& y) const {
-    return comp(x.first, y.first);
+  protected:
+    //this is probably a ValueOfValue struct
+    Compare comp;
+  public:
+    value_compare(Compare c): comp(c) { }
+    typedef bool result_type;
+    bool operator()(value_type const& x, value_type const& y) const {
+      return comp(x.first, y.first);
   }
 };
 
@@ -109,7 +111,9 @@ public:
 
   void clear(void)      { tree.recurse_delete(tree.getroot()); }
   void swap(map& other) { tree.swap(other.tree); }
-  ft::pair<iterator, bool> insert(value_type const& val) {
+
+  ft::pair<iterator, bool> insert(value_type const& val)
+  {
     typename _Container::nodeptr ptr;
 
     ptr = tree.search(KoV()(val));
@@ -119,8 +123,20 @@ public:
     return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
   }
 
+  iterator insert(iterator position, value_type const& val)
+  {
+    typename _Container::nodeptr ptr;
+
+    ptr = tree.search(KoV()(val));
+    if (ptr != tree.getsent() && size())
+      return iterator(ptr);
+    tree.insert(val, position.base());
+    return iterator(tree.search(KoV()(val)));
+  }
+
   template<typename Iter>
-  void insert(Iter first, Iter last) {
+  void insert(Iter first, Iter last)
+  {
     for (; first != last; first++)
       insert(value_type(*first));
   }

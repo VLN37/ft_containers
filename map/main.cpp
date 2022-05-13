@@ -65,4 +65,22 @@ int main(void) {
   std::cout << *map5.find('z') << '\n';
   std::cout << map5.count('z') << ' ' << map5.count('a') << '\n';
 
+{
+  std::cout << "INSERT WITH HINT ###########################################\n";
+  ft::map<char, int> map;
+  ft::map<char, int>::iterator it5;
+  ft::map<char, int>::iterator it6;
+  c = 'a';
+  i = 0;
+  for (; i < 20; ++i, ++c)
+    map.insert(ft::pair<const char, int>(c, i));
+  map.print();
+  it5 = map.begin();
+  it6 = map.begin(); it6++;
+  map.insert(it6, ft::pair<const char, int>(++c, ++i));
+  map.insert(map.find('z'), ft::pair<const char, int>(++c, ++i));
+  map.print();
+
+}
+
 }
