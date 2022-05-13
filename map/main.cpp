@@ -19,7 +19,7 @@ int main(void) {
   std::cout << "max size: " << map1.max_size() << '\n';
   map1.clear();
   map1.swap(map2);
-  std::cout << "DUPLICATE KEY TEST #########################################\n";
+  std::cout << "######################################### DUPLICATE KEY TEST\n";
   std::cout << map1.insert(ft::pair<std::string, int>("a", 1)).second << '\n';
   std::cout << "size    : " << map1.size() << '\n';
   std::cout << map1.insert(ft::pair<std::string, int>("a", 1)).second << '\n';
@@ -31,22 +31,22 @@ int main(void) {
   std::cout << "size    : " << map1.size() << '\n';
 
   map1.print();
-  std::cout << "ITERATOR ###################################################\n";
+  std::cout << "################################################### ITERATOR\n";
   ft::map<std::string, int>::iterator it1 = map1.begin();
   ft::map<std::string, int>::iterator ite1 = map1.end();
   for (; it1 != ite1; ++it1)
     std::cout << *it1 << '\n';
-  std::cout << "REV ITERATOR ###############################################\n";
+  std::cout << "############################################### REV ITERATOR\n";
   ft::map<std::string, int>::rev_iterator rit1 = map1.rbegin();
   ft::map<std::string, int>::rev_iterator rite1 = map1.rend();
   for (; rit1 != rite1; ++rit1)
     std::cout << *rit1 << '\n';
-  std::cout << "CONST ITERATOR #############################################\n";
+  std::cout << "############################################# CONST ITERATOR\n";
   ft::map<std::string, int>::const_iterator cit1 = map1.begin();
   ft::map<std::string, int>::const_iterator cite1 = map1.end();
   for (; cit1 != cite1; ++cit1)
     std::cout << *cit1 << '\n';
-  std::cout << "CONST REV ITERATOR #########################################\n";
+  std::cout << "######################################### CONST REV ITERATOR\n";
   ft::map<std::string, int>::c_rev_iterator crit1 = map1.rbegin();
   ft::map<std::string, int>::c_rev_iterator crite1 = map1.rend();
   for (; crit1 != crite1; ++crit1)
@@ -68,7 +68,7 @@ int main(void) {
   std::cout << map5.count('z') << ' ' << map5.count('a') << '\n';
 
 {
-  std::cout << "INSERT WITH HINT ###########################################\n";
+  std::cout << "########################################### INSERT WITH HINT\n";
   ft::map<char, int> map;
   ft::map<char, int>::iterator it5;
   ft::map<char, int>::iterator it6;
@@ -86,7 +86,7 @@ int main(void) {
   it6 = map.end();
   // ft::advance(it5, 2);
   // for (; it5 != it6; ++it5)
-  std::cout << "ERASE ITERATOR #############################################\n";
+  std::cout << "############################################# ERASE ITERATOR\n";
   map.erase(it5);
   map.print();
   for (char ch = 'b'; ch < 'r'; ch++)
@@ -95,7 +95,7 @@ int main(void) {
 }
 
 {
-  std::cout << "ERASE RANGE ################################################\n";
+  std::cout << "################################################ ERASE RANGE\n";
   ft::map<char, int> map;
   ft::map<char, int>::iterator it5;
   ft::map<char, int>::iterator it6;
@@ -108,5 +108,21 @@ int main(void) {
   map.print();
 }
 
-
+{
+  std::cout << "###################################### KEY COMPARE ASSESSORS\n";
+  ft::map<char, int> map;
+  ft::map<char, int>::iterator it5;
+  ft::map<char, int>::iterator it6;
+  c = 'a';
+  i = 0;
+  for (; i < 20; ++i, ++c)
+    map.insert(ft::pair<const char, int>(c, i));
+  map.print();
+  it5 = map.begin();
+  it6 = map.begin();
+  ft::map<char, int>::key_compare key_comp = map.key_comp();
+  ft::map<char, int>::value_compare val_comp = map.value_comp();
+  std::cout << key_comp(it5->first, it6->first) << '\n';
+  std::cout << val_comp(*it5, *it6) << '\n';
+}
 }

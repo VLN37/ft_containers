@@ -50,7 +50,6 @@ class value_compare {
     Compare comp;
   public:
     value_compare(Compare c): comp(c) { }
-    typedef bool result_type;
     bool operator()(value_type const& x, value_type const& y) const {
       return comp(x.first, y.first);
   }
@@ -82,6 +81,8 @@ public:
 // #############################################################################
 
   allocator_type get_allocator() const { return allocator_type(); }
+  key_compare    key_comp() const      { return key_compare(); }
+  value_compare  value_comp() const    { return value_compare(key_comp()); }
 
 // #############################################################################
 // #                            ITERATOR SUPPORT                               #
