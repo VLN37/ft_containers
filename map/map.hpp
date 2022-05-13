@@ -22,7 +22,6 @@ struct KoV {
     return src.first;
   }
 };
-
 // #############################################################################
 // #                               TYPEDEFS                                    #
 // #############################################################################
@@ -44,14 +43,25 @@ public:
   typedef typename _Container::c_rev_iterator                  c_rev_iterator;
   typedef ptrdiff_t                                            difference_type;
 
+class value_compare {
+protected:
+  Compare comp;
+  value_compare(Compare c): comp(c) { }
+public:
+  typedef bool result_type;
+  bool operator()(value_type const& x, value_type const& y) const {
+    return comp(x.first, y.first);
+  }
+};
+
 protected:
   rbtree<const Key, value_type, KoV, Compare, Alloc> tree;
 
-public:
 // #############################################################################
 // #                              CONSTRUCTORS                                 #
 // #############################################################################
 
+public:
   explicit map(key_compare const     = key_compare(),
                allocator_type const& = allocator_type()) { };
   map(map const& src) { tree = src.tree; }
