@@ -49,6 +49,41 @@ void TREE_TYPE::insert(Val value) {
   fix_insert(node);
 }
 
+template <TREE_TEMPLATE>
+void TREE_TYPE::insert(Val value, nodeptr hint) {
+  nodeptr node = search(KeyOfValue()(value), hint);
+  if (node != SENT)
+    erase(KeyOfValue()(value));
+  _size++;
+  nodeptr prev = SENT;
+  nodeptr curr = root;
+  node = init_node(value);
+  while (curr != SENT) {
+    prev = curr;
+    if (Compare()(KeyOfValue()(node->data), KeyOfValue()(curr->data)))
+      curr = curr->left;
+    else
+      curr = curr->right;
+  }
+  node->parent = prev;
+  if (prev == SENT)
+    root = node;
+  else if (Compare()(KeyOfValue()(node->data), KeyOfValue()(prev->data)))
+    prev->left = node;
+  else
+    prev->right = node;
+
+  //case 1
+  if (node->parent == SENT) {
+    node->color = BLACK;
+    return;
+  }
+  //determine if this is the second node
+  if (node->parent->parent == SENT)
+    return;
+  fix_insert(node);
+}
+
 /**
  * 4 - rebalance if parent's brother is red (parent->parent->left/right)
  * 5 - decide rotation rules

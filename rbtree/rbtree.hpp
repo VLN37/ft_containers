@@ -77,9 +77,11 @@ public:
   // #                            MEMBER FUNCTIONS                             #
   // ###########################################################################
   void    insert(Val value);
+  void    insert(Val value, nodeptr hint);
   void    erase(Key key);
   void    recurse_delete(nodeptr node);
-  nodeptr search(Key key) { return searchHelper(root, key); }
+  nodeptr search(Key key)               { return searchHelper(root, key); }
+  nodeptr search(Key key, nodeptr hint) { return searchHelper(hint, key); }
   void    swap(tree_type& other);
 
   // ###########################################################################
