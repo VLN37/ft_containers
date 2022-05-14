@@ -148,4 +148,23 @@ int main(void) {
   map.erase('z');
   std::cout << *map.lower_bound('z') << '\n';
 }
+
+{
+  std::cout << "########################################## RANGE CONSTRUCTOR\n";
+  ft::map<char, int> map;
+  ft::map<char, int>::iterator it5;
+  ft::map<char, int>::iterator it6;
+  c = 'a';
+  i = 0;
+  for (; i < 20; ++i, ++c)
+    map.insert(ft::pair<const char, int>(c, i));
+  map.print();
+  it5 = map.upper_bound('g');
+  it6 = map.lower_bound('p');
+  std::cout << "upper bound: " << *it5 << '\n';
+  std::cout << "lower bound: " << *it6 << '\n';
+  ft::map<char, int> map2(it5, it6);
+  map.print();
+  map2.print();
+}
 }

@@ -77,6 +77,13 @@ protected:
 
 public:
   map(void): comp(key_compare()), val_comp(value_compare(key_compare())) { };
+  template<typename Iter>
+  map(Iter first, Iter last)
+  :comp(key_compare()), val_comp(value_compare(key_compare()))
+  {
+    for (; first != last; first++)
+      tree.insert(ft::pair<const Key, Val>(*first));
+  }
   map(map const& s)
   : comp(s.key_comp()), val_comp(s.value_comp()) { tree = s.tree; }
   map& operator=(map const& src) {
