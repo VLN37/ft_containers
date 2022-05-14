@@ -161,8 +161,7 @@ public:
     typename _Container::nodeptr ptr;
 
     ptr = tree.search(k);
-    return ft::pair<const_iterator, const_iterator>(const_iterator(ptr),
-                                                    const_iterator(ptr));
+    return ft::make_pair(const_iterator(ptr), const_iterator(ptr));
   }
 
   ft::pair<iterator, iterator> equal_range(key_type const& k)
@@ -170,7 +169,7 @@ public:
     typename _Container::nodeptr ptr;
 
     ptr = tree.search(k);
-    return ft::pair<iterator, iterator>(iterator(ptr), iterator(ptr));
+    return ft::make_pair(iterator(ptr), iterator(ptr));
   }
 
   mapped_type& operator[](key_type const& key)

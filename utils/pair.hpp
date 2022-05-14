@@ -30,6 +30,10 @@ public:
   { o << rhs.first << " " << rhs.second; return o; }
 };
 
+template <class T1, class T2>
+  pair<T1, T2> make_pair(T1 x, T2 y) { return ( pair<T1, T2>(x, y) ); }
+
+
 template<typename T1, typename T2>
 bool operator==(pair<T1, T2> const& lhs, pair<T1, T2> const& rhs)
 { return lhs.first == rhs.first && lhs.second == rhs.second; }
