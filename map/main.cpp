@@ -131,21 +131,21 @@ int main(void) {
   map['z'] = 42;
   map.print();
   std::cout << "################################################ EQuAL RANGE\n";
-  std::cout << map.equal_range('h').first.base()->data << '\n';
-  std::cout << map.equal_range('b').first.base()->data << '\n';
-  std::cout << map.equal_range('c').first.base()->data << '\n';
+  std::cout << *map.equal_range('h').first << '\n';
+  std::cout << *map.equal_range('b').first << '\n';
+  std::cout << *map.equal_range('c').first << '\n';
   std::cout << "################################################ UPPER BOUND\n";
-  std::cout << map.upper_bound('h').base()->data << '\n';
-  std::cout << map.upper_bound('b').base()->data << '\n';
-  std::cout << map.upper_bound('c').base()->data << '\n';
+  std::cout << *map.upper_bound('h') << '\n';
+  std::cout << *map.upper_bound('b') << '\n';
+  std::cout << *map.upper_bound('c') << '\n';
   std::cout << "################################################ LOWER BOUND\n";
-  std::cout << map.lower_bound('a').base()->data << '\n';
+  std::cout << *map.lower_bound('a') << '\n';
   map.erase('a');
-  std::cout << map.lower_bound('a').base()->data << '\n';
-  std::cout << map.lower_bound('b').base()->data << '\n';
-  std::cout << map.lower_bound('w').base()->data << '\n';
-  std::cout << map.lower_bound('z').base()->data << '\n';
+  std::cout << *map.lower_bound('a') << '\n';
+  std::cout << *map.lower_bound('b') << '\n';
+  std::cout << *map.lower_bound('w') << '\n';
+  std::cout << *map.lower_bound('z') << '\n';
   map.erase('z');
-  std::cout << map.lower_bound('z').base()->data << '\n';
+  std::cout << *map.lower_bound('z') << '\n';
 }
 }
