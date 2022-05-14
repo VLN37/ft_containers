@@ -90,15 +90,15 @@ bool operator!=(tree_iterator<IterA, _Container> const& lhs,
   { return (lhs.base() != rhs.base()); }
 
 template<typename IterT, typename _Container>
-class tree_rev_iterator
+class tree_reverse_iterator
 : public iterator<std::bidirectional_iterator_tag, IterT> {
   // ###########################################################################
   // #                               TYPEDEFS                                  #
   // ###########################################################################
 private:
-  typedef tree_rev_iterator<IterT, _Container>                rev;
-  typedef tree_rev_iterator<IterT, _Container>&               rev_ref;
-  typedef tree_rev_iterator<IterT, _Container> const&         rev_constref;
+  typedef tree_reverse_iterator<IterT, _Container>                rev;
+  typedef tree_reverse_iterator<IterT, _Container>&               rev_ref;
+  typedef tree_reverse_iterator<IterT, _Container> const&         rev_constref;
 
 
 public:
@@ -120,21 +120,21 @@ protected:
   // #                              CONSTRUCTORS                               #
   // ###########################################################################
 public:
-  tree_rev_iterator(void): current(NULL) { }
-  // tree_rev_iterator(iterator_type src): current(src) { }
-  explicit tree_rev_iterator(nodeptr src): current(src) { }
-  tree_rev_iterator(rev const& src): current(src.current) { }
-  ~tree_rev_iterator(void) { }
+  tree_reverse_iterator(void): current(NULL) { }
+  // tree_reverse_iterator(iterator_type src): current(src) { }
+  explicit tree_reverse_iterator(nodeptr src): current(src) { }
+  tree_reverse_iterator(rev const& src): current(src.current) { }
+  ~tree_reverse_iterator(void) { }
 
   template<typename Iter>
-  tree_rev_iterator(tree_iterator<Iter, _Container> src)
+  tree_reverse_iterator(tree_iterator<Iter, _Container> src)
   : current(src.base()){ }
   template<typename Iter>
-  tree_rev_iterator(tree_rev_iterator<Iter, _Container> src)
+  tree_reverse_iterator(tree_reverse_iterator<Iter, _Container> src)
   : current(src.base()){ }
 
   template<typename Iter>
-  rev& operator=(tree_rev_iterator<Iter, _Container> const& rhs)
+  rev& operator=(tree_reverse_iterator<Iter, _Container> const& rhs)
   { current = rhs.base(); return *this; }
 
 
@@ -166,13 +166,13 @@ public:
 // #                           NON-MEMBER OPERATORS                            #
 // #############################################################################
 template<typename IterA, typename IterB, typename _Container>
-bool operator==(tree_rev_iterator<IterA, _Container> const& lhs,
-                tree_rev_iterator<IterB, _Container> const& rhs)
+bool operator==(tree_reverse_iterator<IterA, _Container> const& lhs,
+                tree_reverse_iterator<IterB, _Container> const& rhs)
   { return (lhs.base() == rhs.base()); }
 
 template<typename IterA, typename IterB, typename _Container>
-bool operator!=(tree_rev_iterator<IterA, _Container> const& lhs,
-                tree_rev_iterator<IterB, _Container> const& rhs)
+bool operator!=(tree_reverse_iterator<IterA, _Container> const& lhs,
+                tree_reverse_iterator<IterB, _Container> const& rhs)
   { return (lhs.base() != rhs.base()); }
 
 } //namespace ft

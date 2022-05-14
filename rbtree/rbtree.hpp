@@ -36,9 +36,15 @@ public:
   typedef rbtree<Key, Val, KeyOfValue, Compare, Alloc>    tree_type;
   typedef tree_iterator<pointer, tree_type>               iterator;
   typedef tree_iterator<const_pointer, tree_type>         const_iterator;
-  typedef tree_rev_iterator<pointer, tree_type>           rev_iterator;
-  typedef tree_rev_iterator<const_pointer, tree_type>     c_rev_iterator;
-  typedef typename Alloc::template rebind<Node<Val> >::other Node_allocator;
+  typedef tree_reverse_iterator<pointer, tree_type>       reverse_iterator;
+  typedef
+    typename Alloc::template rebind<Node<Val> >::other   Node_allocator;
+  typedef
+    tree_reverse_iterator<const_pointer, tree_type>      const_reverse_iterator;
+
+private:
+  typedef const_reverse_iterator                          c_rev_iterator;
+  typedef reverse_iterator                                rev_iterator;
 
   // ###########################################################################
   // #                            INTERVAL VARIABLES                           #

@@ -32,11 +32,11 @@ public:
   typedef ft::pair<const Key, Val>                             value_type;
   typedef Compare                                              key_compare;
   typedef Alloc                                                allocator_type;
-  typedef typename std::allocator<value_type>::reference       reference;
-  typedef typename std::allocator<value_type>::const_reference const_reference;
-  typedef typename std::allocator<value_type>::pointer         pointer;
-  typedef typename std::allocator<value_type>::const_pointer   const_pointer;
-  typedef typename std::allocator<value_type>::size_type       size_type;
+  typedef typename Alloc::reference                            reference;
+  typedef typename Alloc::const_reference                      const_reference;
+  typedef typename Alloc::pointer                              pointer;
+  typedef typename Alloc::const_pointer                        const_pointer;
+  typedef typename Alloc::size_type                            size_type;
   typedef rbtree<const Key, value_type, KoV, Compare, Alloc>   _Container;
   typedef typename _Container::iterator                        iterator;
   typedef typename _Container::const_iterator                  const_iterator;
