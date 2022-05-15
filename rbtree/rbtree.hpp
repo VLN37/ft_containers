@@ -61,7 +61,7 @@ public:
   // #                              CONSTRUCTORS                               #
   // ###########################################################################
   rbtree(void)              { root = SENT; _size = 0; }
-  rbtree(rbtree const& src) { *this = src; _size = 0; }
+  rbtree(rbtree const& src) { _size = 0; *this = src; }
   ~rbtree(void)             { recurse_delete(root); }
   rbtree& operator=(rbtree const& src);
 
