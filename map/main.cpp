@@ -10,6 +10,7 @@
 int main(void) {
   std::cout << "this compiles!\n";
 
+  std::cout << "########################################### CONSTRUCTOR TEST\n";
   ft::map<std::string, int> map1;
   ft::map<std::string, int> map2(map1);
   ft::map<std::string, int> map3 = map2;
@@ -53,6 +54,8 @@ int main(void) {
   for (; crit1 != crite1; ++crit1)
     std::cout << *crit1 << '\n';
 
+
+  std::cout << "################################################ INSERT TEST\n";
   ft::map<char, int> map5;
   char c = 'a';
   int  i = 0;
