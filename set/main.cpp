@@ -72,5 +72,62 @@ int main(void) {
   std::cout << set.count('z') << ' ' << set.count('a') << '\n';
 }
 
+{
+  std::cout << "########################################### INSERT WITH HINT\n";
+  ft::set<char> set;
+  ft::set<char>::iterator it1;
+  ft::set<char>::iterator it2;
+  char c = 'a';
+  for (; c < 'a' + 20; ++c)
+    set.insert(c);
+  set.print();
+  it1 = set.begin();
+  it2 = set.begin(); it2++;
+  set.insert(it2, ++c);
+  set.insert(set.find('z'), ++c);
+  set.print();
+  it1 = set.begin();
+  it2 = set.end();
+  std::cout << "############################################# ERASE ITERATOR\n";
+  set.erase(it1);
+  set.print();
+  for (char ch = 'b'; ch < 'r'; ch++)
+    set.erase(ch);
+  set.print();
+}
+
+{
+  std::cout << "################################################ ERASE RANGE\n";
+  ft::set<char> set;
+  ft::set<char>::iterator it1;
+  ft::set<char>::iterator it2;
+  char c = 'a';
+  for (; c < 'a' + 20; ++c)
+    set.insert(c);
+  set.print();
+  set.erase(set.begin(), set.end());
+  set.print();
+}
+
+{
+  std::cout << "###################################### KEY COMPARE ASSESSORS\n";
+  ft::set<char> set;
+  ft::set<char>::iterator it1;
+  ft::set<char>::iterator it2;
+  char c = 'a';
+  for (; c < 'a' + 20; ++c)
+    set.insert(c);
+  set.print();
+  it1 = set.begin();
+  it2 = set.begin();
+  ft::set<char>::key_compare   key_comp = set.key_comp();
+  ft::set<char>::value_compare val_comp = set.value_comp();
+  std::cout << key_comp(*it1, *it2) << '\n';
+  std::cout << val_comp(*it1, *it2) << '\n';
+  it2++;
+  std::cout << key_comp(*it1, *it2) << '\n';
+  std::cout << val_comp(*it1, *it2) << '\n';
+}
+
 }
 
