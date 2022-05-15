@@ -27,24 +27,22 @@ struct KoV {
 // #                               TYPEDEFS                                    #
 // #############################################################################
 public:
-  typedef Key                                                key_type;
-  typedef Val                                                mapped_type;
-  typedef ft::pair<const Key, Val>                           value_type;
-  typedef Compare                                            key_compare;
-  typedef Alloc                                              allocator_type;
+  typedef Key                                            key_type;
+  typedef Val                                            mapped_type;
+  typedef ft::pair<const Key, Val>                       value_type;
+  typedef Compare                                        key_compare;
+  typedef Alloc                                          allocator_type;
+  typedef typename Alloc::reference                      reference;
+  typedef typename Alloc::const_reference                const_reference;
   typedef rbtree<const Key, value_type, KoV, Compare, Alloc> _Container;
-  typedef typename Alloc::reference                          reference;
-  typedef typename Alloc::const_reference                    const_reference;
-  typedef typename Alloc::pointer                            pointer;
-  typedef typename Alloc::const_pointer                      const_pointer;
-  typedef typename Alloc::size_type                          size_type;
-  typedef ptrdiff_t                                          difference_type;
-  typedef typename _Container::iterator                      iterator;
-  typedef typename _Container::const_iterator                const_iterator;
-  typedef typename
-                   _Container::reverse_iterator          reverse_iterator;
-  typedef typename
-                   _Container::const_reverse_iterator    const_reverse_iterator;
+  typedef typename Alloc::pointer                        pointer;
+  typedef typename Alloc::const_pointer                  const_pointer;
+  typedef typename Alloc::size_type                      size_type;
+  typedef ptrdiff_t                                      difference_type;
+  typedef typename _Container::iterator                  iterator;
+  typedef typename _Container::const_iterator            const_iterator;
+  typedef typename _Container::reverse_iterator          reverse_iterator;
+  typedef typename _Container::const_reverse_iterator    const_reverse_iterator;
 
 private:
   typedef typename _Container::reverse_iterator          rev_iterator;
@@ -57,7 +55,6 @@ private:
 public:
 class value_compare {
   protected:
-    //this is probably a ValueOfValue struct
     Compare comp;
   public:
     value_compare(Compare c): comp(c) { }
