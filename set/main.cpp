@@ -127,6 +127,37 @@ int main(void) {
   it2++;
   std::cout << key_comp(*it1, *it2) << '\n';
   std::cout << val_comp(*it1, *it2) << '\n';
+  std::cout << "################################################ EQuAL RANGE\n";
+  std::cout << "find h: " << *set.equal_range('h').first << '\n';
+  std::cout << "find b: " << *set.equal_range('b').first << '\n';
+  std::cout << "find c: " << *set.equal_range('c').first << '\n';
+  std::cout << "################################################ UPPER BOUND\n";
+  std::cout << "find h: " << *set.upper_bound('h') << '\n';
+  std::cout << "find b: " << *set.upper_bound('b') << '\n';
+  std::cout << "find c: " << *set.upper_bound('c') << '\n';
+  std::cout << "################################################ LOWER BOUND\n";
+  std::cout << "find a: " << *set.lower_bound('a') << '\n';
+  set.erase('a');
+  std::cout << "find a: " << *set.lower_bound('a') << '\n';
+  std::cout << "find b: " << *set.lower_bound('b') << '\n';
+}
+
+{
+  std::cout << "########################################## RANGE CONSTRUCTOR\n";
+  ft::set<char> set;
+  ft::set<char>::iterator it1;
+  ft::set<char>::iterator it2;
+  char c = 'a';
+  for (; c < 'a' + 20; ++c)
+    set.insert(c);
+  set.print();
+  it1 = set.upper_bound('g');
+  it2 = set.lower_bound('p');
+  std::cout << "upper bound: " << *it1 << '\n';
+  std::cout << "lower bound: " << *it2 << '\n';
+  ft::set<char> set2(it1, it2);
+  set.print();
+  set2.print();
 }
 
 }

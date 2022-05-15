@@ -26,8 +26,7 @@ typename TREE_TYPE::nodeptr TREE_TYPE::searchHelper(nodeptr node, Key key) {
     return node;
   if (Compare()(key, KeyOfValue()(node->data)))
     return searchHelper(node->left, key);
-  else
-    return searchHelper(node->right, key);
+  return searchHelper(node->right, key);
 }
 
 template <TREE_TEMPLATE>

@@ -28,7 +28,7 @@ struct KoV {
 // #############################################################################
 
 public:
-  typedef T                                             key_type;
+  typedef const T                                       key_type;
   typedef T                                             value_type;
   typedef Compare                                       key_compare;
   typedef Alloc                                         allocator_type;
@@ -37,7 +37,7 @@ public:
   typedef typename Alloc::pointer                       pointer;
   typedef typename Alloc::const_pointer                 const_pointer;
   typedef typename Alloc::size_type                     size_type;
-  typedef rbtree<const T, T, KoV, Compare, Alloc> _Container;
+  typedef rbtree<const T, T, KoV, Compare, Alloc>       _Container;
   typedef ptrdiff_t                                     difference_type;
   typedef typename _Container::iterator                 iterator;
   typedef typename _Container::const_iterator           const_iterator;
@@ -58,7 +58,7 @@ class value_compare {
     Compare comp;
   public:
     value_compare(Compare c): comp(c) { }
-    bool operator()(value_type const& x, value_type const& y) const {
+    bool operator()(key_type const& x, key_type const& y) const {
       return comp(x, y);
   }
 };
@@ -140,7 +140,7 @@ public:
   {
     iterator it = begin();
     iterator ite = end();
-    for (; it != ite && !comp(key, it->first); ++it)
+    for (; it != ite && !comp(key, *it); ++it)
       continue;
     return it;
   }
@@ -149,7 +149,7 @@ public:
   {
     const_iterator it = begin();
     const_iterator ite = end();
-    for (; it != ite && !comp(key, it->first); ++it)
+    for (; it != ite && !comp(key, *it); ++it)
       continue;
     return it;
   }
@@ -158,7 +158,7 @@ public:
   {
     iterator it = begin();
     iterator ite = end();
-    for (; it != ite && comp(it->first, key); ++it)
+    for (; it != ite && comp(*it, key); ++it)
       continue;
     return it;
   }
@@ -167,7 +167,7 @@ public:
   {
     const_iterator it = begin();
     const_iterator ite = end();
-    for (; it != ite && comp(it->first, key); ++it)
+    for (; it != ite && comp(*it, key); ++it)
       continue;
     return it;
   }
