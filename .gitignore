@@ -8,5 +8,6 @@ vecft
 vecstd
 perfft
 perfstd
+set/set
 map/map
 rbtree/rbtree
