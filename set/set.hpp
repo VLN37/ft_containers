@@ -22,7 +22,6 @@ struct KoV {
   }
 };
 
-class value_compare: Compare { };
 
 // #############################################################################
 // #                               TYPEDEFS                                    #
@@ -49,6 +48,21 @@ private:
   typedef typename _Container::reverse_iterator         rev_iterator;
   typedef typename _Container::const_reverse_iterator   c_rev_iterator;
 
+// #############################################################################
+// #                          INTERNAL VARIABLES                               #
+// #############################################################################
+
+public:
+class value_compare {
+  protected:
+    Compare comp;
+  public:
+    value_compare(Compare c): comp(c) { }
+    bool operator()(value_type const& x, value_type const& y) const {
+      return comp(x, y);
+  }
+};
+
 protected:
   _Container    tree;
   key_compare   comp;
@@ -59,15 +73,17 @@ protected:
 // #############################################################################
 
 public:
-  set(void): comp(key_compare()), val_comp(value_compare()) { }
+  set(void): comp(key_compare()), val_comp(value_compare(key_compare())) { }
   template<typename Iter>
-  set(Iter first, Iter last): comp(key_compare()), val_comp(value_compare())
+  set(Iter first, Iter last)
+  : comp(key_compare()), val_comp(value_compare(key_compare()))
   {
     for (; first != last; first++)
       tree.insert(*first);
   }
   set(set const& src)
-  : comp(key_compare()), val_comp(value_compare()) { tree = src.tree; }
+  : comp(key_compare()), val_comp(value_compare(key_compare()))
+  { tree = src.tree; }
   set& operator=(set const& src) {
     tree = src.tree;
     comp = src.key_comp();
