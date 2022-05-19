@@ -45,7 +45,7 @@ void vector<T, Alloc>::reserve(size_t n) {
   tmp = _alloc.allocate(n);
   for (size_type i = 0; i < _size; i++)
     _alloc.construct(tmp + i, *(_data + i));
-  for (size_type i = 0; i < _capacity; i++)
+  for (size_type i = 0; i < _size; i++)
     _alloc.destroy(_data + i);
   _alloc.deallocate(_data, _capacity);
   _capacity = n;
