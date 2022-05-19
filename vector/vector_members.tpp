@@ -56,7 +56,6 @@ template<typename T, typename Alloc>
 typename vector<T, Alloc>::iterator
   vector<T,Alloc>::erase(vector<T, Alloc>::iterator pos) {
   if (end() != begin() && pos == end() - 1) {
-    std::cout << "here\n";
     pop_back();
     return end();
   }
@@ -225,7 +224,6 @@ void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
     size_t diff = pos - begin();
     reserve(_size ? (_size + distance) * 2 : distance);
     pos = begin() + diff;
-    std::cout << *this;
   }
   if (pos == end()) {
     for (; first != last; ++first)
@@ -233,10 +231,10 @@ void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
     return;
   }
   for (size_type i = 0; i < distance; i++)
-    _alloc.construct(_data + _size + i, 0);
+    _alloc.construct(_data + _size + i, value_type());
   _size += distance;
-  iterator it = end() - distance;
-  iterator to = end();
+  iterator it = end() - distance - 1;
+  iterator to = end() - 1;
   for (; it > pos; --it, --to) {
     *to = *it;
   }

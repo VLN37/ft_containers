@@ -163,10 +163,10 @@ public:
   friend bool operator<=(vec_constref lhs, vec_constref rhs)
   { return lhs < rhs || lhs == rhs; }
 
-private:
   // ###########################################################################
   // #                                DISPATCHERS                              #
   // ###########################################################################
+private:
   template<typename Integer>
   void constructor_fill(size_type n, Integer value);
   template<typename Integer>
