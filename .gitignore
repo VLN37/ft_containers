@@ -11,3 +11,7 @@ perfstd
 set/set
 map/map
 rbtree/rbtree
+vector_*
+stack_*
+map_*
+set_*

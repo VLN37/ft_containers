@@ -167,7 +167,6 @@ typename vector<T, Alloc>::iterator
     throw(std::length_error("max_size exceeded\n"));
   if (_size == _capacity) {
     size_t diff = ft::distance(begin(), pos);
-    std::cout << "reserve\n";
     reserve(_size ? _size * 2 : 1);
     pos = begin() + diff;
   }
@@ -223,7 +222,6 @@ void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
   if (_size + distance >= _max_size)
     throw(std::length_error("max_size exceeded\n"));
   if (_size + distance > _capacity) {
-    std::cout << "reserver\n";
     size_t diff = pos - begin();
     reserve(_size ? (_size + distance) * 2 : distance);
     pos = begin() + diff;

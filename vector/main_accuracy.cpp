@@ -287,21 +287,5 @@ int main(void) {
   std::cout << (stk1  < stk2) << '\n';
   std::cout << (stk1  > stk2) << '\n';
 }
-
-
-// {
-//   ft::vector<int> vec1;
-//   for (int i = 0; i < 100000; i++)
-//     vec1.push_back(i);
-//   ft::vector<int> vec2;
-//   vec2.assign(vec1.begin() + 200, vec1.begin() + 5200);
-//   ft::vector<int>::iterator it1 = vec1.begin();
-//   for (int i = 0; i < 10000000; i++) {
-//     for (; it1 != vec1.end(); it1++)
-//       *it1 += 50;
-//   }
-//   vec1.erase(vec1.begin(), vec1.begin() + 100);
-// }
-
   return 0;
 }
