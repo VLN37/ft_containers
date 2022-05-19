@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make test
+make -C vector/ test
 
 time ./accft > ft
 time ./accstd > std

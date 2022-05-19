@@ -1,16 +1,19 @@
 CC			= c++
 CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
 CFLAGS	+= -MMD -MP #compiler flags to generate the dependancy file
-INCPATH = -I./ -I./vector -I./iterator -I./utils -I./stack -I./rbtree
+
+ROOT		= ../
+INCPATH = -I./ -I../ -I../iterator -I../utils -I../stack -I../rbtree -I../tests
 OBJDIR	= obj
 STD			?=
-NAME		= containers
-NAMET		?=
+NAME		= vec
+NAME_ACC	?=
 GTEST		= test
 
 SRC			=	main.cpp \
 
-SRCT		=	unit.cpp \
+SRC_ACC		=	main_accuracy.cpp \
+
 
 INC			=	vector.hpp \
 					vector_members.tpp \
@@ -26,19 +29,24 @@ INC			=	vector.hpp \
 					rbtree.hpp \
 
 OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
+OBJ_ACC	= $(SRC_ACC:%.cpp=$(OBJDIR)/%.o)
 DEPS		= $(SRC:%.cpp=$(OBJDIR)/%.d)
-OBJT			= $(SRCT:%.cpp=$(OBJDIR)/%.o)
 
-#this bugs when rbtree obj dir is already created -- investigate
 # VPATH = vector stack utils iterator rbtree tests
-vpath %.cpp vector stack utils iterator rbtree tests
-vpath %.hpp vector stack utils iterator rbtree tests
+vpath %.cpp stack utils iterator rbtree tests
+vpath %.hpp stack utils iterator rbtree tests
 
 $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
+$(NAME_ACC):	$(OBJDIR) $(OBJ_ACC)
+		$(CC) $(CFLAGS) $(OBJ_ACC) -o $(ROOT)$(NAME_ACC)
+
 $(GTEST):	$(OBJDIR) $(OBJ)
-		@make -C vector test
+		STD=-DSTD=1 NAME_ACC=accstd make accstd
+		rm obj/main_accuracy.o
+		NAME_ACC=accft make accft
+		rm obj/main_accuracy.o
 
 $(OBJDIR)/%.o: %.cpp
 		$(CC) $(CFLAGS) $(STD) -c $< -o $@ $(INCPATH)
@@ -47,7 +55,7 @@ clean:
 		rm -rf $(OBJDIR)
 
 fclean:	clean
-		rm -rf $(NAME) accft accstd
+		rm -rf $(NAME) ../accft ../accstd
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)
