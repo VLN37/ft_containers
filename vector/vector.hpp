@@ -97,7 +97,8 @@ public:
   void            pop_back(void);
   void            clear(void);
 
-  void assign(size_type n, value_type const& val);
+  void assign(size_type n, value_type const& val)
+  { assign_dispatch(n, val, true_type()); };
   template <class IterT>
   void assign(IterT first, IterT last) {
     typedef typename is_integral<IterT>::type _integral;
