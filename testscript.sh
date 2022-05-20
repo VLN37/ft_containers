@@ -2,30 +2,40 @@
 
 make test
 
-# echo "###################### VECTOR ACCURACY TEST #############################"
+echo "###################### VECTOR ACCURACY TEST #############################"
 
-# echo ft
-#./vector_acc_ft > ft
-# echo std
-#./vector_acc_std > std
-# diff --color -y -s --suppress-common-lines std ft
+echo ""
+./vector_acc_ft > ft
+./vector_acc_std > std
+diff --color -y -s --suppress-common-lines std ft
+echo ""
 
-# echo "##################### VECTOR PERFORMANCE TEST ###########################"
-# time ./vector_perf_ft
-# time ./vector_perf_std
+echo "##################### VECTOR PERFORMANCE TEST ###########################"
+
+echo ""
+echo -e "ft"
+time ./vector_perf_ft
+echo ""
+echo -e "std"
+time ./vector_perf_std
+echo ""
 
 echo "####################### STACK ACCURACY TEST #############################"
 
-# echo ft
+echo ""
 ./stack_acc_ft > ft
-# echo std
 ./stack_acc_std > std
 diff --color -y -s --suppress-common-lines std ft
+echo ""
 
 echo "###################### STACK PERFORMANCE TEST ###########################"
-echo ft
+
+echo ""
+echo -e "ft"
 time ./stack_perf_ft
-echo std
+echo ""
+echo -e "std"
 time ./stack_perf_std
+echo ""
 
 rm ft std
