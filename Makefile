@@ -2,7 +2,8 @@ test:	$(OBJDIR) $(OBJ)
 	make -s --no-print-directory -C vector performance
 	make -s --no-print-directory -C vector accuracy
 	make -s --no-print-directory -C stack accuracy
-	make -s --no-print-directory -C stack accuracy
+	make -s --no-print-directory -C stack performance
+	make -s --no-print-directory -C map accuracy
 
 clean:
 		make -s -C stack clean
