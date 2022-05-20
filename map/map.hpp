@@ -244,12 +244,15 @@ public:
 
   void erase(iterator first, iterator last)
   {
+    if (first.base() == tree.getsent())
+      return;
     iterator next(first);
     next++;
-    for (; first != last; next++) {
+    for (; next != last; next++) {
       tree.erase(KoV()(first.base()->data));
       first = next;
     }
+    tree.erase(KoV()(first.base()->data));
   }
 
 // #############################################################################
