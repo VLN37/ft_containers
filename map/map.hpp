@@ -262,7 +262,7 @@ friend bool operator==(map const& lhs, map const& rhs) {
   return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 friend bool operator<(map const& lhs, map const& rhs) {
-  return ft::lexicographical_compare(lhs.begin(), lhs.end()
+  return ft::lexicographical_compare(lhs.begin(), lhs.end(),
                                      rhs.begin(), rhs.end());
 }
 friend bool operator!=(map const& lhs, map const& rhs)
