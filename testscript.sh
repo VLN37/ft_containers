@@ -28,15 +28,15 @@ echo ""
 diff --color -y -s --suppress-common-lines std ft
 echo ""
 
-# echo "####################### MAP PERFORMANCE TEST ############################"
+echo "####################### MAP PERFORMANCE TEST ############################"
 
-# echo ""
-# echo -e "ft"
-# time ./map/map_perf_ft
-# echo ""
-# echo -e "std"
-# time ./map/map_perf_std
-# echo ""
+echo ""
+echo -e "ft"
+time ./map/map_perf_ft
+echo ""
+echo -e "std"
+time ./map/map_perf_std
+echo ""
 
 # echo "######################## SET ACCURACY TEST ##############################"
 

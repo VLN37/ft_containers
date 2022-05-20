@@ -39,6 +39,7 @@ test:	$(OBJDIR) $(OBJ)
 	make -s --no-print-directory -C stack accuracy
 	make -s --no-print-directory -C stack performance
 	make -s --no-print-directory -C map accuracy
+	make -s --no-print-directory -C map performance
 
 clean:
 		rm -rf $(OBJDIR)
