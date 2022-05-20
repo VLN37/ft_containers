@@ -9,11 +9,11 @@ clean:
 		rm -rf $(OBJDIR)
 
 fclean:	clean
-		rm -rf $(NAME) accft accstd
+		rm -rf accft accstd
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)
 
-re:		fclean $(NAME)
+re:		fclean
 
 -include $(DEPS)

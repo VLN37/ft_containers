@@ -18,7 +18,7 @@ namespace ft = std;
 # include "algo.hpp"
 #endif
 
-#define TIMES 10000
+#define TIMES 15000
 
 int main(void) {
 
@@ -36,12 +36,44 @@ int main(void) {
   vec1.insert(vec1.end(), TIMES, str);
 
   //copy constructor
+  for (int i = 0; i < TIMES; i++) {
+      ft::vector<std::string> vec3(vec2);
+  }
 
   //insert range
   vec2.insert(vec2.begin(), vec1.begin(), vec1.end());
 
+  for (int i = 0; i < TIMES; i++)
+   vec1.insert(vec1.begin(), str);
+
   // assign fill
-  // vec2.assign(TIMES, str);
+  vec2.assign(TIMES, str);
+
+  // //assign range
+  vec2.assign(vec1.begin(), vec1.end());
+}
+
+{
+  //insert end
+  ft::vector<int> vec1;
+  ft::vector<int> vec2;
+  std::string str("asd");
+  for (int i = 0; i < TIMES; i++)
+    vec1.insert(vec1.end(), i);
+  for (int i = 0; i < TIMES; i++)
+    vec2.insert(vec2.end(), i);
+
+  //insert fill
+  vec1.insert(vec1.begin(), TIMES, 42);
+
+  //insert range
+  vec2.insert(vec2.begin(), vec1.begin(), vec1.end());
+
+  for (int i = 0; i < TIMES; i++)
+   vec1.insert(vec1.begin(), 42);
+
+  // assign fill
+  vec2.assign(TIMES, 42);
 
   // //assign range
   vec2.assign(vec1.begin(), vec1.end());
@@ -53,6 +85,11 @@ int main(void) {
     vec1.insert(vec1.end(), i);
   //assignment operator
   ft::vector<int> vec2 = vec1;
+  //iterators
+  // ft::vector<int>::iterator it1 = vec1.begin();
+  // ft::vector<int>::iterator it2 = vec1.end();
+  // while (it1 != it2)
+  //   it1++;
 }
 
 {
@@ -63,5 +100,4 @@ int main(void) {
   for (int i = 0; i < TIMES; i++)
     vec1.pop_back();
 }
-
 }
