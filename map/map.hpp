@@ -10,6 +10,7 @@
 #include "iterator_tree.hpp"
 #include "rbtree_node.hpp"
 #include "pair.hpp"
+#include "algo.hpp"
 
 namespace ft {
 template <typename Key,
@@ -250,6 +251,29 @@ public:
       first = next;
     }
   }
+
+// #############################################################################
+// #                          RELATIONAL OPERATORS                             #
+// #############################################################################
+
+friend bool operator==(map const& lhs, map const& rhs) {
+  if (lhs.size() != rhs.size())
+    return false;
+  return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+friend bool operator<(map const& lhs, map const& rhs) {
+  return ft::lexicographical_compare(lhs.begin(), lhs.end()
+                                     rhs.begin(), rhs.end());
+}
+friend bool operator!=(map const& lhs, map const& rhs)
+{ return !(lhs == rhs); }
+friend bool operator>(map const& lhs, map const& rhs)
+{ return !(lhs < rhs); }
+friend bool operator>=(map const& lhs, map const& rhs)
+{ return lhs > rhs || lhs == rhs; }
+friend bool operator<=(map const& lhs, map const& rhs)
+{ return lhs < rhs || lhs == rhs; }
+
 
 // #############################################################################
 // #                                 DEBUG                                     #

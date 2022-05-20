@@ -241,6 +241,29 @@ public:
   }
 
 // #############################################################################
+// #                          RELATIONAL OPERATORS                             #
+// #############################################################################
+
+friend bool operator==(set const& lhs, set const& rhs) {
+  if (lhs.size() != rhs.size())
+    return false;
+  return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+friend bool operator<(set const& lhs, set const& rhs) {
+  return ft::lexicographical_compare(lhs.begin(), lhs.end()
+                                     rhs.begin(), rhs.end());
+}
+friend bool operator!=(set const& lhs, set const& rhs)
+{ return !(lhs == rhs); }
+friend bool operator>(set const& lhs, set const& rhs)
+{ return !(lhs < rhs); }
+friend bool operator>=(set const& lhs, set const& rhs)
+{ return lhs > rhs || lhs == rhs; }
+friend bool operator<=(set const& lhs, set const& rhs)
+{ return lhs < rhs || lhs == rhs; }
+
+
+// #############################################################################
 // #                                 DEBUG                                     #
 // #############################################################################
 
