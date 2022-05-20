@@ -1,5 +1,5 @@
 CC			= c++
-CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
+CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -pedantic
 CFLAGS	+= -MMD -MP #compiler flags to generate the dependancy file
 
 ROOT		= ../
@@ -38,10 +38,10 @@ $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(NAME_ACC):	$(OBJDIR) $(OBJ_ACC)
-		$(CC) $(CFLAGS) $(OBJ_ACC) -o $(ROOT)$(NAME_ACC)
+		$(CC) $(CFLAGS) $(OBJ_ACC) -o $(NAME_ACC)
 
 $(NAME_PERF):	$(OBJDIR) $(OBJ_PERF)
-		$(CC) $(CFLAGS) $(OBJ_PERF) -o $(ROOT)$(NAME_PERF)
+		$(CC) $(CFLAGS) $(OBJ_PERF) -o $(NAME_PERF)
 
 $(ACCTEST):	$(OBJDIR) $(OBJ)
 		STD=-DSTD=1 NAME_ACC=$(ACC)std make $(ACC)std
