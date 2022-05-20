@@ -1,3 +1,5 @@
+OBJDIR = obj
+
 test:	$(OBJDIR) $(OBJ)
 	make -s --no-print-directory -C vector performance
 	make -s --no-print-directory -C vector accuracy
@@ -10,6 +12,7 @@ clean:
 		make -s -C vector clean
 		make -s -C set clean
 		make -s -C map clean
+		make -s -C rbtree clean
 		rm -rf $(OBJDIR)
 
 fclean:	clean
@@ -17,6 +20,7 @@ fclean:	clean
 		make -s -C vector fclean
 		make -s -C set fclean
 		make -s -C map fclean
+		make -s -C rbtree fclean
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)

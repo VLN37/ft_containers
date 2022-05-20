@@ -63,6 +63,9 @@ clean:
 
 fclean:	clean
 		rm -rf $(NAME)
+		rm -rf *_perf_*
+		rm -rf *_acc_*
+		rm -rf *_test
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)
