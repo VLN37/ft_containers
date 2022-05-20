@@ -1,19 +1,21 @@
-TEST		= test
-
-
-$(TEST):	$(OBJDIR) $(OBJ)
+test:	$(OBJDIR) $(OBJ)
 	make -s -C vector performance
 	make -s -C vector accuracy
+	make -s -C stack accuracy
+	make -s -C stack accuracy
 
 clean:
+		make -C stack clean
+		make -C vector clean
 		rm -rf $(OBJDIR)
+		rm -f vector_*
+		rm -f set_*
+		rm -f stack_*
+		rm -f map_*
 
 fclean:	clean
-		rm -rf accft accstd
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)
 
-re:		fclean
-
--include $(DEPS)
+re:		fclean test
