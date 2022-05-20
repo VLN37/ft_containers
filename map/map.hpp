@@ -177,7 +177,7 @@ public:
     typename _Container::nodeptr ptr;
 
     ptr = tree.search(k);
-    return ft::make_pair(const_iterator(ptr), const_iterator(ptr));
+    return ft::make_pair(const_iterator(ptr), upper_bound(ptr->data.first));
   }
 
   ft::pair<iterator, iterator> equal_range(key_type const& k)
