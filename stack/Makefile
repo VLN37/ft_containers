@@ -37,10 +37,10 @@ $(NAME):	$(OBJDIR) $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(NAME_ACC):	$(OBJDIR) $(OBJ_ACC)
-		$(CC) $(CFLAGS) $(OBJ_ACC) -o $(ROOT)$(NAME_ACC)
+		$(CC) $(CFLAGS) $(OBJ_ACC) -o $(NAME_ACC)
 
 $(NAME_PERF):	$(OBJDIR) $(OBJ_PERF)
-		$(CC) $(CFLAGS) $(OBJ_PERF) -o $(ROOT)$(NAME_PERF)
+		$(CC) $(CFLAGS) $(OBJ_PERF) -o $(NAME_PERF)
 
 $(ACCTEST):	$(OBJDIR) $(OBJ)
 		STD=-DSTD=1 NAME_ACC=$(ACC)std make $(ACC)std
@@ -62,6 +62,9 @@ clean:
 
 fclean:	clean
 		rm -rf $(NAME)
+		rm -rf *_perf_*
+		rm -rf *_acc_*
+		rm -rf *_test
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)

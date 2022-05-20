@@ -5,8 +5,8 @@ make test
 echo "###################### VECTOR ACCURACY TEST #############################"
 
 echo ""
-./vector_acc_ft > ft
-./vector_acc_std > std
+./vector/vector_acc_ft > ft
+./vector/vector_acc_std > std
 diff --color -y -s --suppress-common-lines std ft
 echo ""
 
@@ -14,17 +14,17 @@ echo "##################### VECTOR PERFORMANCE TEST ###########################"
 
 echo ""
 echo -e "ft"
-time ./vector_perf_ft
+time ./vector/vector_perf_ft
 echo ""
 echo -e "std"
-time ./vector_perf_std
+time ./vector/vector_perf_std
 echo ""
 
 echo "######################## MAP ACCURACY TEST ##############################"
 
 echo ""
-./stack_acc_ft > ft
-./stack_acc_std > std
+./map/map_acc_ft > ft
+./map/map_acc_std > std
 diff --color -y -s --suppress-common-lines std ft
 echo ""
 
@@ -32,17 +32,17 @@ echo ""
 
 # echo ""
 # echo -e "ft"
-# time ./stack_perf_ft
+# time ./map/map_perf_ft
 # echo ""
 # echo -e "std"
-# time ./stack_perf_std
+# time ./map/map_perf_std
 # echo ""
 
 # echo "######################## SET ACCURACY TEST ##############################"
 
 # echo ""
-# ./stack_acc_ft > ft
-# ./stack_acc_std > std
+# ./set/set_acc_ft > ft
+# ./set/set_acc_std > std
 # diff --color -y -s --suppress-common-lines std ft
 # echo ""
 
@@ -50,17 +50,17 @@ echo ""
 
 # echo ""
 # echo -e "ft"
-# time ./stack_perf_ft
+# time ./set/set_perf_ft
 # echo ""
 # echo -e "std"
-# time ./stack_perf_std
+# time ./set/set_perf_std
 # echo ""
 
 echo "####################### STACK ACCURACY TEST #############################"
 
 echo ""
-./stack_acc_ft > ft
-./stack_acc_std > std
+./stack/stack_acc_ft > ft
+./stack/stack_acc_std > std
 diff --color -y -s --suppress-common-lines std ft
 echo ""
 
@@ -68,10 +68,10 @@ echo "###################### STACK PERFORMANCE TEST ###########################"
 
 echo ""
 echo -e "ft"
-time ./stack_perf_ft
+time ./stack/stack_perf_ft
 echo ""
 echo -e "std"
-time ./stack_perf_std
+time ./stack/stack_perf_std
 echo ""
 
 rm ft std

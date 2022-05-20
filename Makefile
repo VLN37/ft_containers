@@ -8,13 +8,15 @@ test:	$(OBJDIR) $(OBJ)
 clean:
 		make -s -C stack clean
 		make -s -C vector clean
+		make -s -C set clean
+		make -s -C map clean
 		rm -rf $(OBJDIR)
-		rm -f vector_*
-		rm -f set_*
-		rm -f stack_*
-		rm -f map_*
 
 fclean:	clean
+		make -s -C stack fclean
+		make -s -C vector fclean
+		make -s -C set fclean
+		make -s -C map fclean
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)
