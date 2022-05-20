@@ -185,7 +185,7 @@ public:
     typename _Container::nodeptr ptr;
 
     ptr = tree.search(k);
-    return ft::make_pair(iterator(ptr), iterator(ptr));
+    return ft::make_pair(iterator(ptr), upper_bound(ptr->data.first));
   }
 
   mapped_type& operator[](key_type const& key)

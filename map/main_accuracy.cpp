@@ -92,10 +92,8 @@ int main(void) {
   std::cout << val_comp(*it1, *it1) << '\n';
   std::cout << key_comp(it1->first, it2->first) << '\n';
   std::cout << key_comp(it1->first, it1->first) << '\n';
-
-
+}
 {
-
   //iterators
   ft::map<int, std::string> map1;
   int i = 0;
@@ -128,14 +126,53 @@ int main(void) {
   cit1 = map1.begin();
   std::cout << (it1 == cit1) << '\n';
   std::cout << (it1 != cit1) << '\n';
+  std::cout << (crit1 == rit1) << '\n';
+  std::cout << (crit1 != rit1) << '\n';
+  next_string(true);
+}
+{
+  //modifiers
+  ft::map<int, std::string> map1;
+  int i = 0;
+  for (; i < 42; i++)
+
+  // upper bound lower bound equal range
+    map1.insert(ft::make_pair(i, next_string()));
+  printiterator(map1.upper_bound(21));
+  printiterator(map1.upper_bound(0));
+  printiterator(map1.lower_bound(21));
+  printiterator(map1.lower_bound(0));
+  printiterator(map1.equal_range(21).first);
+  printiterator(map1.equal_range(21).second);
+  printiterator(map1.equal_range(12).first);
+  printiterator(map1.equal_range(12).second);
+
+  // bracket operator
+  std::cout << map1[21] << '\n';
+
+  //insert position
+  map1.insert(map1.upper_bound(500), ft::make_pair(500, next_string()));
+  print(map1);
+  ft::map<int, std::string> map2;
+  //insert range
+  map2.insert(map1.find(10), map1.find(21));
+  print(map2);
+
+  //erase key
+  map1.erase(12);
+  map1.erase(12);
+  print(map1);
+
+  //erase range
+  map1.erase(map1.upper_bound(10), map1.upper_bound(21));
+  print(map1);
 
   // relational operators
-  std::cout << (it1 >= it2) << '\n';
-  std::cout << (it1 <= it2) << '\n';
-  std::cout << (it1 > it2) << '\n';
-  std::cout << (it1 < it2) << '\n';
-}
-
-  next_string(true);
+  std::cout << (map1 == map2) << '\n';
+  std::cout << (map1 != map2) << '\n';
+  std::cout << (map1 <= map2) << '\n';
+  std::cout << (map1 >= map2) << '\n';
+  std::cout << (map1 < map2) << '\n';
+  std::cout << (map1 > map2) << '\n';
 }
 }
