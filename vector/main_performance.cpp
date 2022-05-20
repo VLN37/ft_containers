@@ -51,6 +51,9 @@ int main(void) {
 
   // //assign range
   vec2.assign(vec1.begin(), vec1.end());
+
+  for (int i = 0; i < 1000; i++)
+    vec1.erase(vec1.begin());
 }
 
 {
@@ -85,11 +88,11 @@ int main(void) {
     vec1.insert(vec1.end(), i);
   //assignment operator
   ft::vector<int> vec2 = vec1;
-  //iterators
-  // ft::vector<int>::iterator it1 = vec1.begin();
-  // ft::vector<int>::iterator it2 = vec1.end();
-  // while (it1 != it2)
-  //   it1++;
+  // iterators
+  ft::vector<int>::iterator it1 = vec1.begin();
+  ft::vector<int>::iterator it2 = vec1.end();
+  while (it1 != it2)
+    it1++;
 }
 
 {
