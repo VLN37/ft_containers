@@ -135,9 +135,9 @@ int main(void) {
   ft::map<int, std::string> map1;
   int i = 0;
   for (; i < 42; i++)
+    map1.insert(ft::make_pair(i, next_string()));
 
   // upper bound lower bound equal range
-    map1.insert(ft::make_pair(i, next_string()));
   printiterator(map1.upper_bound(21));
   printiterator(map1.upper_bound(0));
   printiterator(map1.lower_bound(21));

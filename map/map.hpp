@@ -173,20 +173,10 @@ public:
   }
 
   ft::pair<const_iterator, const_iterator> equal_range(key_type const& k) const
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(k);
-    return ft::make_pair(const_iterator(ptr), upper_bound(ptr->data.first));
-  }
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
 
   ft::pair<iterator, iterator> equal_range(key_type const& k)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(k);
-    return ft::make_pair(iterator(ptr), upper_bound(ptr->data.first));
-  }
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
 
   mapped_type& operator[](key_type const& key)
   {
