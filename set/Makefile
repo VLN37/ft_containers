@@ -1,5 +1,5 @@
 CC			= c++
-CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -Wshadow -pedantic
+CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -pedantic
 CFLAGS	+= -MMD -MP #compiler flags to generate the dependancy file
 
 ROOT		= ../

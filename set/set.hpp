@@ -9,6 +9,7 @@
 #include "rbtree.hpp"
 #include "iterator_tree.hpp"
 #include "rbtree_node.hpp"
+#include "algo.hpp"
 #include "pair.hpp"
 
 namespace ft {
@@ -173,20 +174,10 @@ public:
   }
 
   ft::pair<const_iterator, const_iterator> equal_range(key_type const& k) const
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(k);
-    return ft::make_pair(const_iterator(ptr), const_iterator(ptr));
-  }
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
 
   ft::pair<iterator, iterator> equal_range(key_type const& k)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(k);
-    return ft::make_pair(iterator(ptr), iterator(ptr));
-  }
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
 
   ft::pair<iterator, bool> insert(value_type const& val)
   {
