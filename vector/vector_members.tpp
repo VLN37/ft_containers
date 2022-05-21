@@ -2,6 +2,8 @@
 //Creation date: 07/04/2022
 
 #include "vector.hpp"
+#include <string.h>
+#include <algorithm>
 
 namespace ft {
 
@@ -39,8 +41,19 @@ void vector<T, Alloc>::resize(size_t n, value_type val) {
 //treat capacity = 0 case
 template<typename T, typename Alloc>
 void vector<T, Alloc>::reserve(size_t n) {
+  typedef typename ft::is_integral<value_type>::type _integral;
   if (n < _capacity)
     return;
+  if (_integral()) {
+    // value_type is memcopyable
+    T*tmp = _alloc.allocate(n);
+    std::copy(begin().base(), end().base(), tmp);
+    _alloc.deallocate(_data, _capacity);
+    _capacity = n;
+    _data = tmp;
+    return;
+  }
+  // value_type is complex
   T *tmp;
   tmp = _alloc.allocate(n);
   for (size_type i = 0; i < _size; i++)
@@ -162,6 +175,7 @@ void vector<T, Alloc>::swap(vector& src) {
 template<typename T, typename Alloc>
 typename vector<T, Alloc>::iterator
   vector<T, Alloc>::insert(iterator pos, value_type const& val) {
+  typedef typename ft::is_integral<value_type>::type _integral;
   if (_size == _max_size)
     throw(std::length_error("max_size exceeded\n"));
   if (_size == _capacity) {
@@ -173,6 +187,15 @@ typename vector<T, Alloc>::iterator
     push_back(val);
     return pos;
   }
+  if (_integral()) {
+    // in this case the value_type is integral i.e. - memcopyable
+    std::copy_backward(pos.base(), end().base(), (end() + 1).base());
+    *pos = val;
+    ++_size;
+    return pos;
+  }
+
+  // in this case the value_type is complex
   _alloc.construct(_data + _size, val);
   iterator it = end() - 1;
   iterator to = end();
@@ -180,6 +203,7 @@ typename vector<T, Alloc>::iterator
   for (; it >= pos; --it, --to)
     *to = *it;
   *pos = val;
+
   return pos;
 }
 

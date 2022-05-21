@@ -21,6 +21,23 @@ namespace ft = std;
 #define TIMES 10000
 
 int main(void) {
+{
+  ft::vector<int> vec1;
+  ft::vector<int> vec2;
+  // std::string str("asd");
+  // for (int i = 0; i < 600; i++)
+    // vec1.insert(vec1.begin(), i);
+  // ft::vector<int>::iterator it1(vec1[500]);
+  for (int i = 0; i < TIMES; i++)
+    vec1.insert(vec1.begin(), i);
+
+  for (int i = 0; i < TIMES; i++)
+    vec1.insert(vec1.begin(), i);
+  for (int i = 0; i < TIMES; i++)
+    vec1.insert(vec1.begin(), i);
+  for (int i = 0; i < TIMES; i++)
+    vec1.insert(vec1.begin(), i);
+}
 
 {
   //insert end
@@ -28,9 +45,9 @@ int main(void) {
   ft::vector<std::string> vec2;
   std::string str("asd");
   for (int i = 0; i < TIMES; i++)
-    vec1.insert(vec1.end(), str);
+    vec1.insert(vec1.begin(), str);
   for (int i = 0; i < TIMES; i++)
-    vec2.insert(vec2.end(), str);
+    vec2.insert(vec2.begin(), str);
 
   //insert fill
   vec1.insert(vec1.end(), TIMES, str);
@@ -60,11 +77,10 @@ int main(void) {
   //insert end
   ft::vector<int> vec1;
   ft::vector<int> vec2;
-  std::string str("asd");
   for (int i = 0; i < TIMES; i++)
-    vec1.insert(vec1.end(), i);
+    vec1.insert(vec1.begin(), i);
   for (int i = 0; i < TIMES; i++)
-    vec2.insert(vec2.end(), i);
+    vec2.insert(vec2.begin(), i);
 
   //insert fill
   vec1.insert(vec1.begin(), TIMES, 42);
