@@ -17,31 +17,6 @@ namespace ft = std;
 
 #define TIMES 1000000
 
-template<typename Var>
-void printvar(Var var) {
-  std::cout << var << '\n';
-}
-
-template<typename Var>
-void printpair(Var pair) {
-  std::cout << pair.first << " " << pair.second << "\n";
-}
-
-template<typename Var>
-void printiterator(Var it) {
-  std::cout << it->first << " " << it->second << "\n";
-}
-
-template<typename T>
-void print(T const& vec) {
-  typename T::const_iterator it1 = vec.begin();
-  typename T::const_iterator it2 = vec.end();
-  for (; it1 != it2; it1++) {
-    std::cout << it1->first << " ";
-  }
-  std::cout << '\n';
-}
-
 std::string next_string(bool reset = false) {
   static size_t nbr = 0;
   std::stringstream stream;
@@ -58,6 +33,17 @@ std::string next_string(bool reset = false) {
 
 
 int main(void) {
+{
+  ft::map<std::string, int> map1;
+  std::stringstream ss;
+  std::string str;
+
+  for (int i = 0; i < TIMES; i++) {
+    ss << i << " ", ss >> str;
+    map1.insert(ft::make_pair(str, i));
+  }
+}
+
 {
   ft::map<int, std::string> map1;
 
