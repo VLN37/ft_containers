@@ -74,7 +74,7 @@ echo -e -n "std"
 time ./set/set_perf_std
 echo ""
 
-echo "SET MEMORY TEST #########################################################"
+echo "STACK MEMORY TEST #######################################################"
 
 echo ""
 valgrind ./stack/stack_test | grep -i '=='
