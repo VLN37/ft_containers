@@ -34,12 +34,16 @@ run: $(NAME)
 	./containers
 
 test:	$(OBJDIR) $(OBJ)
+	make -s --no-print-directory -C vector
 	make -s --no-print-directory -C vector performance
 	make -s --no-print-directory -C vector accuracy
+	make -s --no-print-directory -C stack
 	make -s --no-print-directory -C stack performance
 	make -s --no-print-directory -C stack accuracy
+	make -s --no-print-directory -C map
 	make -s --no-print-directory -C map performance
 	make -s --no-print-directory -C map accuracy
+	make -s --no-print-directory -C set
 	make -s --no-print-directory -C set performance
 	make -s --no-print-directory -C set accuracy
 
