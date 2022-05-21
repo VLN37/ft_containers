@@ -13,10 +13,10 @@ echo ""
 echo "##################### VECTOR PERFORMANCE TEST ###########################"
 
 echo ""
-echo -e "ft"
+echo -e -n "ft"
 time ./vector/vector_perf_ft
 echo ""
-echo -e "std"
+echo -e -n "std"
 time ./vector/vector_perf_std
 echo ""
 
@@ -31,30 +31,30 @@ echo ""
 echo "####################### MAP PERFORMANCE TEST ############################"
 
 echo ""
-echo -e "ft"
+echo -e -n "ft"
 time ./map/map_perf_ft
 echo ""
-echo -e "std"
+echo -e -n "std"
 time ./map/map_perf_std
 echo ""
 
-# echo "######################## SET ACCURACY TEST ##############################"
+echo "######################## SET ACCURACY TEST ##############################"
 
-# echo ""
-# ./set/set_acc_ft > ft
-# ./set/set_acc_std > std
-# diff --color -y -s --suppress-common-lines std ft
-# echo ""
+echo ""
+./set/set_acc_ft > ft
+./set/set_acc_std > std
+diff --color -y -s --suppress-common-lines std ft
+echo ""
 
-# echo "####################### SET PERFORMANCE TEST ############################"
+echo "####################### SET PERFORMANCE TEST ############################"
 
-# echo ""
-# echo -e "ft"
-# time ./set/set_perf_ft
-# echo ""
-# echo -e "std"
-# time ./set/set_perf_std
-# echo ""
+echo ""
+echo -e -n "ft"
+time ./set/set_perf_ft
+echo ""
+echo -e -n "std"
+time ./set/set_perf_std
+echo ""
 
 echo "####################### STACK ACCURACY TEST #############################"
 
@@ -67,10 +67,10 @@ echo ""
 echo "###################### STACK PERFORMANCE TEST ###########################"
 
 echo ""
-echo -e "ft"
+echo -e -n "ft"
 time ./stack/stack_perf_ft
 echo ""
-echo -e "std"
+echo -e -n "std"
 time ./stack/stack_perf_std
 echo ""
 

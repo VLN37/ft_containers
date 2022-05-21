@@ -18,7 +18,7 @@ namespace ft = std;
 # include "algo.hpp"
 #endif
 
-#define TIMES 15000
+#define TIMES 10000
 
 int main(void) {
 
