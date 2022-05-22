@@ -25,6 +25,8 @@ INC				=	map.hpp \
 						iterator_tree.hpp \
 						pair.hpp \
 						rbtree.hpp \
+						map_observers.tpp \
+						map_modifiers.tpp \
 
 OBJ				= $(SRC:%.cpp=$(OBJDIR)/%.o)
 OBJ_ACC		= $(SRC_ACC:%.cpp=$(OBJDIR)/%.o)

@@ -12,6 +12,12 @@
 #include "pair.hpp"
 #include "algo.hpp"
 
+#define MAP_TEMPLATE typename Key, \
+                     typename Val, \
+                     typename Compare, \
+                     typename Alloc
+#define MAP_TYPE map<Key, Val, Compare, Alloc>
+
 namespace ft {
 template <typename Key,
           typename Val,
@@ -121,7 +127,7 @@ public:
   c_rev_iterator rend(void)   const  { return tree.rend(); }
 
 // #############################################################################
-// #                               OPERATIONS                                  #
+// #                               OBSERVERS                                   #
 // #############################################################################
 
 //to do - const correctness on rbtree to work here
@@ -129,121 +135,32 @@ public:
   size_type count(Key const& key)
 { return tree.search(key) == tree.getsent() ?  0 : 1; }
 
+  iterator       upper_bound(key_type const& key);
+  const_iterator upper_bound(key_type const& key) const;
+  iterator       lower_bound(key_type const& key);
+  const_iterator lower_bound(key_type const& key) const;
+  ft::pair<const_iterator, const_iterator> equal_range(key_type const& k) const
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
+  ft::pair<iterator, iterator> equal_range(key_type const& k)
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
+
 // #############################################################################
 // #                               MODIFIERS                                   #
 // #############################################################################
 
-  void clear(void)      { tree.recurse_delete(tree.getroot()); }
-  void swap(map& other) { tree.swap(other.tree); }
-
-  iterator upper_bound(key_type const& key)
-  {
-    iterator it = begin();
-    iterator ite = end();
-    for (; it != ite && !comp(key, it->first); ++it)
-      continue;
-    return it;
-  }
-
-  const_iterator upper_bound(key_type const& key) const
-  {
-    const_iterator it = begin();
-    const_iterator ite = end();
-    for (; it != ite && !comp(key, it->first); ++it)
-      continue;
-    return it;
-  }
-
-  iterator lower_bound(key_type const& key)
-  {
-    iterator it = begin();
-    iterator ite = end();
-    for (; it != ite && comp(it->first, key); ++it)
-      continue;
-    return it;
-  }
-
-  const_iterator lower_bound(key_type const& key) const
-  {
-    const_iterator it = begin();
-    const_iterator ite = end();
-    for (; it != ite && comp(it->first, key); ++it)
-      continue;
-    return it;
-  }
-
-  ft::pair<const_iterator, const_iterator> equal_range(key_type const& k) const
-  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
-
-  ft::pair<iterator, iterator> equal_range(key_type const& k)
-  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
-
-  mapped_type& operator[](key_type const& key)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(key);
-    if (ptr == tree.getsent())
-      tree.insert(value_type(key, mapped_type()));
-    else
-      return ptr->data.second;
-    return tree.search(key)->data.second;
-  }
-
-  ft::pair<iterator, bool> insert(value_type const& val)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(KoV()(val));
-    if (ptr != tree.getsent() && size())
-      return ft::pair<iterator, bool>(iterator(ptr), false);
-    tree.insert(val);
-    return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
-  }
-
-  iterator insert(iterator position, value_type const& val)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(KoV()(val));
-    if (ptr != tree.getsent() && size())
-      return iterator(ptr);
-    tree.insert(val, position.base());
-    return iterator(tree.search(KoV()(val)));
-  }
+  void  clear(void)      { tree.recurse_delete(tree.getroot()); }
+  void  swap(map& other) { tree.swap(other.tree); }
 
   template<typename Iter>
-  void insert(Iter first, Iter last)
-  {
-    for (; first != last; first++)
-      insert(value_type(*first));
-  }
+  void                     insert(Iter first, Iter last);
+  ft::pair<iterator, bool> insert(value_type const& val);
+  iterator                 insert(iterator position, value_type const& val);
+  void                     erase(iterator first, iterator last);
+  size_type                erase(key_type const& key);
+  void                     erase(iterator position)
+  {  tree.erase(KoV()(position.base()->data)); }
+  mapped_type&             operator[](key_type const& key);
 
-  void erase(iterator position)
-  {
-    tree.erase(KoV()(position.base()->data));
-  }
-
-  size_type erase(key_type const& key)
-  {
-    typename _Container::nodeptr ptr;
-    ptr = tree.search(key);
-    tree.erase(key);
-    return ptr == tree.getsent() ? 0 : 1;
-  }
-
-  void erase(iterator first, iterator last)
-  {
-    if (first.base() == tree.getsent())
-      return;
-    iterator next(first);
-    next++;
-    for (; next != last; next++) {
-      tree.erase(KoV()(first.base()->data));
-      first = next;
-    }
-    tree.erase(KoV()(first.base()->data));
-  }
 
 // #############################################################################
 // #                          RELATIONAL OPERATORS                             #
@@ -276,4 +193,6 @@ friend bool operator<=(map const& lhs, map const& rhs)
 };
 
 } // namespace ft
+#include "map_observers.tpp"
+#include "map_modifiers.tpp"
 #endif // MAP_HPP
