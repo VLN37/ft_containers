@@ -10,6 +10,7 @@ namespace ft = std;
 # include <vector>
 # include <stack>
 #else
+# include <deque>
 # include "iterator_vector.hpp"
 # include "type_traits.hpp"
 # include "vector.hpp"
@@ -46,5 +47,13 @@ int main(void) {
   stk2.pop();
   std::cout << (stk1 == stk2) << '\n';
   std::cout << (stk1 != stk2) << '\n';
+
+  ft::stack<std::string, std::deque<std::string> > stk3;
+  std::string str("string");
+  for (int i = 0; i < 42; i++)
+    stk3.push(str);
+  for (int i = 0; i < 42; i++)
+    std::cout << stk3.top() << " ";
+  std::cout << "\n";
   return 0;
 }
