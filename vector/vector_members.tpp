@@ -7,23 +7,23 @@
 
 namespace ft {
 
-template<typename T, typename Alloc>
-size_t vector<T, Alloc>::size(void) const {
+template<VECTOR_TEMPLATE>
+size_t VECTOR_TYPE::size(void) const {
   return _size;
 }
 
-template<typename T, typename Alloc>
-size_t vector<T, Alloc>::max_size(void) const {
+template<VECTOR_TEMPLATE>
+size_t VECTOR_TYPE::max_size(void) const {
   return _alloc.max_size();
 }
 
-template<typename T, typename Alloc>
-size_t vector<T, Alloc>::capacity(void) const {
+template<VECTOR_TEMPLATE>
+size_t VECTOR_TYPE::capacity(void) const {
   return _capacity;
 }
 
-template<typename T, typename Alloc>
-void vector<T, Alloc>::resize(size_t n, value_type val) {
+template<VECTOR_TEMPLATE>
+void VECTOR_TYPE::resize(size_t n, value_type val) {
   if (n < _size) {
     for (size_t i = _size; i > n; i--)
       _alloc.destroy(_data + i);
@@ -39,8 +39,8 @@ void vector<T, Alloc>::resize(size_t n, value_type val) {
 }
 
 //treat capacity = 0 case
-template<typename T, typename Alloc>
-void vector<T, Alloc>::reserve(size_t n) {
+template<VECTOR_TEMPLATE>
+void VECTOR_TYPE::reserve(size_t n) {
   typedef typename ft::is_integral<value_type>::type _integral;
   if (n < _capacity)
     return;
@@ -65,9 +65,8 @@ void vector<T, Alloc>::reserve(size_t n) {
   _data = tmp;
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator
-  vector<T,Alloc>::erase(vector<T, Alloc>::iterator pos) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::iterator VECTOR_TYPE::erase(VECTOR_TYPE::iterator pos) {
   if (end() != begin() && pos == end() - 1) {
     pop_back();
     return end();
@@ -85,81 +84,80 @@ typename vector<T, Alloc>::iterator
   return pos;
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator
-  vector<T,Alloc>::erase(iterator first, iterator last) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::iterator
+  VECTOR_TYPE::erase(iterator first, iterator last) {
   for (; last > first; last--)
     erase(last);
   return first;
 }
 
 
-template<typename T, typename Alloc>
-void vector<T, Alloc>::clear(void) {
+template<VECTOR_TEMPLATE>
+void VECTOR_TYPE::clear(void) {
   while(_size)
     pop_back();
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator vector<T, Alloc>::begin(void) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::iterator VECTOR_TYPE::begin(void) {
   return iterator(_data);
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_iterator vector<T, Alloc>::begin(void) const {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::const_iterator VECTOR_TYPE::begin(void) const {
   return const_iterator(_data);
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator vector<T, Alloc>::end(void) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::iterator VECTOR_TYPE::end(void) {
   return iterator(_data + _size);
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_iterator vector<T, Alloc>::end(void) const {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::const_iterator VECTOR_TYPE::end(void) const {
   return const_iterator(_data + _size);
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rbegin(void) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::reverse_iterator VECTOR_TYPE::rbegin(void) {
   return reverse_iterator(end());
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_reverse_iterator
-     vector<T, Alloc>::rbegin(void) const {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::const_reverse_iterator
+     VECTOR_TYPE::rbegin(void) const {
   return reverse_iterator(end());
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rend(void) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::reverse_iterator VECTOR_TYPE::rend(void) {
   return reverse_iterator(begin());
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::const_reverse_iterator
-     vector<T, Alloc>::rend(void) const {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::const_reverse_iterator VECTOR_TYPE::rend(void) const {
   return reverse_iterator(begin());
 }
 
-template<typename T, typename Alloc>
-void vector<T, Alloc>::push_back(value_type const& val) {
+template<VECTOR_TEMPLATE>
+void VECTOR_TYPE::push_back(value_type const& val) {
   if (_size == _capacity)
     reserve(_size ? _size * 2 : 1);
   _alloc.construct(_data + _size, val);
   _size++;
 }
 
-template<typename T, typename Alloc>
-void vector<T, Alloc>::pop_back(void) {
+template<VECTOR_TEMPLATE>
+void VECTOR_TYPE::pop_back(void) {
   if (_size > 0) {
     _alloc.destroy(_data + _size);
     _size--;
   }
 }
 
-template<typename T, typename Alloc>
-void vector<T, Alloc>::swap(vector& src) {
+template<VECTOR_TEMPLATE>
+void VECTOR_TYPE::swap(vector& src) {
   size_type	tmp_size = _size;
   size_type	tmp_cap = _capacity;
   pointer		tmp_data = _data;
@@ -172,9 +170,9 @@ void vector<T, Alloc>::swap(vector& src) {
   src._capacity = tmp_cap;
 }
 
-template<typename T, typename Alloc>
-typename vector<T, Alloc>::iterator
-  vector<T, Alloc>::insert(iterator pos, value_type const& val) {
+template<VECTOR_TEMPLATE>
+typename VECTOR_TYPE::iterator
+  VECTOR_TYPE::insert(iterator pos, value_type const& val) {
   typedef typename ft::is_integral<value_type>::type _integral;
   if (_size == _max_size)
     throw(std::length_error("max_size exceeded\n"));
@@ -207,10 +205,9 @@ typename vector<T, Alloc>::iterator
   return pos;
 }
 
-template<typename T, typename Alloc>
+template<VECTOR_TEMPLATE>
 template<typename Integer>
-void
-  vector<T, Alloc>::insert_fill(iterator pos, size_type n, Integer const& val) {
+void VECTOR_TYPE::insert_fill(iterator pos, size_type n, Integer const& val) {
   if (_size + n >= _max_size)
     throw(std::length_error("max_size exceeded\n"));
   if (_size + n > _capacity) {
@@ -236,9 +233,9 @@ void
     *it = val;
 }
 
-template<typename T, typename Alloc>
+template<VECTOR_TEMPLATE>
 template<typename IterT>
-void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
+void VECTOR_TYPE::insert_range(iterator pos, IterT first, IterT last) {
   size_t distance = last - first;
   if (first > last)
     throw(std::length_error("range error\n"));
@@ -267,9 +264,9 @@ void vector<T, Alloc>::insert_range(iterator pos, IterT first, IterT last) {
     *it = *first;
 }
 
-template<typename T, typename Alloc>
+template<VECTOR_TEMPLATE>
 template<typename Integer>
-void vector<T, Alloc>::assign_fill(size_type n, Integer const& val) {
+void VECTOR_TYPE::assign_fill(size_type n, Integer const& val) {
   if (n >= _max_size)
     throw(std::length_error("max_size exceeded\n"));
   if (n > _capacity)
@@ -281,9 +278,9 @@ void vector<T, Alloc>::assign_fill(size_type n, Integer const& val) {
     push_back(val);
 }
 
-template<typename T, typename Alloc>
+template<VECTOR_TEMPLATE>
 template<typename IterT>
-void vector<T, Alloc>::assign_range(IterT first, IterT last) {
+void VECTOR_TYPE::assign_range(IterT first, IterT last) {
   if (first > last)
     throw(std::length_error("range error\n"));
   if (static_cast<size_type>(last - first) > _capacity)

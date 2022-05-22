@@ -5,8 +5,8 @@
 
 namespace ft {
 
-template <typename T, typename Alloc>
-vector<T, Alloc>::vector(const alloc_type& alloc)
+template <VECTOR_TEMPLATE>
+VECTOR_TYPE::vector(const alloc_type& alloc)
 : _alloc(alloc) {
   _data = _alloc.allocate(0);
   _size = 0;
@@ -14,15 +14,15 @@ vector<T, Alloc>::vector(const alloc_type& alloc)
   _max_size = _alloc.max_size();
 }
 
-template<typename T, typename Alloc>
-vector<T, Alloc>::vector(vector<T, Alloc> const& src)
+template<VECTOR_TEMPLATE>
+VECTOR_TYPE::vector(VECTOR_TYPE const& src)
 : _alloc(src.get_allocator()), _size(0) {
   _data = _alloc.allocate(0);
   *this = src;
 }
 
-template<typename T, typename Alloc>
-vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
+template<VECTOR_TEMPLATE>
+VECTOR_TYPE::vector(size_type n, value_type val, const alloc_type& alloc)
 : _alloc(alloc) {
   _data = _alloc.allocate(n);
   _size = n;
@@ -32,9 +32,9 @@ vector<T, Alloc>::vector(size_type n, value_type val, const alloc_type& alloc)
     _alloc.construct(_data + i, val);
 }
 
-template<typename T, typename Alloc>
+template<VECTOR_TEMPLATE>
 template<typename IterT>
-void vector<T, Alloc>::constructor_range(IterT first, IterT last) {
+void VECTOR_TYPE::constructor_range(IterT first, IterT last) {
   _data = _alloc.allocate(last - first);
   _size = 0;
   _capacity = last - first;
@@ -43,9 +43,9 @@ void vector<T, Alloc>::constructor_range(IterT first, IterT last) {
     push_back(*first);
 }
 
-template<typename T, typename Alloc>
+template<VECTOR_TEMPLATE>
 template<typename Integer>
-void vector<T, Alloc>::constructor_fill(size_type n, Integer value) {
+void VECTOR_TYPE::constructor_fill(size_type n, Integer value) {
   _data = _alloc.allocate(n);
   _size = n;
   _capacity = n;
@@ -54,8 +54,8 @@ void vector<T, Alloc>::constructor_fill(size_type n, Integer value) {
     _alloc.construct(_data + i, value);
 }
 
-template<typename T, typename Alloc>
-vector<T, Alloc>::~vector(void) {
+template<VECTOR_TEMPLATE>
+VECTOR_TYPE::~vector(void) {
   for (size_t i = 0; i < _size; i++)
     _alloc.destroy(_data + i);
   _alloc.deallocate(_data, size_type());

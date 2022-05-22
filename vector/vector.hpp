@@ -10,6 +10,9 @@
 #include "type_traits.hpp"
 #include "algo.hpp"
 
+#define VECTOR_TEMPLATE typename T, typename Alloc
+#define VECTOR_TYPE vector<T, Alloc>
+
 namespace ft {
   typedef integral_constant<bool, false>              false_type;
   typedef integral_constant<bool, true>               true_type;
