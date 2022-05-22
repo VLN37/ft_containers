@@ -12,7 +12,7 @@ namespace ft {
 template<typename IterT>
 typename iterator_traits<IterT>::difference_type
 distance(IterT first, IterT last) {
-  typename ft::iterator_traits<IterT>::difference_type diff = 0;
+  typename iterator_traits<IterT>::difference_type diff = 0;
   for (; first != last; first++, diff++)
     continue;
   return diff;

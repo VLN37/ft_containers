@@ -12,6 +12,9 @@
 #include "algo.hpp"
 #include "pair.hpp"
 
+#define SET_TEMPLATE typename T, typename Compare, typename Alloc
+#define SET_TYPE set<T, Compare, Alloc>
+
 namespace ft {
 template<typename T,
          typename Compare = std::less<T>,
@@ -22,7 +25,6 @@ struct KoV {
     return src;
   }
 };
-
 
 // #############################################################################
 // #                               TYPEDEFS                                    #
@@ -122,13 +124,23 @@ public:
   c_rev_iterator rend(void)   const  { return tree.rend(); }
 
 // #############################################################################
-// #                               OPERATIONS                                  #
+// #                                OBSERVERS                                  #
 // #############################################################################
 
 //to do - const correctness on rbtree to work here
-  iterator  find(value_type const& val) { return iterator(tree.search(val)); }
+  iterator  find(value_type const& val)
+  { return iterator(tree.search(val)); }
   size_type count(value_type const& val)
-{ return tree.search(val) == tree.getsent() ?  0 : 1; }
+  { return tree.search(val) == tree.getsent() ?  0 : 1; }
+
+  iterator       upper_bound(key_type const& key);
+  const_iterator upper_bound(key_type const& key) const;
+  iterator       lower_bound(key_type const& key);
+  const_iterator lower_bound(key_type const& key) const;
+  pair<const_iterator, const_iterator> equal_range(key_type const& k) const
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
+  pair<iterator, iterator>             equal_range(key_type const& k)
+  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
 
 // #############################################################################
 // #                               MODIFIERS                                   #
@@ -137,99 +149,14 @@ public:
   void clear(void)      { tree.recurse_delete(tree.getroot()); }
   void swap(set& other) { tree.swap(other.tree); }
 
-  iterator upper_bound(key_type const& key)
-  {
-    iterator it = begin();
-    iterator ite = end();
-    for (; it != ite && !comp(key, *it); ++it)
-      continue;
-    return it;
-  }
-
-  const_iterator upper_bound(key_type const& key) const
-  {
-    const_iterator it = begin();
-    const_iterator ite = end();
-    for (; it != ite && !comp(key, *it); ++it)
-      continue;
-    return it;
-  }
-
-  iterator lower_bound(key_type const& key)
-  {
-    iterator it = begin();
-    iterator ite = end();
-    for (; it != ite && comp(*it, key); ++it)
-      continue;
-    return it;
-  }
-
-  const_iterator lower_bound(key_type const& key) const
-  {
-    const_iterator it = begin();
-    const_iterator ite = end();
-    for (; it != ite && comp(*it, key); ++it)
-      continue;
-    return it;
-  }
-
-  ft::pair<const_iterator, const_iterator> equal_range(key_type const& k) const
-  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
-
-  ft::pair<iterator, iterator> equal_range(key_type const& k)
-  { return ft::make_pair(lower_bound(k), upper_bound(k)); }
-
-  ft::pair<iterator, bool> insert(value_type const& val)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(KoV()(val));
-    if (ptr != tree.getsent() && size())
-      return ft::pair<iterator, bool>(iterator(ptr), false);
-    tree.insert(val);
-    return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
-  }
-
-  iterator insert(iterator position, value_type const& val)
-  {
-    typename _Container::nodeptr ptr;
-
-    ptr = tree.search(KoV()(val));
-    if (ptr != tree.getsent() && size())
-      return iterator(ptr);
-    tree.insert(val, position.base());
-    return iterator(tree.search(KoV()(val)));
-  }
-
   template<typename Iter>
-  void insert(Iter first, Iter last)
-  {
-    for (; first != last; first++)
-      insert(value_type(*first));
-  }
-
-  void erase(iterator position)
-  {
-    tree.erase(KoV()(position.base()->data));
-  }
-
-  size_type erase(key_type const& key)
-  {
-    typename _Container::nodeptr ptr;
-    ptr = tree.search(key);
-    tree.erase(key);
-    return ptr == tree.getsent() ? 0 : 1;
-  }
-
-  void erase(iterator first, iterator last)
-  {
-    iterator next(first);
-    next++;
-    for (; first != last; next++) {
-      tree.erase(KoV()(first.base()->data));
-      first = next;
-    }
-  }
+  void                 insert(Iter first, Iter last);
+  pair<iterator, bool> insert(value_type const& val);
+  iterator             insert(iterator position, value_type const& val);
+  size_type            erase(key_type const& key);
+  void                 erase(iterator first, iterator last);
+  void                 erase(iterator position)
+  { tree.erase(KoV()(position.base()->data)); }
 
 // #############################################################################
 // #                          RELATIONAL OPERATORS                             #
@@ -253,13 +180,14 @@ friend bool operator>=(set const& lhs, set const& rhs)
 friend bool operator<=(set const& lhs, set const& rhs)
 { return lhs < rhs || lhs == rhs; }
 
-
 // #############################################################################
 // #                                 DEBUG                                     #
 // #############################################################################
 
   void print(void) { tree.print(); }
 };
-
 } // namespace ft
+
+#include "set_modifiers.tpp"
+#include "set_observers.tpp"
 #endif // SET_HPP
