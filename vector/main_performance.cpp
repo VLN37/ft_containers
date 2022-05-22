@@ -63,6 +63,8 @@ int main(void) {
   for (int i = 0; i < TIMES; i++)
    vec1.insert(vec1.begin(), str);
 
+  vec1.insert(vec1.begin(), TIMES, str);
+
   // assign fill
   vec2.assign(TIMES, str);
 
