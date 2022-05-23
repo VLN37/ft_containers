@@ -188,7 +188,6 @@ typename VECTOR_TYPE::iterator
   if (pos == end()) {
     push_back(val);
     return pos;
-  _alloc.construct(_data + _size, val);
   }
   if (_integral_type()) {
     // in this case the value_type is integral i.e. - memcopyable
@@ -197,6 +196,7 @@ typename VECTOR_TYPE::iterator
     ++_size;
     return pos;
   }
+  _alloc.construct(_data + _size, val);
   // in this case the value_type is complex
   iterator it = end() - 1;
   iterator to = end();
@@ -222,6 +222,13 @@ void VECTOR_TYPE::insert_fill(iterator pos, size_type n, Integer const& val) {
     while (n--)
       push_back(val);
     return;
+  }
+  if (_integral_type()) {
+    std::copy(pos.base(), end().base(), (pos + n).base());
+    _size += n;
+    while (n--)
+      *pos++ = val;
+    return ;
   }
   for (size_type i = 0; i < n; i++)
     _alloc.construct(_data + _size + i, val);
