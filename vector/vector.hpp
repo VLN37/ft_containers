@@ -37,6 +37,9 @@ public:
   typedef ft::reverse_iterator<iterator>              reverse_iterator;
   typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
 
+private:
+  typedef typename ft::is_integral<value_type>::type  _integral_type;
+
   // ###########################################################################
   // #                            INTERVAL VARIABLES                           #
   // ###########################################################################

@@ -41,10 +41,9 @@ void VECTOR_TYPE::resize(size_t n, value_type val) {
 //treat capacity = 0 case
 template<VECTOR_TEMPLATE>
 void VECTOR_TYPE::reserve(size_t n) {
-  typedef typename ft::is_integral<value_type>::type _integral;
   if (n < _capacity)
     return;
-  if (_integral()) {
+  if (_integral_type()) {
     // value_type is memcopyable
     T*tmp = _alloc.allocate(n);
     std::copy(begin().base(), end().base(), tmp);
@@ -71,6 +70,11 @@ typename VECTOR_TYPE::iterator VECTOR_TYPE::erase(VECTOR_TYPE::iterator pos) {
     pop_back();
     return end();
   }
+  if (_integral_type()) {
+    std::copy((pos + 1).base(), end().base(), pos.base());
+    --_size;
+    return pos;
+  }
   _alloc.destroy(pos.base());
   iterator it = pos;
   iterator next = pos + 1;
@@ -87,7 +91,8 @@ typename VECTOR_TYPE::iterator VECTOR_TYPE::erase(VECTOR_TYPE::iterator pos) {
 template<VECTOR_TEMPLATE>
 typename VECTOR_TYPE::iterator
   VECTOR_TYPE::erase(iterator first, iterator last) {
-  for (; last > first; last--)
+  last--;
+  for (; last >= first; last--)
     erase(last);
   return first;
 }
@@ -173,7 +178,6 @@ void VECTOR_TYPE::swap(vector& src) {
 template<VECTOR_TEMPLATE>
 typename VECTOR_TYPE::iterator
   VECTOR_TYPE::insert(iterator pos, value_type const& val) {
-  typedef typename ft::is_integral<value_type>::type _integral;
   if (_size == _max_size)
     throw(std::length_error("max_size exceeded\n"));
   if (_size == _capacity) {
@@ -184,17 +188,16 @@ typename VECTOR_TYPE::iterator
   if (pos == end()) {
     push_back(val);
     return pos;
+  _alloc.construct(_data + _size, val);
   }
-  if (_integral()) {
+  if (_integral_type()) {
     // in this case the value_type is integral i.e. - memcopyable
     std::copy_backward(pos.base(), end().base(), (end() + 1).base());
     *pos = val;
     ++_size;
     return pos;
   }
-
   // in this case the value_type is complex
-  _alloc.construct(_data + _size, val);
   iterator it = end() - 1;
   iterator to = end();
   ++_size;
