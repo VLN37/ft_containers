@@ -91,9 +91,20 @@ typename VECTOR_TYPE::iterator VECTOR_TYPE::erase(VECTOR_TYPE::iterator pos) {
 template<VECTOR_TEMPLATE>
 typename VECTOR_TYPE::iterator
   VECTOR_TYPE::erase(iterator first, iterator last) {
-  last--;
-  for (; last >= first; last--)
-    erase(last);
+  iterator tmp(first);
+
+  if (_integral_type()) {
+    if (last != end())
+      std::copy(last.base(), end().base(), first.base());
+  }
+  else {
+    for (; tmp != last; ++tmp)
+        _alloc.destroy(tmp.base());
+    tmp = first;
+    for (; last != end(); ++last, ++tmp)
+      *tmp = *last;
+  }
+  _size -= ft::distance(first, last);
   return first;
 }
 
