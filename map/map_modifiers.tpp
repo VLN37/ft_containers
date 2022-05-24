@@ -28,8 +28,8 @@ pair<typename MAP_TYPE::iterator, bool>
   ptr = tree.search(KoV()(val));
   if (ptr != tree.getsent() && size())
     return ft::pair<iterator, bool>(iterator(ptr), false);
-  tree.insert(val);
-  return ft::pair<iterator, bool>(iterator(tree.search(KoV()(val))), true);
+  ptr = tree.insert(val);
+  return ft::pair<iterator, bool>(iterator(ptr), true);
 }
 
 template<MAP_TEMPLATE>
@@ -40,8 +40,8 @@ typename MAP_TYPE::iterator
   ptr = tree.search(KoV()(val));
   if (ptr != tree.getsent() && size())
     return iterator(ptr);
-  tree.insert(val, position.base());
-  return iterator(tree.search(KoV()(val)));
+  ptr = tree.insert(val, position.base());
+  return iterator(ptr);
 }
 
 template<MAP_TEMPLATE>

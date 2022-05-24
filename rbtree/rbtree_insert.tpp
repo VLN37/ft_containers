@@ -15,14 +15,14 @@ namespace ft {
  * 3 - parent of newnode is black - exit
  */
 template <TREE_TEMPLATE>
-void TREE_TYPE::insert(Val value) {
-  nodeptr node = search(KeyOfValue()(value));
-  if (node != SENT)
-    erase(KeyOfValue()(value));
+typename TREE_TYPE::nodeptr TREE_TYPE::insert(Val value) {
+  // nodeptr node = search(KeyOfValue()(value));
+  // if (node != SENT)
+  //   erase(KeyOfValue()(value));
   _size++;
   nodeptr prev = SENT;
   nodeptr curr = root;
-  node = init_node(value);
+  nodeptr node = init_node(value);
   while (curr != SENT) {
     prev = curr;
     if (Compare()(KeyOfValue()(node->data), KeyOfValue()(curr->data)))
@@ -41,16 +41,17 @@ void TREE_TYPE::insert(Val value) {
   //case 1
   if (node->parent == SENT) {
     node->color = BLACK;
-    return;
+    return node;
   }
   //determine if this is the second node
   if (node->parent->parent == SENT)
-    return;
+    return node;
   fix_insert(node);
+  return node;
 }
 
 template <TREE_TEMPLATE>
-void TREE_TYPE::insert(Val value, nodeptr hint) {
+typename TREE_TYPE::nodeptr TREE_TYPE::insert(Val value, nodeptr hint) {
   nodeptr node = search(KeyOfValue()(value), hint);
   if (node != SENT)
     erase(KeyOfValue()(value));
@@ -76,12 +77,13 @@ void TREE_TYPE::insert(Val value, nodeptr hint) {
   //case 1
   if (node->parent == SENT) {
     node->color = BLACK;
-    return;
+    return node;
   }
   //determine if this is the second node
   if (node->parent->parent == SENT)
-    return;
+    return node;
   fix_insert(node);
+  return node;
 }
 
 /**
