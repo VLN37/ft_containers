@@ -197,6 +197,7 @@ int main(void) {
   tree5.insert(ft::pair<std::string, int>("c", 444));
   STRINT_TREE::iterator tree1begin = tree3.begin();
   STRINT_TREE::iterator tree2begin = tree5.begin();
+
   std::cout << tree3.getroot() << " " << tree5.getroot() << '\n';
   std::cout << *tree1begin << "       " << *tree2begin << '\n';
   tree3.swap(tree5);
@@ -211,4 +212,18 @@ int main(void) {
   it1 = tree3.begin();
   std::cout << it1->first << '\n';
   std::cout << it1->second << '\n';
+
+{
+  STRINT_TREE tree7;
+  tree4.insert(ft::pair<std::string, int>("z", 82));
+  tree4.insert(ft::pair<std::string, int>("x", 94));
+  tree4.insert(ft::pair<std::string, int>("y", 3));
+  tree4.insert(ft::pair<std::string, int>("v", 42));
+  tree4.insert(ft::pair<std::string, int>("t", 12));
+  STRINT_TREE::const_iterator constiter = tree7.begin();
+  STRINT_TREE::const_iterator constiter2(tree7.begin());
+  (void)constiter2;
+  (void)constiter;
+}
+
 }
