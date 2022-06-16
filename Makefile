@@ -1,5 +1,5 @@
 CC			= c++
-CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++11 -pedantic
+CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -pedantic
 CFLAGS	+= -MMD -MP #compiler flags to generate the dependancy file
 
 INCPATH = -I stack -I vector -I map -I set -I rbtree -I iterator -I utils \
@@ -45,7 +45,8 @@ config:
 	fi;
 
 gtest: config $(OBJDIR) $(OBJ)
-	$(CC) $(CFLAGS) obj/maing.o -o gtest
+	$(CC) $(CFLAGS) obj/maing.o -o gtest -lgtest \
+	-L googletest/build/lib/ -lpthread
 
 test:	$(OBJDIR) $(OBJ)
 	make -s -C vector
