@@ -1,11 +1,15 @@
 CC			= c++
-CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++98 -pedantic
+CFLAGS	= -g3 -Wall -Wextra -Werror -Wno-long-long -std=c++11 -pedantic
 CFLAGS	+= -MMD -MP #compiler flags to generate the dependancy file
 
-INCPATH = -I stack -I vector -I map -I set -I rbtree -I iterator -I utils
+INCPATH = -I stack -I vector -I map -I set -I rbtree -I iterator -I utils \
+					-I googletest/googletest/include/gtest \
+					-I googletest/googletest/include/ \
+
 NAME		=	containers
 
 SRC				=	main.cpp \
+						maing.cpp \
 
 INC			=	vector.hpp \
 					vector_members.tpp \
@@ -25,13 +29,23 @@ OBJ			= $(SRC:%.cpp=$(OBJDIR)/%.o)
 DEPS		= $(SRC:%.cpp=$(OBJDIR)/%.d)
 
 $(NAME):	$(OBJDIR) $(OBJ)
-		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+		$(CC) $(CFLAGS) obj/main.o -o $(NAME)
 
 $(OBJDIR)/%.o: %.cpp
 		$(CC) $(CFLAGS) $(STD) -c $< -o $@ $(INCPATH)
 
 run: $(NAME)
 	./containers
+
+config:
+	if [ ! -d "googletest/build" ]; then \
+		mkdir googletest/build; \
+		cmake -S googletest -B googletest/build; \
+		make -C googletest/build; \
+	fi;
+
+gtest: config $(OBJDIR) $(OBJ)
+	$(CC) $(CFLAGS) obj/maing.o -o gtest
 
 test:	$(OBJDIR) $(OBJ)
 	make -s -C vector
