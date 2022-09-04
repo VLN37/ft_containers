@@ -9,7 +9,6 @@ INCPATH = -I stack -I vector -I map -I set -I rbtree -I iterator -I utils \
 NAME		=	containers
 
 SRC				=	main.cpp \
-						maing.cpp \
 
 INC			=	vector.hpp \
 					vector_members.tpp \
